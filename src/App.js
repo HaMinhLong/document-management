@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Navbar from "./components/layout/Navbar";
+// import Footer from "./components/layout/Footer";
+import NoMatch from "./components/pages/404";
+
+import Home from "./components/home/Home";
+
+import Employees from "./components/employees/Employees";
+import EmployeeInformation from "./components/employees/employee/EmployeeInformation";
+
+import AddEmployee from "./components/employees/employee/AddEmployee";
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/employees" component={Employees} />
+          <Route exact path="/employees/:id" component={EmployeeInformation} />
+          <Route exact path="/add-employee" component={AddEmployee} />
+          <Route exact path="/add-employee-:id" component={AddEmployee} />
+          <Route path="*" component={NoMatch} />
+        </Switch>
+      </Router>
+    </>
   );
-}
+};
 
 export default App;
