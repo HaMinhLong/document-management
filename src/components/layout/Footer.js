@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer>
+      <a href="#banner"></a>
       <div className="content">
         <h1>Thăng Long University</h1>
         <div className="footer-container">
@@ -14,10 +15,10 @@ const Footer = () => {
                 <Link>Quản lí cơ cấu tổ chức</Link>
               </li>
               <li>
-                <Link>Quản lí nhân viên</Link>
+                <Link to="/employees">Quản lí nhân viên</Link>
               </li>
               <li>
-                <Link>Giới thiệu</Link>
+                <Link to="/about">Giới thiệu</Link>
               </li>
               <li>
                 <Link>Liên hệ</Link>
@@ -50,7 +51,7 @@ const Footer = () => {
                 href="https://www.facebook.com/thanglonguniversity"
                 target="blank"
               >
-                <i class="fab fa-facebook" aria-hidden="true"></i>
+                <i className="fab fa-facebook" aria-hidden="true"></i>
               </a>
             </li>
             <li>
@@ -58,7 +59,7 @@ const Footer = () => {
                 href="https://www.instagram.com/thanglonguniversity/"
                 target="blank"
               >
-                <i class="fab fa-instagram" aria-hidden="true"></i>
+                <i className="fab fa-instagram" aria-hidden="true"></i>
               </a>
             </li>
             <li>
@@ -66,7 +67,7 @@ const Footer = () => {
                 href="https://www.youtube.com/channel/UClrfICnLonC_sEF5TVEKc3A"
                 target="blank"
               >
-                <i class="fab fa-youtube" aria-hidden="true"></i>
+                <i className="fab fa-youtube" aria-hidden="true"></i>
               </a>
             </li>
             <li>
@@ -74,7 +75,7 @@ const Footer = () => {
                 href="https://www.tiktok.com/@thanglonguniversity?"
                 target="blank"
               >
-                <i class="fab fa-twitter"></i>
+                <i className="fab fa-twitter"></i>
               </a>
             </li>
           </ul>
