@@ -22,7 +22,7 @@ const Home = () => {
 
       slider.style.marginLeft = -(index * 100) + "%";
 
-      if (index > 2) {
+      if (index > 1) {
         setIndex(0);
       } else {
         setIndex(index + 1);
@@ -266,10 +266,12 @@ const Home = () => {
             <div className="news-box23">
               <div className="news-box2">
                 <div className="image-box">
-                  <img
-                    src="https://thanglong.edu.vn/sites/default/files/2020-05/chao-k32-01.jpg"
-                    alt=""
-                  />
+                  <div className="box">
+                    <img
+                      src="https://thanglong.edu.vn/sites/default/files/2020-05/chao-k32-01.jpg"
+                      alt=""
+                    />
+                  </div>
                 </div>
                 <div className="content">
                   <p>
