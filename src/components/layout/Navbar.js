@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 const toggleTasks = () => {
   const tasksLogo = document.querySelector(".tasks-logo");
   const tasks = document.querySelector(".tasks");
+  const tasksBg = document.querySelector(".tasks-bg");
+
   tasks.classList.toggle("active");
   tasksLogo.classList.toggle("active");
+  tasksBg.classList.toggle("active");
 };
 
 const Navbar = () => {
@@ -15,6 +18,7 @@ const Navbar = () => {
       <Link to="/" className="logo">
         <img src="https://thanglong.edu.vn/themes/md_tlu/img/logo.svg" alt="" />
       </Link>
+      <div className="tasks-bg"></div>
       <span className="tasks-logo" onClick={() => toggleTasks()}></span>
       <div className="tasks active">
         <ul>
@@ -35,7 +39,9 @@ const Navbar = () => {
             <span></span>
           </li>
           <li>
-            <Link onClick={() => toggleTasks()}>Giới thiệu</Link>
+            <Link to="/about" onClick={() => toggleTasks()}>
+              Giới thiệu
+            </Link>
             <span></span>
           </li>
           <li>
