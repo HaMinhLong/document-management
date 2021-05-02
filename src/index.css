@@ -1050,7 +1050,8 @@ header .tasks.active {
   bottom: 0;
 }
 .employee-information-container .employee-information .content a button {
-  padding: 10px 50px;
+  width: 250px;
+  height: 40px;
   background: #04143d;
   color: #fff;
   font-weight: bold;

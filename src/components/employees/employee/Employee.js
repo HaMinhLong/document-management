@@ -2,7 +2,11 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-const Employee = ({ employees, setDeleteEmployee }) => {
+const Employee = ({ employees, setConfirmDelete, setEmployeeDeleteId }) => {
+  const deleteEmployee = (id) => {
+    setConfirmDelete(true);
+    setEmployeeDeleteId(id);
+  };
   return (
     <div className="table-container">
       <table>
@@ -38,7 +42,7 @@ const Employee = ({ employees, setDeleteEmployee }) => {
                   </Link>
                   <i
                     className="fas fa-trash"
-                    onClick={() => setDeleteEmployee(true)}
+                    onClick={() => deleteEmployee(employee.id)}
                   ></i>
                 </td>
               </tr>

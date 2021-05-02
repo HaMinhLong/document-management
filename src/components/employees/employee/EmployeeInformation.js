@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
 
-import data from "../../../data/employees.json";
-
 import { Link } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
 
 import Banner2 from "../../layout/Banner2";
 import Footer2 from "../../layout/Footer2";
 
+import { fetchEmployee } from "../../../redux/employees/employeesActions";
+
 const EmployeeInformation = (props) => {
   const id = props.match.params.id;
   useEffect(() => {
-    document.title = `TLU | ${employee[0].name}`;
+    document.title = `TLU | ${employee.name}`;
   });
-  const [employee, setEmployee] = useState(
-    data.employees.filter((employee) => employee.id === id)
-  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchEmployee(id));
+  }, [dispatch]);
+
+  const employee = useSelector((state) => state.employees);
 
   const back = () => {
     window.history.back();
@@ -35,10 +42,10 @@ const EmployeeInformation = (props) => {
             <div className="contact">
               <p>Contact</p>
               <p>
-                <i class="fas fa-phone-square"></i> {employee[0].email}
+                <i className="fas fa-phone-square"></i> {employee[0].email}
               </p>
               <p>
-                <i class="fas fa-envelope"></i>
+                <i className="fas fa-envelope"></i>
                 {employee[0].phoneNumber}
               </p>
             </div>

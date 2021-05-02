@@ -1,21 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useSelector, useDispatch } from "react-redux";
+
 import Banner2 from "../layout/Banner2";
 import Employee from "./employee/Employee";
 import Pagination from "../layout/Pagination";
 import Footer2 from "../layout/Footer2";
 
-import data from "../../data/employees.json";
+import {
+  fetchEmployees,
+  deleteEmployee,
+} from "../../redux/employees/employeesActions";
 
 const Employees = () => {
   useEffect(() => {
     document.title = "TLU | Quản lí nhân viên";
   });
 
-  const employeesList = data.employees;
-  const [employees, setEmployees] = useState(employeesList.slice(0, 10));
-  const [deleteEmployee, setDeleteEmployee] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(1);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchEmployees());
+  }, [dispatch]);
+
+  const employeesList = useSelector((state) => state.employees);
+
+  const [employees, setEmployees] = useState();
+
+  useEffect(() => {
+    setEmployees(
+      employeesList.slice(10 * (currentIndex - 1), 10 * currentIndex)
+    );
+  }, [employeesList]);
 
   const nextPagination = (employeesNumber, currentIndex) => {
     setEmployees(
@@ -24,6 +43,14 @@ const Employees = () => {
         employeesNumber * currentIndex
       )
     );
+  };
+
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [employeeDeleteId, setEmployeeDeleteId] = useState();
+
+  const deleteEmployeeFunction = (id) => {
+    dispatch(deleteEmployee(id));
+    setConfirmDelete(false);
   };
 
   return (
@@ -45,9 +72,16 @@ const Employees = () => {
           <div className="filter-result">
             <p>
               Hiển thị{" "}
-              <span>
-                {employees.length}/{employeesList.length}
-              </span>{" "}
+              {employees &&
+              employees.length > 0 &&
+              employeesList &&
+              employeesList.length > 0 ? (
+                <span>
+                  {employees.length}/{employeesList.length}
+                </span>
+              ) : (
+                <span>0 </span>
+              )}
               nhân viên
             </p>
           </div>
@@ -68,20 +102,30 @@ const Employees = () => {
             </div>
           </div>
         </div>
-
-        <Employee employees={employees} setDeleteEmployee={setDeleteEmployee} />
-        <Pagination
-          recordsTotal={employeesList.length}
-          recordsNumber={10}
-          nextPagination={nextPagination}
+        <Employee
+          employees={employees}
+          setConfirmDelete={setConfirmDelete}
+          setEmployeeDeleteId={setEmployeeDeleteId}
         />
-        {deleteEmployee && <span className="bg"></span>}
-        {deleteEmployee && (
+
+        {employeesList && employeesList.length > 0 && (
+          <Pagination
+            recordsTotal={employeesList.length}
+            recordsNumber={10}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            nextPagination={nextPagination}
+          />
+        )}
+        {confirmDelete && <span className="bg"></span>}
+        {confirmDelete && (
           <div className="delete-employee">
             <p>Bạn có muốn xóa nhân viên này không?</p>
             <div className="confirm">
-              <button onClick={() => setDeleteEmployee(false)}>Có</button>
-              <button onClick={() => setDeleteEmployee(false)}>Không</button>
+              <button onClick={() => deleteEmployeeFunction(employeeDeleteId)}>
+                Có
+              </button>
+              <button onClick={() => setConfirmDelete(false)}>Không</button>
             </div>
           </div>
         )}

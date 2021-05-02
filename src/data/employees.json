@@ -239,18 +239,6 @@
       "position": "Giảng viên",
       "startDate": "30/04/2021",
       "image": "https://toplist.vn/images/800px/tiem-chup-anh-the-334-321384.jpg"
-    },
-    {
-      "id": "21",
-      "code": "CTI20",
-      "name": "Nguyễn Văn W",
-      "email": "nguyenvana3@gmail.com",
-      "phoneNumber": "0963333333",
-      "department": "KhoaToán - Tin",
-      "affiliatedDepartment": "Bộ môn Toán",
-      "position": "Giảng viên",
-      "startDate": "30/04/2021",
-      "image": "https://toplist.vn/images/800px/tiem-chup-anh-the-334-321384.jpg"
     }
   ]
 }

@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
 import FileBase from "react-file-base64";
-
-import data from "../../../data/employees.json";
+import { useDispatch, useSelector } from "react-redux";
 
 import Banner2 from "../../layout/Banner2";
 import Footer2 from "../../layout/Footer2";
 
+import {
+  fetchEmployee,
+  addEmployee,
+} from "../../../redux/employees/employeesActions";
+
 const AddEmployee = (props) => {
+  const dispatch = useDispatch();
   const url = props.match.url;
+  const id = url.slice(14, url.length);
   useEffect(() => {
     document.title =
       url === "/add-employee"
         ? "TLU | Thêm nhân viên"
         : "TLU | Cập nhật thông tin nhân viên";
     if (url !== "/add-employee") {
-      const dt = data.employees.filter((dt) => dt.id === id);
-      setEmployee(dt[0]);
+      setEmployee(data[0]);
     }
   });
 
-  const id = url.slice(14, url.length);
+  useEffect(() => {
+    dispatch(fetchEmployee(id));
+  }, [dispatch]);
+
+  const data = useSelector((state) => state.employees);
 
   const [employee, setEmployee] = useState({
-    id: "",
+    id: Math.floor(Math.random() * 1000000000000000000).toString(),
     name: "",
     code: "",
     email: "",
@@ -38,6 +46,8 @@ const AddEmployee = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(addEmployee(employee));
+    props.history.push("/employees");
   };
 
   const back = () => {
