@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
-const Pagination = ({ recordsTotal, recordsNumber, nextPagination }) => {
+const Pagination = ({
+  recordsTotal,
+  recordsNumber,
+  currentIndex,
+  setCurrentIndex,
+  nextPagination,
+}) => {
   useEffect(() => {
     let thumbnails = document.getElementsByClassName("thumbnail");
     thumbnails[currentIndex - 1].classList.add("activePagination");
   });
 
-  const [currentIndex, setCurrentIndex] = useState(1);
   const paginationNumber = [];
 
   const handleClick = (recordsNumber, currentIndex) => {
@@ -16,7 +21,9 @@ const Pagination = ({ recordsTotal, recordsNumber, nextPagination }) => {
       nextPagination(recordsNumber, currentIndex);
       setCurrentIndex(currentIndex);
       if (activeSpans.length) {
-        activeSpans[0].classList.remove("activePagination");
+        for (let index = 0; index < activeSpans.length; index++) {
+          activeSpans[index].classList.remove("activePagination");
+        }
       }
       thumbnails[currentIndex - 1].classList.add("activePagination");
     }
@@ -31,13 +38,13 @@ const Pagination = ({ recordsTotal, recordsNumber, nextPagination }) => {
       <span onClick={() => handleClick(recordsNumber, currentIndex - 1)}>
         &laquo;
       </span>
-      {paginationNumber.map((pagination) => (
+      {paginationNumber.map((paginationNumber) => (
         <span
-          key={pagination}
+          key={paginationNumber}
           className={"thumbnail"}
-          onClick={() => handleClick(recordsNumber, pagination)}
+          onClick={() => handleClick(recordsNumber, paginationNumber)}
         >
-          {pagination}
+          {paginationNumber}
         </span>
       ))}
       <span onClick={() => handleClick(recordsNumber, currentIndex + 1)}>
