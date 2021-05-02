@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="footer-list">
             <ul>
               <li>
-                <Link>Quản lí cơ cấu tổ chức</Link>
+                <Link to="/departments">Quản lí cơ cấu tổ chức</Link>
               </li>
               <li>
                 <Link to="/employees">Quản lí nhân viên</Link>
@@ -21,7 +21,10 @@ const Footer = () => {
                 <Link to="/about">Giới thiệu</Link>
               </li>
               <li>
-                <Link>Liên hệ</Link>
+                <Link to="/contact">Liên hệ</Link>
+              </li>
+              <li to="/about-we">
+                <Link>Về chúng tôi</Link>
               </li>
             </ul>
           </div>

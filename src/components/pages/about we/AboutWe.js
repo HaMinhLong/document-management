@@ -1,124 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
-import Footer from "../layout/Footer";
+import Banner from "../../layout/Banner";
+import Footer from "../../layout/Footer";
 
-const Home = () => {
+const AboutWe = () => {
   useEffect(() => {
-    document.title = "Trường Đại học Thăng Long";
+    document.title = "TLU | Về chúng tôi";
   });
-
-  const [index, setIndex] = useState(1);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const iconSlider = document.querySelectorAll(".icon-slider");
-      const activeIcon = document.getElementsByClassName("sticky");
-      const slider = document.querySelector(".slider-banner");
-
-      if (activeIcon) {
-        activeIcon[0].classList.remove("sticky");
-      }
-      iconSlider[index].classList.add("sticky");
-
-      slider.style.marginLeft = -(index * 100) + "%";
-
-      if (index > 2) {
-        setIndex(0);
-      } else {
-        setIndex(index + 1);
-      }
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [index]);
-
-  const imagesBanner = [
-    ["https://thanglong.edu.vn/sites/default/files/2020-04/banner.png"],
-  ];
-
-  const sliderBanner = () => {
-    const iconSlider = document.querySelectorAll(".icon-slider");
-    const activeIcon = document.getElementsByClassName("sticky");
-
-    const slider = document.querySelector(".slider-banner");
-
-    for (let index = 0; index < iconSlider.length; index++) {
-      iconSlider[index].addEventListener("click", () => {
-        if (activeIcon) {
-          activeIcon[0].classList.remove("sticky");
-        }
-        iconSlider[index].classList.add("sticky");
-        slider.style.marginLeft = -(index * 100) + "%";
-      });
-    }
-  };
 
   return (
     <>
-      <section className="home-container">
-        <div className="banner">
-          <div id="banner"></div>
-          <span
-            className="icon-slider sticky"
-            onClick={() => sliderBanner()}
-          ></span>
-          <span className="icon-slider" onClick={() => sliderBanner()}></span>
-          <span className="icon-slider" onClick={() => sliderBanner()}></span>
-          <span className="icon-slider" onClick={() => sliderBanner()}></span>
-          <div className="down-box">
-            <a href="#study" className="down-icon"></a>
-          </div>
-          <div className="slider-banner">
-            <div className="box1">
-              <div className="content">
-                <p>
-                  Tư duy là <br />
-                  sức mạnh của <br />
-                  sự sáng tạo
-                </p>
-              </div>
-              <div className="image-box">
-                <img src={imagesBanner[0]} alt="" />
-              </div>
-            </div>
-            <div className="box2">
-              <div className="content">
-                <p>
-                  Tư duy là <br />
-                  sức mạnh của <br />
-                  sự sáng tạo
-                </p>
-              </div>
-              <div className="image-box">
-                <img src={imagesBanner[0]} alt="" />
-              </div>
-            </div>
-            <div className="box3">
-              <div className="content">
-                <p>
-                  Tư duy là <br />
-                  sức mạnh của <br />
-                  sự sáng tạo
-                </p>
-              </div>
-              <div className="image-box">
-                <img src={imagesBanner[0]} alt="" />
-              </div>
-            </div>
-            <div className="box4">
-              <div className="content">
-                <p>
-                  Tư duy là <br />
-                  sức mạnh của <br />
-                  sự sáng tạo
-                </p>
-              </div>
-              <div className="image-box">
-                <img src={imagesBanner[0]} alt="" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="study-program-container">
+      <section className="about-we-container">
+        <Banner title={"About We"} />
+        <div className="study-program-container padding">
           <div id="study"></div>
           <div className="introduce">
             <p>Hãy bắt đầu tương lai ngay bây giờ</p>
@@ -191,7 +85,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="thanglong-life">
+        <div className="thanglong-life padding">
           <p>
             Đời sống
             <br /> Thăng Long
@@ -245,7 +139,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="news-container">
+        <div className="news-container padding2">
           <div className="news">
             <div className="news-box1">
               <div className="image-box">
@@ -266,10 +160,12 @@ const Home = () => {
             <div className="news-box23">
               <div className="news-box2">
                 <div className="image-box">
-                  <img
-                    src="https://thanglong.edu.vn/sites/default/files/2020-05/chao-k32-01.jpg"
-                    alt=""
-                  />
+                  <div className="box">
+                    <img
+                      src="https://thanglong.edu.vn/sites/default/files/2020-05/chao-k32-01.jpg"
+                      alt=""
+                    />
+                  </div>
                 </div>
                 <div className="content">
                   <p>
@@ -317,4 +213,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AboutWe;

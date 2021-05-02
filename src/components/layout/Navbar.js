@@ -29,12 +29,14 @@ const Navbar = () => {
             <span></span>
           </li>
           <li>
-            <Link onClick={() => toggleTasks()}>Quản lí cơ cấu tổ chức</Link>
+            <Link to="/departments" onClick={() => toggleTasks()}>
+              Quản lý cơ cấu tổ chức
+            </Link>
             <span></span>
           </li>
           <li>
             <Link to="/employees" onClick={() => toggleTasks()}>
-              Quản lí nhân viên
+              Quản lý nhân viên
             </Link>
             <span></span>
           </li>
@@ -45,7 +47,15 @@ const Navbar = () => {
             <span></span>
           </li>
           <li>
-            <Link onClick={() => toggleTasks()}>Liên hệ</Link>
+            <Link to="/contact" onClick={() => toggleTasks()}>
+              Liên hệ
+            </Link>
+            <span></span>
+          </li>
+          <li>
+            <Link to="/about-we" onClick={() => toggleTasks()}>
+              Về chúng tôi
+            </Link>
             <span></span>
           </li>
           <p>TLU</p>
