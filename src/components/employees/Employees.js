@@ -61,6 +61,14 @@ const Employees = () => {
           Danh sách cán bộ / giảng viên / nhân viên làm việc tại Trường Đại học
           Thăng Long:{" "}
         </h1>
+
+        <div className="search-box">
+          <button>
+            <input type="text" name="search" id="search" />
+            <i className="fas fa-search"></i>
+          </button>
+        </div>
+
         <div className="add-employee-button">
           <button>
             <Link to="/add-employee">
@@ -68,6 +76,7 @@ const Employees = () => {
             </Link>
           </button>
         </div>
+
         <div className="filter-container">
           <div className="filter-result">
             <p>
@@ -87,14 +96,14 @@ const Employees = () => {
           </div>
           <div className="filter">
             <div className="filter-department">
-              <p>Bộ phận: </p>
+              <p>Phòng ban: </p>
               <select>
                 <option value="toantin">Toán - Tin</option>
                 <option value="kinhtequanli">Kinh tế - Quản lí</option>
               </select>
             </div>
             <div className="filter-affiliated-department">
-              <p>Ngành:</p>
+              <p>Bộ phận:</p>
               <select>
                 <option value="toan">Bộ môn Toán</option>
                 <option value="tin">Bộ môn Tin</option>

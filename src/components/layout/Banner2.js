@@ -15,7 +15,9 @@ const Banner = ({ title }) => {
         {title &&
           title.length > 0 &&
           title.map((tt) => (
-            <span key={tt}>
+            <span
+              key={Math.floor(Math.random() * 1000000000000000000).toString()}
+            >
               <img src={svg} alt="" />
               <span>{tt}</span>
             </span>

@@ -763,76 +763,305 @@ header .tasks.active {
   box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
-.employees-container {
+.employees-container,
+.organizational-structure-container,
+.organizational-information-container,
+.departments-container,
+.department-information-container,
+.affiliated-department-container {
   position: relative;
   width: 100%;
   min-height: 100vh;
   background: #f6f7fa;
 }
-.employees-container .add-employee-button {
+.employees-container h1,
+.organizational-structure-container h1,
+.organizational-information-container h1,
+.departments-container h1,
+.department-information-container h1,
+.affiliated-department-container h1 {
+  font-size: 25px;
+}
+.employees-container .search-box,
+.organizational-structure-container .search-box,
+.organizational-information-container .search-box,
+.departments-container .search-box,
+.department-information-container .search-box,
+.affiliated-department-container .search-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 45px;
+  margin-right: 100px;
+}
+.employees-container .search-box button,
+.organizational-structure-container .search-box button,
+.organizational-information-container .search-box button,
+.departments-container .search-box button,
+.department-information-container .search-box button,
+.affiliated-department-container .search-box button {
+  border: none;
+  background: transparent;
+}
+.employees-container .search-box button input,
+.organizational-structure-container .search-box button input,
+.organizational-information-container .search-box button input,
+.departments-container .search-box button input,
+.department-information-container .search-box button input,
+.affiliated-department-container .search-box button input {
+  border-radius: 20px;
+  height: 30px;
+  width: 240px;
+  color: #04143d;
+  letter-spacing: 1px;
+  padding: 0px 21px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #04143d;
+  transition: 0.5s;
+}
+.employees-container .search-box button input:focus,
+.organizational-structure-container .search-box button input:focus,
+.organizational-information-container .search-box button input:focus,
+.departments-container .search-box button input:focus,
+.department-information-container .search-box button input:focus,
+.affiliated-department-container .search-box button input:focus {
+  border-radius: 0px;
+}
+.employees-container .search-box button i,
+.organizational-structure-container .search-box button i,
+.organizational-information-container .search-box button i,
+.departments-container .search-box button i,
+.department-information-container .search-box button i,
+.affiliated-department-container .search-box button i {
+  margin-left: 19px;
+  font-size: 20px;
+  color: #04143d;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.employees-container .search-box button i:hover,
+.organizational-structure-container .search-box button i:hover,
+.organizational-information-container .search-box button i:hover,
+.departments-container .search-box button i:hover,
+.department-information-container .search-box button i:hover,
+.affiliated-department-container .search-box button i:hover {
+  opacity: 1;
+}
+.employees-container .add-employee-button,
+.employees-container .add-organizational-structure-button,
+.employees-container .add-department-button,
+.employees-container .add-affiliated-department-button,
+.organizational-structure-container .add-employee-button,
+.organizational-structure-container .add-organizational-structure-button,
+.organizational-structure-container .add-department-button,
+.organizational-structure-container .add-affiliated-department-button,
+.organizational-information-container .add-employee-button,
+.organizational-information-container .add-organizational-structure-button,
+.organizational-information-container .add-department-button,
+.organizational-information-container .add-affiliated-department-button,
+.departments-container .add-employee-button,
+.departments-container .add-organizational-structure-button,
+.departments-container .add-department-button,
+.departments-container .add-affiliated-department-button,
+.department-information-container .add-employee-button,
+.department-information-container .add-organizational-structure-button,
+.department-information-container .add-department-button,
+.department-information-container .add-affiliated-department-button,
+.affiliated-department-container .add-employee-button,
+.affiliated-department-container .add-organizational-structure-button,
+.affiliated-department-container .add-department-button,
+.affiliated-department-container .add-affiliated-department-button {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  margin-top: 50px;
 }
-.employees-container .add-employee-button button {
+.employees-container .add-employee-button button,
+.employees-container .add-organizational-structure-button button,
+.employees-container .add-department-button button,
+.employees-container .add-affiliated-department-button button,
+.organizational-structure-container .add-employee-button button,
+.organizational-structure-container .add-organizational-structure-button button,
+.organizational-structure-container .add-department-button button,
+.organizational-structure-container .add-affiliated-department-button button,
+.organizational-information-container .add-employee-button button,
+.organizational-information-container .add-organizational-structure-button button,
+.organizational-information-container .add-department-button button,
+.organizational-information-container .add-affiliated-department-button button,
+.departments-container .add-employee-button button,
+.departments-container .add-organizational-structure-button button,
+.departments-container .add-department-button button,
+.departments-container .add-affiliated-department-button button,
+.department-information-container .add-employee-button button,
+.department-information-container .add-organizational-structure-button button,
+.department-information-container .add-department-button button,
+.department-information-container .add-affiliated-department-button button,
+.affiliated-department-container .add-employee-button button,
+.affiliated-department-container .add-organizational-structure-button button,
+.affiliated-department-container .add-department-button button,
+.affiliated-department-container .add-affiliated-department-button button {
   border: none;
 }
-.employees-container .add-employee-button button a {
+.employees-container .add-employee-button button a,
+.employees-container .add-organizational-structure-button button a,
+.employees-container .add-department-button button a,
+.employees-container .add-affiliated-department-button button a,
+.organizational-structure-container .add-employee-button button a,
+.organizational-structure-container .add-organizational-structure-button button a,
+.organizational-structure-container .add-department-button button a,
+.organizational-structure-container .add-affiliated-department-button button a,
+.organizational-information-container .add-employee-button button a,
+.organizational-information-container .add-organizational-structure-button button a,
+.organizational-information-container .add-department-button button a,
+.organizational-information-container .add-affiliated-department-button button a,
+.departments-container .add-employee-button button a,
+.departments-container .add-organizational-structure-button button a,
+.departments-container .add-department-button button a,
+.departments-container .add-affiliated-department-button button a,
+.department-information-container .add-employee-button button a,
+.department-information-container .add-organizational-structure-button button a,
+.department-information-container .add-department-button button a,
+.department-information-container .add-affiliated-department-button button a,
+.affiliated-department-container .add-employee-button button a,
+.affiliated-department-container .add-organizational-structure-button button a,
+.affiliated-department-container .add-department-button button a,
+.affiliated-department-container .add-affiliated-department-button button a {
   border-radius: 20px;
-  padding: 10px 23px;
+  padding: 10px 29.5px;
   color: #fff;
   background: #04143d;
   cursor: pointer;
   font-weight: bold;
   font-size: 16px;
 }
-.employees-container .add-employee-button button a i {
+.employees-container .add-employee-button button a i,
+.employees-container .add-organizational-structure-button button a i,
+.employees-container .add-department-button button a i,
+.employees-container .add-affiliated-department-button button a i,
+.organizational-structure-container .add-employee-button button a i,
+.organizational-structure-container .add-organizational-structure-button button a i,
+.organizational-structure-container .add-department-button button a i,
+.organizational-structure-container .add-affiliated-department-button button a i,
+.organizational-information-container .add-employee-button button a i,
+.organizational-information-container .add-organizational-structure-button button a i,
+.organizational-information-container .add-department-button button a i,
+.organizational-information-container .add-affiliated-department-button button a i,
+.departments-container .add-employee-button button a i,
+.departments-container .add-organizational-structure-button button a i,
+.departments-container .add-department-button button a i,
+.departments-container .add-affiliated-department-button button a i,
+.department-information-container .add-employee-button button a i,
+.department-information-container .add-organizational-structure-button button a i,
+.department-information-container .add-department-button button a i,
+.department-information-container .add-affiliated-department-button button a i,
+.affiliated-department-container .add-employee-button button a i,
+.affiliated-department-container .add-organizational-structure-button button a i,
+.affiliated-department-container .add-department-button button a i,
+.affiliated-department-container .add-affiliated-department-button button a i {
   margin-left: 10px;
   color: #fff;
 }
-.employees-container .table-container table {
+.employees-container .table-container table,
+.organizational-structure-container .table-container table,
+.organizational-information-container .table-container table,
+.departments-container .table-container table,
+.department-information-container .table-container table,
+.affiliated-department-container .table-container table {
   width: 100%;
   height: 100%;
   border: 1px solid #04143d;
 }
 .employees-container .table-container table th,
-.employees-container .table-container table td {
+.employees-container .table-container table td,
+.organizational-structure-container .table-container table th,
+.organizational-structure-container .table-container table td,
+.organizational-information-container .table-container table th,
+.organizational-information-container .table-container table td,
+.departments-container .table-container table th,
+.departments-container .table-container table td,
+.department-information-container .table-container table th,
+.department-information-container .table-container table td,
+.affiliated-department-container .table-container table th,
+.affiliated-department-container .table-container table td {
   padding: 20px 15px;
   border: 1px solid #04143d;
+  text-align: center;
 }
-.employees-container .table-container table tr th {
+.employees-container .table-container table tr th,
+.organizational-structure-container .table-container table tr th,
+.organizational-information-container .table-container table tr th,
+.departments-container .table-container table tr th,
+.department-information-container .table-container table tr th,
+.affiliated-department-container .table-container table tr th {
   background: #04143d;
   color: #fff;
   font-weight: bold;
   transition: 0.5s;
   cursor: pointer;
 }
-.employees-container .table-container table tr th:hover {
+.employees-container .table-container table tr th:hover,
+.organizational-structure-container .table-container table tr th:hover,
+.organizational-information-container .table-container table tr th:hover,
+.departments-container .table-container table tr th:hover,
+.department-information-container .table-container table tr th:hover,
+.affiliated-department-container .table-container table tr th:hover {
   color: red;
 }
 .employees-container .table-container table tr .code,
-.employees-container .table-container table tr .name {
+.employees-container .table-container table tr .name,
+.organizational-structure-container .table-container table tr .code,
+.organizational-structure-container .table-container table tr .name,
+.organizational-information-container .table-container table tr .code,
+.organizational-information-container .table-container table tr .name,
+.departments-container .table-container table tr .code,
+.departments-container .table-container table tr .name,
+.department-information-container .table-container table tr .code,
+.department-information-container .table-container table tr .name,
+.affiliated-department-container .table-container table tr .code,
+.affiliated-department-container .table-container table tr .name {
   font-weight: bold;
 }
-.employees-container .table-container table tr i {
+.employees-container .table-container table tr i,
+.organizational-structure-container .table-container table tr i,
+.organizational-information-container .table-container table tr i,
+.departments-container .table-container table tr i,
+.department-information-container .table-container table tr i,
+.affiliated-department-container .table-container table tr i {
   width: 50%;
   text-align: center;
   color: #04143d;
   transition: 0.5s;
   cursor: pointer;
 }
-.employees-container .table-container table tr i:hover {
+.employees-container .table-container table tr i:hover,
+.organizational-structure-container .table-container table tr i:hover,
+.organizational-information-container .table-container table tr i:hover,
+.departments-container .table-container table tr i:hover,
+.department-information-container .table-container table tr i:hover,
+.affiliated-department-container .table-container table tr i:hover {
   color: red;
 }
-.employees-container .pagination-container {
+.employees-container .pagination-container,
+.organizational-structure-container .pagination-container,
+.organizational-information-container .pagination-container,
+.departments-container .pagination-container,
+.department-information-container .pagination-container,
+.affiliated-department-container .pagination-container {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 50px;
 }
-.employees-container .pagination-container span {
+.employees-container .pagination-container span,
+.organizational-structure-container .pagination-container span,
+.organizational-information-container .pagination-container span,
+.departments-container .pagination-container span,
+.department-information-container .pagination-container span,
+.affiliated-department-container .pagination-container span {
   width: 30px;
   height: 30px;
   text-align: center;
@@ -844,11 +1073,21 @@ header .tasks.active {
   transition: 0.5s;
   color: #04143d;
 }
-.employees-container .pagination-container span.activePagination {
+.employees-container .pagination-container span.activePagination,
+.organizational-structure-container .pagination-container span.activePagination,
+.organizational-information-container .pagination-container span.activePagination,
+.departments-container .pagination-container span.activePagination,
+.department-information-container .pagination-container span.activePagination,
+.affiliated-department-container .pagination-container span.activePagination {
   background: red;
   color: #fff;
 }
-.employees-container .bg {
+.employees-container .bg,
+.organizational-structure-container .bg,
+.organizational-information-container .bg,
+.departments-container .bg,
+.department-information-container .bg,
+.affiliated-department-container .bg {
   position: absolute;
   top: 0;
   left: 0;
@@ -856,7 +1095,12 @@ header .tasks.active {
   height: 100%;
   background: rgba(4, 20, 61, 0.6);
 }
-.employees-container .delete-employee {
+.employees-container .delete-employee,
+.organizational-structure-container .delete-employee,
+.organizational-information-container .delete-employee,
+.departments-container .delete-employee,
+.department-information-container .delete-employee,
+.affiliated-department-container .delete-employee {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -869,19 +1113,34 @@ header .tasks.active {
   justify-content: center;
   align-items: center;
 }
-.employees-container .delete-employee p {
+.employees-container .delete-employee p,
+.organizational-structure-container .delete-employee p,
+.organizational-information-container .delete-employee p,
+.departments-container .delete-employee p,
+.department-information-container .delete-employee p,
+.affiliated-department-container .delete-employee p {
   color: #fff;
   font-weight: bold;
   margin-bottom: 50px;
 }
-.employees-container .delete-employee .confirm {
+.employees-container .delete-employee .confirm,
+.organizational-structure-container .delete-employee .confirm,
+.organizational-information-container .delete-employee .confirm,
+.departments-container .delete-employee .confirm,
+.department-information-container .delete-employee .confirm,
+.affiliated-department-container .delete-employee .confirm {
   width: 100%;
   margin-top: 20px;
   margin-bottom: 50px;
   display: flex;
   justify-content: center;
 }
-.employees-container .delete-employee .confirm button {
+.employees-container .delete-employee .confirm button,
+.organizational-structure-container .delete-employee .confirm button,
+.organizational-information-container .delete-employee .confirm button,
+.departments-container .delete-employee .confirm button,
+.department-information-container .delete-employee .confirm button,
+.affiliated-department-container .delete-employee .confirm button {
   padding: 10px 40px;
   background: red;
   cursor: pointer;
@@ -890,21 +1149,50 @@ header .tasks.active {
   opacity: 0.6;
   transition: 0.5s;
 }
-.employees-container .delete-employee .confirm button:nth-child(2) {
+.employees-container .delete-employee .confirm button:nth-child(2),
+.organizational-structure-container .delete-employee .confirm button:nth-child(2),
+.organizational-information-container .delete-employee .confirm button:nth-child(2),
+.departments-container .delete-employee .confirm button:nth-child(2),
+.department-information-container .delete-employee .confirm button:nth-child(2),
+.affiliated-department-container .delete-employee .confirm button:nth-child(2) {
   margin-left: 100px;
   background: green;
 }
-.employees-container .delete-employee .confirm button:hover {
+.employees-container .delete-employee .confirm button:hover,
+.organizational-structure-container .delete-employee .confirm button:hover,
+.organizational-information-container .delete-employee .confirm button:hover,
+.departments-container .delete-employee .confirm button:hover,
+.department-information-container .delete-employee .confirm button:hover,
+.affiliated-department-container .delete-employee .confirm button:hover {
   opacity: 1;
 }
+.employees-container > p,
+.organizational-structure-container > p,
+.organizational-information-container > p,
+.departments-container > p,
+.department-information-container > p,
+.affiliated-department-container > p {
+  cursor: pointer;
+  margin-top: 20px;
+}
+.employees-container > p:hover,
+.organizational-structure-container > p:hover,
+.organizational-information-container > p:hover,
+.departments-container > p:hover,
+.department-information-container > p:hover,
+.affiliated-department-container > p:hover {
+  text-decoration: underline;
+}
 
-.add-employee-container {
+.add-employee-container,
+.add-department-container {
   position: relative;
   width: 100%;
   min-height: 100vh;
   background: #f6f7fa;
 }
-.add-employee-container form {
+.add-employee-container form,
+.add-department-container form {
   width: 600px;
   height: 100%;
   padding: 20px 0px;
@@ -914,14 +1202,18 @@ header .tasks.active {
   justify-content: center;
   align-items: flex-start;
 }
-.add-employee-container form label {
+.add-employee-container form label,
+.add-department-container form label {
   color: #04143d;
   font-weight: bold;
   margin-bottom: 20px;
 }
 .add-employee-container form input[type=text],
 .add-employee-container form input[type=email],
-.add-employee-container form input[type=number] {
+.add-employee-container form input[type=number],
+.add-department-container form input[type=text],
+.add-department-container form input[type=email],
+.add-department-container form input[type=number] {
   width: 100%;
   height: 20px;
   border: none;
@@ -934,20 +1226,34 @@ header .tasks.active {
 }
 .add-employee-container form input[type=text]:focus,
 .add-employee-container form input[type=email]:focus,
-.add-employee-container form input[type=number]:focus {
+.add-employee-container form input[type=number]:focus,
+.add-department-container form input[type=text]:focus,
+.add-department-container form input[type=email]:focus,
+.add-department-container form input[type=number]:focus {
   margin-top: 20px;
   border-bottom-color: red;
 }
-.add-employee-container form .input-img {
-  margin-top: 20px;
-  margin-bottom: 30px;
+.add-employee-container form input:last-child,
+.add-department-container form input:last-child {
+  margin-top: 30px;
 }
-.add-employee-container form select {
+.add-employee-container form textarea,
+.add-department-container form textarea {
+  width: 100%;
+  height: 250px;
+  margin-bottom: 20px;
+  outline: none;
+  border: 1px solid #04143d;
+  padding: 10px;
+}
+.add-employee-container form select,
+.add-department-container form select {
   margin-left: 20px;
   margin-bottom: 20px;
   margin-top: 10px;
 }
-.add-employee-container form input[type=submit] {
+.add-employee-container form input[type=submit],
+.add-department-container form input[type=submit] {
   width: 100%;
   height: 40px;
   background: #04143d;
@@ -956,11 +1262,13 @@ header .tasks.active {
   cursor: pointer;
   text-transform: uppercase;
 }
-.add-employee-container a {
+.add-employee-container a,
+.add-department-container a {
   display: inline-block;
   margin-top: 50px;
 }
-.add-employee-container p:hover {
+.add-employee-container p:hover,
+.add-department-container p:hover {
   text-decoration: underline;
   cursor: pointer;
 }
