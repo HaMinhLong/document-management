@@ -108,7 +108,7 @@ const HomePage = () => {
             <div className="system-function-box">
               <div className="box">
                 <p>Quản lý cơ cấu tổ chức</p>
-                <Link to="/departments">
+                <Link to="/organizational-structure">
                   <button>
                     Xem
                     <i className="fas fa-long-arrow-alt-right"></i>

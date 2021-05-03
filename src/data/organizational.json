@@ -1,0 +1,39 @@
+{
+  "organizational": [
+    {
+      "id": "1",
+      "name": "Hội đồng quản trị",
+      "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+      "email": "email@gmail.com",
+      "phoneNumber": "0963333333"
+    },
+    {
+      "id": "2",
+      "name": "Ban giám hiệu",
+      "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+      "email": "email@gmail.com",
+      "phoneNumber": "0963333333"
+    },
+    {
+      "id": "3",
+      "name": "Các khoa",
+      "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+      "email": "email@gmail.com",
+      "phoneNumber": "0963333333"
+    },
+    {
+      "id": "4",
+      "name": "Phòng ban",
+      "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+      "email": "email@gmail.com",
+      "phoneNumber": "0963333333"
+    },
+    {
+      "id": "5",
+      "name": "Các tổ chức khác",
+      "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+      "email": "email@gmail.com",
+      "phoneNumber": "0963333333"
+    }
+  ]
+}

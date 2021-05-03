@@ -736,22 +736,71 @@ header {
 }
 
 // EMPLOYEES CONTAINER
-.employees-container {
+.employees-container,
+.organizational-structure-container,
+.organizational-information-container,
+.departments-container,
+.department-information-container,
+.affiliated-department-container {
   position: relative;
   width: 100%;
   min-height: 100vh;
   background: #f6f7fa;
-  .add-employee-button {
+  h1 {
+    font-size: 25px;
+  }
+  .search-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 45px;
+    margin-right: 100px;
+    button {
+      border: none;
+      background: transparent;
+      input {
+        border-radius: 20px;
+        height: 30px;
+        width: 240px;
+        color: #04143d;
+        letter-spacing: 1px;
+        padding: 0px 21px;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #04143d;
+        transition: 0.5s;
+      }
+      input:focus {
+        border-radius: 0px;
+      }
+      i {
+        margin-left: 19px;
+        font-size: 20px;
+        color: #04143d;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: 0.5s;
+      }
+      i:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .add-employee-button,
+  .add-organizational-structure-button,
+  .add-department-button,
+  .add-affiliated-department-button {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    margin-top: 50px;
     button {
       border: none;
       a {
         border-radius: 20px;
-        padding: 10px 23px;
+        padding: 10px 29.5px;
         color: #fff;
         background: #04143d;
         cursor: pointer;
@@ -773,6 +822,7 @@ header {
       td {
         padding: 20px 15px;
         border: 1px solid #04143d;
+        text-align: center;
       }
       tr {
         th {
@@ -873,10 +923,18 @@ header {
       }
     }
   }
+  > p {
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  > p:hover {
+    text-decoration: underline;
+  }
 }
 
 // ADD EMPLOYEE CONTAINER
-.add-employee-container {
+.add-employee-container,
+.add-department-container {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -914,9 +972,18 @@ header {
       margin-top: 20px;
       border-bottom-color: red;
     }
-    .input-img {
-      margin-top: 20px;
-      margin-bottom: 30px;
+    input {
+      &:last-child {
+        margin-top: 30px;
+      }
+    }
+    textarea {
+      width: 100%;
+      height: 250px;
+      margin-bottom: 20px;
+      outline: none;
+      border: 1px solid #04143d;
+      padding: 10px;
     }
     select {
       margin-left: 20px;

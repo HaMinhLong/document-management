@@ -12,7 +12,9 @@ const Footer = () => {
           <div className="footer-list">
             <ul>
               <li>
-                <Link to="/departments">Quản lí cơ cấu tổ chức</Link>
+                <Link to="/organizational-structure">
+                  Quản lí cơ cấu tổ chức
+                </Link>
               </li>
               <li>
                 <Link to="/employees">Quản lí nhân viên</Link>
