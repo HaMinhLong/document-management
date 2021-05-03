@@ -53,7 +53,7 @@ const OrganizationalStructure = () => {
                 <th>Email</th>
                 <th>Phone Number</th>
                 <th>Bộ phận trực thuộc</th>
-                <th>Hành động</th>
+                {/* <th>Hành động</th> */}
               </tr>
             </thead>
             <tbody>
@@ -76,11 +76,11 @@ const OrganizationalStructure = () => {
                         Xem bộ phận trực thuộc
                       </Link>
                     </td>
-                    <td>
+                    {/* <td>
                       <Link to={`/add-department`}>
                         <i className="fas fa-edit"></i>
                       </Link>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
             </tbody>

@@ -1,6 +1,6 @@
 import * as actions from "./employeesTypes";
 
-const productsReducer = (state = [], action) => {
+const employeesReducers = (state = [], action) => {
   switch (action.type) {
     case actions.FETCH_EMPLOYEES:
       return action.payload;
@@ -19,4 +19,4 @@ const productsReducer = (state = [], action) => {
   }
 };
 
-export default productsReducer;
+export default employeesReducers;
