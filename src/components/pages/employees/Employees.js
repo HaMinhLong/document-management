@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import Banner2 from "../layout/Banner2";
+import Banner2 from "../../layout/Banner2";
 import Employee from "./employee/Employee";
-import Pagination from "../layout/Pagination";
-import Footer2 from "../layout/Footer2";
+import Pagination from "../../layout/Pagination";
+import Footer2 from "../../layout/Footer2";
 
 import {
   fetchEmployees,
   deleteEmployee,
-} from "../../redux/employees/employeesActions";
+} from "../../../redux/employees/employeesActions";
 
 const Employees = () => {
   useEffect(() => {

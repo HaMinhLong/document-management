@@ -1,0 +1,19 @@
+{
+  "position": [
+    {
+      "name": "Cán bộ"
+    },
+    {
+      "name": "Trưởng khoa"
+    },
+    {
+      "name": "Trưởng phòng"
+    },
+    {
+      "name": "Giảng viên"
+    },
+    {
+      "name": "Nhân viên"
+    }
+  ]
+}

@@ -8,21 +8,20 @@ import NoMatch from "./components/pages/404";
 
 import HomePage from "./components/pages/home/HomePage";
 
-import Employees from "./components/employees/Employees";
-import EmployeeInformation from "./components/employees/employee/EmployeeInformation";
-import AddEmployee from "./components/employees/employee/AddEmployee";
+import Employees from "./components/pages/employees/Employees";
+import EmployeeDetails from "./components/pages/employees/employee/EmployeeDetails";
+import AddEmployee from "./components/Form/AddEmployee";
 
-import OrganizationalStructure from "./components/organizational-structure/OrganizationalStructure";
-import OrganizationalInformation from "./components/organizational-structure/OrganizationalInformation";
+import Organizational from "./components/pages/organizational/Organizational";
+import OrganizationalDetails from "./components/pages/organizational/OrganizationalDetails";
 
-import Departments from "./components/organizational-structure/departments/Departments";
-import DepartmentInformation from "./components/organizational-structure/departments/DepartmentInformation";
+import Departments from "./components/pages/organizational/departments/Departments";
+import DepartmentDetails from "./components/pages/organizational/departments/DepartmentDetails";
 
-import AffiliatedDepartment from "./components/organizational-structure/departments/affiliated-department/AffiliatedDepartment";
-import AffiliatedDepartmentInformation from "./components/organizational-structure/departments/affiliated-department/AffiliatedDepartmentInformation";
+import AffiliatedDepartment from "./components/pages/organizational/departments/affiliated-department/AffiliatedDepartment";
+import AffiliatedDepartmentDetails from "./components/pages/organizational/departments/affiliated-department/AffiliatedDepartmentDetails";
 
-import AddDepartment from "./components/organizational-structure/AddDepartment";
-import AddAffiliatedDepartment from "./components/organizational-structure/departments/affiliated-department/AddAffiliatedDepartment";
+import AddDepartment from "./components/Form/AddDepartment";
 
 import About from "./components/pages/about/About";
 import AboutWe from "./components/pages/about we/AboutWe";
@@ -37,51 +36,46 @@ const App = () => {
 
           {/* Employee management */}
           <Route exact path="/employees" component={Employees} />
-          <Route exact path="/employees/:id" component={EmployeeInformation} />
+          <Route exact path="/employees/:id" component={EmployeeDetails} />
           <Route exact path="/add-employee" component={AddEmployee} />
           <Route exact path="/add-employee-:id" component={AddEmployee} />
 
           {/* Organizational Structure Management */}
+          <Route exact path="/organizational" component={Organizational} />
           <Route
             exact
-            path="/organizational-structure"
-            component={OrganizationalStructure}
-          />
-          <Route
-            exact
-            path="/organizational-structure/:id"
-            component={OrganizationalInformation}
+            path="/organizational/:id"
+            component={OrganizationalDetails}
           />
 
           <Route exact path="/department-:id" component={Departments} />
           <Route
             exact
             path="/department-:id1/:id2"
-            component={DepartmentInformation}
+            component={DepartmentDetails}
           />
 
           <Route
             exact
-            path="/affiliated-department-:id"
+            path="/affiliated-department-:id1-:id2"
             component={AffiliatedDepartment}
           />
           <Route
             exact
-            path="/affiliated-department-:id1/:id2"
-            component={AffiliatedDepartmentInformation}
+            path="/affiliated-department-:id1-:id2/:id3"
+            component={AffiliatedDepartmentDetails}
           />
 
           <Route exact path="/add-department" component={AddDepartment} />
-          <Route exact path="/add-department-:id" component={AddDepartment} />
           <Route
             exact
-            path="/add-affiliated-department"
-            component={AddAffiliatedDepartment}
+            path="/update-department-:id/:id1"
+            component={AddDepartment}
           />
           <Route
             exact
-            path="/add-affiliated-department-:id"
-            component={AddAffiliatedDepartment}
+            path="/update-department-:id/:id1/:id2"
+            component={AddDepartment}
           />
 
           <Route exact path="/about" component={About} />

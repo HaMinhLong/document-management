@@ -1184,6 +1184,21 @@ header .tasks.active {
   text-decoration: underline;
 }
 
+.information {
+  margin-top: 60px;
+  width: 600px;
+  padding-left: 40px;
+  border-left: 10px solid #04143d;
+}
+.information p {
+  line-height: 24px;
+  margin-bottom: 50px;
+}
+.information p span {
+  font-weight: bold;
+  font-style: italic;
+}
+
 .add-employee-container,
 .add-department-container {
   position: relative;
@@ -1231,7 +1246,15 @@ header .tasks.active {
 .add-department-container form input[type=email]:focus,
 .add-department-container form input[type=number]:focus {
   margin-top: 20px;
-  border-bottom-color: red;
+}
+.add-employee-container form input.invalid,
+.add-department-container form input.invalid {
+  border-color: red;
+}
+.add-employee-container form .error-message,
+.add-department-container form .error-message {
+  color: red;
+  margin-bottom: 10px;
 }
 .add-employee-container form input:last-child,
 .add-department-container form input:last-child {
@@ -1251,6 +1274,18 @@ header .tasks.active {
   margin-left: 20px;
   margin-bottom: 20px;
   margin-top: 10px;
+}
+.add-employee-container form .input-img,
+.add-department-container form .input-img {
+  display: flex;
+  flex-direction: column;
+}
+.add-employee-container form .input-img img,
+.add-department-container form .input-img img {
+  margin-top: 20px;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
 }
 .add-employee-container form input[type=submit],
 .add-department-container form input[type=submit] {
