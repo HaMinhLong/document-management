@@ -5,35 +5,235 @@
       "name": "Hội đồng quản trị",
       "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
       "email": "email@gmail.com",
-      "phoneNumber": "0963333333"
+      "phoneNumber": "0963333333",
+      "startDate": "20/10/2021",
+      "departments": [
+        {
+          "id": 1,
+          "name": "Hội đồng quản trị",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "emai@gmail.com",
+          "phoneNumber": "0966666666",
+          "startDate": "20/10/2021"
+        }
+      ]
     },
     {
       "id": "2",
       "name": "Ban giám hiệu",
       "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
       "email": "email@gmail.com",
-      "phoneNumber": "0963333333"
+      "phoneNumber": "0963333333",
+      "startDate": "20/10/2021",
+      "departments": [
+        {
+          "id": 1,
+          "name": "Ban giám hiệu",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "emai@gmail.com",
+          "phoneNumber": "0966666666",
+          "startDate": "20/10/2021"
+        }
+      ]
     },
     {
       "id": "3",
       "name": "Các khoa",
       "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
       "email": "email@gmail.com",
-      "phoneNumber": "0963333333"
+      "phoneNumber": "0963333333",
+      "startDate": "20/10/2021",
+      "departments": [
+        {
+          "id": 1,
+          "name": "Khoa Toán - Tin",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021",
+
+          "affiliatedDepartment": [
+            {
+              "id": 1,
+              "name": "Bộ môn Toán",
+              "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+              "email": "emai@gmail.com",
+              "phoneNumber": "0966666666",
+              "startDate": "20/10/2021"
+            },
+            {
+              "id": 2,
+              "name": "Bộ môn Tin",
+              "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+              "email": "emai@gmail.com",
+              "phoneNumber": "0966666666",
+              "startDate": "20/10/2021"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Khoa ngôn ngữ",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021",
+
+          "affiliatedDepartment": [
+            {
+              "id": 1,
+              "name": "Bộ môn Anh",
+              "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+              "email": "emai@gmail.com",
+              "phoneNumber": "0966666666",
+              "startDate": "20/10/2021"
+            },
+            {
+              "id": 2,
+              "name": "Bộ môn Trung",
+              "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+              "email": "emai@gmail.com",
+              "phoneNumber": "0966666666",
+              "startDate": "20/10/2021"
+            },
+            {
+              "id": 3,
+              "name": "Bộ môn Nhật",
+              "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+              "email": "emai@gmail.com",
+              "phoneNumber": "0966666666",
+              "startDate": "20/10/2021"
+            },
+            {
+              "id": 4,
+              "name": "Bộ môn Hàn",
+              "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+              "email": "emai@gmail.com",
+              "phoneNumber": "0966666666",
+              "startDate": "20/10/2021"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Khoa Khoa học xã hội và Nhân văn",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021",
+
+          "affiliatedDepartment": [
+            {
+              "id": 1,
+              "name": "Bộ môn Việt Nam học",
+              "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+              "email": "emai@gmail.com",
+              "phoneNumber": "0966666666",
+              "startDate": "20/10/2021"
+            },
+            {
+              "id": 2,
+              "name": "Bộ môn Cộng tác xã hội",
+              "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+              "email": "emai@gmail.com",
+              "phoneNumber": "0966666666",
+              "startDate": "20/10/2021"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "4",
       "name": "Phòng ban",
       "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
       "email": "email@gmail.com",
-      "phoneNumber": "0963333333"
+      "phoneNumber": "0963333333",
+      "startDate": "20/10/2021",
+      "departments": [
+        {
+          "id": 4,
+          "name": "Phòng Tài vụ",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021"
+        },
+        {
+          "id": 5,
+          "name": "Phòng Đào tạo",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021"
+        },
+        {
+          "id": 6,
+          "name": "Phòng Cộng tác sinh viên",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021"
+        },
+        {
+          "id": 7,
+          "name": "Phòng Hành chính",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021"
+        },
+        {
+          "id": 8,
+          "name": "Phòng Hợp tác quốc tế",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021"
+        }
+      ]
     },
     {
       "id": "5",
       "name": "Các tổ chức khác",
       "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
       "email": "email@gmail.com",
-      "phoneNumber": "0963333333"
+      "phoneNumber": "0963333333",
+      "startDate": "20/10/2021",
+      "departments": [
+        {
+          "id": 9,
+          "name": "Đoàn TNCS HCM",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021"
+        },
+        {
+          "id": 10,
+          "name": "Công đòan trường",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021"
+        },
+        {
+          "id": 11,
+          "name": "Hội khuyến học",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021"
+        },
+        {
+          "id": 12,
+          "name": "Hội sinh viên",
+          "describe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, ea! Asperiores autem dolores pariatur eveniet tempora, vitae, vel qui error molestias a sunt ad possimus. Earum temporibus ab cum dolorem.",
+          "email": "email@gmail.com",
+          "phoneNumber": "0963333333",
+          "startDate": "20/10/2021"
+        }
+      ]
     }
   ]
 }

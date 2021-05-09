@@ -58,6 +58,7 @@ export const updateEmployee = (employee) => (dispatch) => {
     for (var i = 0; i < data.employees.length; i++) {
       if (data.employees[i].id === employee.id) {
         data.employees[i] = employee;
+        break;
       }
     }
     dispatch({

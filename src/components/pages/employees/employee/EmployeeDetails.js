@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Banner2 from "../../layout/Banner2";
-import Footer2 from "../../layout/Footer2";
+import Banner2 from "../../../layout/Banner2";
+import Footer2 from "../../../layout/Footer2";
 
-import { fetchEmployee } from "../../../redux/employees/employeesActions";
+import { fetchEmployee } from "../../../../redux/employees/employeesActions";
 
-const EmployeeInformation = (props) => {
+const EmployeeDetails = (props) => {
   const id = props.match.params.id;
   useEffect(() => {
     document.title = `TLU | ${employee.name}`;
@@ -86,4 +86,4 @@ const EmployeeInformation = (props) => {
   );
 };
 
-export default EmployeeInformation;
+export default EmployeeDetails;

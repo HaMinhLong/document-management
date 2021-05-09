@@ -29,7 +29,7 @@ const Navbar = () => {
             <span></span>
           </li>
           <li>
-            <Link to="/organizational-structure" onClick={() => toggleTasks()}>
+            <Link to="/organizational" onClick={() => toggleTasks()}>
               Quản lý cơ cấu tổ chức
             </Link>
             <span></span>
