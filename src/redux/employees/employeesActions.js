@@ -1,12 +1,13 @@
 import * as actions from "./employeesTypes";
 import data from "../../data/employees.json";
+import * as api from "../../api/index";
 
 export const fetchEmployees = () => async (dispatch) => {
   try {
-    const { employees } = data;
+    const { data } = await api.fetchEmployees();
     dispatch({
       type: actions.FETCH_EMPLOYEES,
-      payload: employees,
+      payload: data,
     });
   } catch (error) {
     console.log("Error Fetch Employees: " + error.message);
@@ -15,10 +16,10 @@ export const fetchEmployees = () => async (dispatch) => {
 
 export const fetchEmployee = (id) => async (dispatch) => {
   try {
-    const employee = data.employees.filter((employee) => employee.id === id);
+    const { data } = await api.fetchEmployee(id);
     dispatch({
       type: actions.FETCH_EMPLOYEE,
-      payload: employee,
+      payload: data,
     });
   } catch (error) {
     console.log("Error Fetch Employee: " + error.message);
@@ -27,7 +28,7 @@ export const fetchEmployee = (id) => async (dispatch) => {
 
 export const addEmployee = (employee) => async (dispatch) => {
   try {
-    data.employees.push(employee);
+    await api.createEmployee(employee.departmentId, employee);
     dispatch({
       type: actions.ADD_EMPLOYEE,
       payload: employee,
@@ -39,11 +40,7 @@ export const addEmployee = (employee) => async (dispatch) => {
 
 export const deleteEmployee = (id) => async (dispatch) => {
   try {
-    for (var i = 0; i < data.employees.length; i++) {
-      if (data.employees[i].id === id) {
-        data.employees.splice(i, 1);
-      }
-    }
+    await api.deleteEmployee(id);
     dispatch({
       type: actions.DELETE_EMPLOYEE,
       payload: id,
@@ -53,14 +50,9 @@ export const deleteEmployee = (id) => async (dispatch) => {
   }
 };
 
-export const updateEmployee = (employee) => (dispatch) => {
+export const updateEmployee = (employee) => async (dispatch) => {
   try {
-    for (var i = 0; i < data.employees.length; i++) {
-      if (data.employees[i].id === employee.id) {
-        data.employees[i] = employee;
-        break;
-      }
-    }
+    await api.updateEmployee(employee.id, employee);
     dispatch({
       type: actions.UPDATE_EMPLOYEE,
       payload: employee,

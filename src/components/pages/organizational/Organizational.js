@@ -7,19 +7,56 @@ import Footer2 from "../../layout/Footer2";
 
 import Pagination from "../../layout/Pagination";
 
-import { organizational } from "../../../data/organizational.json";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchOrganizational,
+  deleteDepartment,
+} from "../../../redux/organizational-structure/organizationalActions";
 
 const OrganizationalStructure = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = "TLU | Quản lý cơ cấu tổ chức";
+    dispatch(fetchOrganizational());
   }, []);
 
-  const [data, setData] = useState(organizational);
-
   const [currentIndex, setCurrentIndex] = useState(1);
-  const nextPagination = (employeesNumber, currentIndex) => {};
+
+  const organizational = useSelector((state) => state.organizational);
+
+  const [data, setData] = useState();
+  useEffect(() => {
+    setData(organizational.slice((currentIndex - 1) * 10, currentIndex * 10));
+  }, [organizational]);
+
+  const nextPagination = (organizationalNumber, currentIndex) => {
+    setData(
+      organizational.slice(
+        organizationalNumber * (currentIndex - 1),
+        organizationalNumber * currentIndex
+      )
+    );
+  };
 
   const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const [orgId, setOrgId] = useState();
+  const dlp = (id) => {
+    setConfirmDelete(true);
+    setOrgId(id);
+  };
+  const deleteDpm = () => {
+    dispatch(deleteDepartment(orgId));
+    setConfirmDelete(false);
+  };
+
+  const searchDepartments = (value) => {
+    const dataSearch = organizational.filter(
+      (org) => org.name.toLowerCase().indexOf(value) !== -1
+    );
+    setData(dataSearch);
+  };
 
   return (
     <>
@@ -30,7 +67,12 @@ const OrganizationalStructure = () => {
 
           <div className="search-box">
             <button>
-              <input type="text" name="search" id="search" />
+              <input
+                type="text"
+                name="search"
+                id="search"
+                onChange={(e) => searchDepartments(e.target.value)}
+              />
               <i className="fas fa-search"></i>
             </button>
           </div>
@@ -51,8 +93,7 @@ const OrganizationalStructure = () => {
                   <th>Mô tả</th>
                   <th>Email</th>
                   <th>Phone Number</th>
-                  <th>Ngày thành lập</th>
-                  <th>Bộ phận trực thuộc</th>
+                  <th>Hành động</th>
                 </tr>
               </thead>
               <tbody>
@@ -65,14 +106,18 @@ const OrganizationalStructure = () => {
                           {data.name}
                         </Link>
                       </td>
-                      <td>{data.describe.slice(0, 30)}...</td>
+                      <td>{data.description.slice(0, 30)}...</td>
                       <td>{data.email}</td>
                       <td>{data.phoneNumber}</td>
-                      <td>{data.startDate}</td>
+
                       <td>
-                        <Link to={`/department-${data.id}`}>
-                          Xem bộ phận trực thuộc
+                        <Link to={`/add-department-${data.id}}`}>
+                          <i className="fas fa-edit"></i>
                         </Link>
+                        <i
+                          className="fas fa-trash"
+                          onClick={() => dlp(data.id)}
+                        ></i>
                       </td>
                     </tr>
                   ))}
@@ -81,7 +126,7 @@ const OrganizationalStructure = () => {
           </div>
           {data && data.length > 0 && (
             <Pagination
-              recordsTotal={data.length}
+              recordsTotal={organizational.length}
               recordsNumber={10}
               currentIndex={currentIndex}
               setCurrentIndex={setCurrentIndex}
@@ -93,7 +138,7 @@ const OrganizationalStructure = () => {
             <div className="delete-employee">
               <p>Bạn có muốn xóa bộ phận này không?</p>
               <div className="confirm">
-                <button>Có</button>
+                <button onClick={() => deleteDpm()}>Có</button>
                 <button onClick={() => setConfirmDelete(false)}>Không</button>
               </div>
             </div>

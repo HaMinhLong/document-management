@@ -14,95 +14,58 @@ import ReactNotification from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchOrganizational,
+  createDepartment,
+  updateDepartment,
+} from "../../redux/organizational-structure/organizationalActions";
+
 const AddDepartment = (props) => {
-  const check =
-    props.match.path === "/add-department"
-      ? "add-department"
-      : props.match.path === "/update-department-:id/:id1"
-      ? "update-department"
-      : "update-affiliated-department";
+  const dispatch = useDispatch();
+  const id = props.match.params.id.slice(0, props.match.params.id.length - 1);
 
-  // Lay ID cua co cau to chuc, bo phan, bo phan truc thuoc
-  const organizationalID =
-    check === "add-department" ? "" : props.match.params.id;
-  const departmentID =
-    check === "add-department"
-      ? ""
-      : check === "update-department"
-      ? props.match.params.id1.slice(0, props.match.params.id1.length - 1)
-      : props.match.params.id1;
-  const affiliatedDepartmentID =
-    check === "add-department" ? "" : props.match.params.id2;
+  useEffect(() => {
+    document.title = id
+      ? "TLU | Thêm bộ phận"
+      : "TLU | Cập nhật thông tin bộ phận";
+    dispatch(fetchOrganizational());
+  }, []);
 
-  // Lay du lieu
-  const organizationalData =
-    check === "add-department"
-      ? ""
-      : organizational.find((org) => org.id === organizationalID);
-
-  const departmentData =
-    check === "add-department"
-      ? ""
-      : organizationalData.departments.find(
-          (department) => department.id == departmentID
-        );
-
-  const affiliatedDepartmentData =
-    check === "update-affiliated-department"
-      ? departmentData.affiliatedDepartment.find(
-          (aff) => aff.id == affiliatedDepartmentID
-        )
-      : "";
+  const organizational = useSelector((state) => state.organizational);
 
   // Du lieu ban dau cua bo phan khi them moi
   const [department, setDepartment] = useState(
-    check === "add-department"
-      ? {
+    id
+      ? organizational.find((org) => org.id === id)
+      : {
           id: Math.floor(Math.random() * 1000000000000000000).toString(),
           name: "",
-          describe: "",
+          description: "",
           email: "",
           phoneNumber: "",
-          startDate: "20/10/2021",
-          organizational: "",
-          department: "",
-        }
-      : check === "update-department"
-      ? {
-          id: departmentData.id,
-          name: departmentData.name,
-          describe: departmentData.describe,
-          email: departmentData.email,
-          phoneNumber: departmentData.phoneNumber,
-          startDate: departmentData.startDate,
-          organizational: organizationalData.name,
-          department: "",
-        }
-      : {
-          id: affiliatedDepartmentData.id,
-          name: affiliatedDepartmentData.name,
-          describe: affiliatedDepartmentData.describe,
-          email: affiliatedDepartmentData.email,
-          phoneNumber: affiliatedDepartmentData.phoneNumber,
-          startDate: affiliatedDepartmentData.startDate,
-          organizational: organizationalData.name,
-          department: departmentData.name,
+          belongto: "",
         }
   );
+
+  const [departmentSelect, setDepartmentSelect] = useState([]);
+  useEffect(() => {
+    setDepartmentSelect(organizational);
+  }, [organizational]);
+
+  const handleDepartment = (value) => {};
 
   const handleSubmit = (values) => {
-    console.log(values);
-    SuccessNoti();
-    // props.history.push("/organizational");
-  };
-
-  // Tu thay doi thong tin cua phong ban khi lua chon co cau to chuc
-  const [departmentSelect, setDepartmentSelect] = useState(
-    affiliatedDepartmentID ? organizationalData.departments : ""
-  );
-  const handleDepartment = (value) => {
-    const data = organizational.find((org) => org.name === value);
-    if (data) setDepartmentSelect(data.departments);
+    const department = organizational.find(
+      (org) => org.name === values.belongto
+    );
+    if (department) values.belongto = department.id;
+    if (id) {
+      dispatch(updateDepartment(values));
+    } else {
+      dispatch(createDepartment(values));
+    }
+    props.history.push("/organizational");
   };
 
   // Ham nay khong de lam gi
@@ -111,8 +74,10 @@ const AddDepartment = (props) => {
   // Thong bao
   const SuccessNoti = () => {
     store.addNotification({
-      title: "Bộ phận mới được thêm",
-      message: "Thêm mới bộ phận thành công",
+      title: !id ? "Bộ phận mới được thêm" : "Bộ phận được cập nhật",
+      message: !id
+        ? "Thêm mới bộ phận thành công"
+        : "Cập nhật thông tin bộ phận thành công",
       type: "success",
       container: "top-right",
       insert: "top",
@@ -130,7 +95,9 @@ const AddDepartment = (props) => {
   const ErrorNoti = () => {
     store.addNotification({
       title: "Lỗi",
-      message: "Đã xảy ra lỗi khi thêm mới bộ phận",
+      message: !id
+        ? "Đã xảy ra lỗi khi thêm mới bộ phận"
+        : "Đã xảy ra lỗi khi cập nhật bộ phận",
       type: "warning",
       container: "top-right",
       insert: "top",
@@ -148,9 +115,9 @@ const AddDepartment = (props) => {
   return (
     <>
       <ReactNotification /> {/* react notification component */}
-      <Banner2 title={[departmentID ? "Cập nhật bộ phận" : "Thêm bộ phận"]} />
+      <Banner2 title={[id ? "Cập nhật bộ phận" : "Thêm bộ phận"]} />
       <section className="add-department-container padding">
-        <h1>{departmentID ? "Cập nhập bộ phận :" : "Thêm bộ phận :"}</h1>
+        <h1>{id ? "Cập nhập bộ phận :" : "Thêm bộ phận :"}</h1>
 
         {department && (
           <Formik
@@ -161,7 +128,7 @@ const AddDepartment = (props) => {
             {(formik) => (
               <Form>
                 <TextField label="Tên bộ phận:" name="name" type="text" />
-                <Textarea label="Mô tả :" name="describe" type="text" />
+                <Textarea label="Mô tả :" name="description" type="text" />
                 <TextField label="Email :" name="email" type="email" />
                 <TextField
                   label="Số điện thoại :"
@@ -170,23 +137,17 @@ const AddDepartment = (props) => {
                 />
                 <SelectField
                   label="Bộ phận quản lý :"
-                  name="organizational"
-                  id="organizational"
-                  optionsData={organizational}
-                  onChange={handleDepartment}
-                />
-                <SelectField
-                  label="Bộ phận trực thuộc :"
-                  name="department"
+                  name="belongto"
+                  id="belongto"
                   optionsData={
                     departmentSelect ? departmentSelect : [{ name: "" }]
                   }
-                  onChange={handleChange}
+                  onChange={handleDepartment}
                 />
 
                 <input
                   type="submit"
-                  value={departmentID ? "Cập nhật bộ phận" : "Thêm nhân viên"}
+                  value={id ? "Cập nhật bộ phận" : "Thêm nhân viên"}
                 />
               </Form>
             )}

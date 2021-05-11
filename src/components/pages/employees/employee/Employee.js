@@ -17,7 +17,6 @@ const Employee = ({ employees, setConfirmDelete, setEmployeeDeleteId }) => {
             <th>Chức vụ</th>
             <th>Email</th>
             <th>Phone Number</th>
-            <th>Ngày vào làm</th>
             <th>Hành động</th>
           </tr>
         </thead>
@@ -32,10 +31,9 @@ const Employee = ({ employees, setConfirmDelete, setEmployeeDeleteId }) => {
                 <td className="name">
                   <Link to={`/employees/${employee.id}`}>{employee.name}</Link>
                 </td>
-                <td>{employee.position}</td>
+                <td>{employee.roleName}</td>
                 <td>{employee.email}</td>
                 <td>{employee.phoneNumber}</td>
-                <td>{employee.startDate}</td>
                 <td>
                   <Link to={`/add-employee-${employee.id}`}>
                     <i className="fas fa-edit"></i>
