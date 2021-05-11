@@ -71,6 +71,13 @@ const Employees = () => {
     );
   };
 
+  const searchEmployees = (value) => {
+    const dataSearch = employeesList.filter(
+      (employee) => employee.name.toLowerCase().indexOf(value) !== -1
+    );
+    setEmployees(dataSearch);
+  };
+
   return (
     <>
       <Banner2 title={["Quản lí nhân viên"]} />
@@ -82,7 +89,12 @@ const Employees = () => {
 
         <div className="search-box">
           <button>
-            <input type="text" name="search" id="search" />
+            <input
+              type="text"
+              name="search"
+              id="search"
+              onChange={(e) => searchEmployees(e.target.value)}
+            />
             <i className="fas fa-search"></i>
           </button>
         </div>
