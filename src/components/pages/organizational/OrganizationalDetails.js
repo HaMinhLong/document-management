@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
 
-import { organizational } from "../../../data/organizational.json";
-
 import Banner2 from "../../layout/Banner2";
 import Footer2 from "../../layout/Footer2";
 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDepartments } from "../../../redux/organizational-structure/organizationalActions";
+
 const OrganizationalDetails = (props) => {
   const id = props.match.params.id;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setData(organizational.find((org) => org.id === id));
+    dispatch(fetchDepartments(id));
   }, []);
 
+  const departmentDetails = useSelector((state) => state.organizational);
+
   const [data, setData] = useState({});
+  useEffect(() => {
+    setData(departmentDetails[0]);
+  }, [departmentDetails]);
 
   return (
     <>
@@ -27,7 +34,7 @@ const OrganizationalDetails = (props) => {
               </p>
               <p>
                 <span> Mô tả về {data.name} : </span>
-                {data.describe}
+                {data.description}
               </p>
               <p>
                 <span>Email : </span>

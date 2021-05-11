@@ -8,20 +8,34 @@ import Banner2 from "../../../layout/Banner2";
 import Footer2 from "../../../layout/Footer2";
 
 import { fetchEmployee } from "../../../../redux/employees/employeesActions";
+import { fetchOrganizational } from "../../../../redux/organizational-structure/organizationalActions";
 
 const EmployeeDetails = (props) => {
   const id = props.match.params.id;
   useEffect(() => {
     document.title = `TLU | ${employee.name}`;
-  });
+    dispatch(fetchOrganizational());
+    dispatch(fetchEmployee(id));
+  }, []);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchEmployee(id));
-  }, [dispatch]);
-
   const employee = useSelector((state) => state.employees);
+  const organizational = useSelector((state) => state.organizational);
+
+  console.log("====================================");
+  console.log(employee);
+  console.log("====================================");
+  console.log(organizational);
+  console.log("====================================");
+  console.log("====================================");
+
+  const [department, setDepartment] = useState();
+  useEffect(() => {
+    setDepartment(
+      organizational.find((org) => org.id === employee.departmentId)
+    );
+  }, [employee]);
 
   const back = () => {
     window.history.back();
@@ -29,52 +43,52 @@ const EmployeeDetails = (props) => {
 
   return (
     <>
-      <Banner2 title={["Quản lí nhân viên", `${employee[0].name}`]} />
+      <Banner2 title={["Quản lí nhân viên", `${employee.name}`]} />
       <section className="employee-information-container padding">
-        <h1>Thông tin nhân viên {employee[0].name} :</h1>
+        <h1>Thông tin nhân viên {employee.name} :</h1>
         <div className="employee-information">
           <div className="card-box">
             <div className="image-box">
-              <img src={employee[0].image} alt="" />
-              <p>{employee[0].name}</p>
-              <p>{employee[0].position}</p>
+              <img
+                src={
+                  employee.image
+                    ? employee.image
+                    : "https://i.stack.imgur.com/l60Hf.png"
+                }
+                alt=""
+              />
+              <p>{employee.name}</p>
+              <p>{employee.roleName}</p>
             </div>
             <div className="contact">
               <p>Contact</p>
               <p>
-                <i className="fas fa-phone-square"></i> {employee[0].email}
+                <i className="fas fa-phone-square"></i> {employee.email}
               </p>
               <p>
                 <i className="fas fa-envelope"></i>
-                {employee[0].phoneNumber}
+                {employee.phoneNumber}
               </p>
             </div>
           </div>
           <div className="content">
             <div>
-              <h1>{employee[0].name}</h1>
-              <p>{employee[0].code}</p>
+              <h1>{employee.name}</h1>
+              <p>{employee.code}</p>
             </div>
             <p>
-              <span>Chức vụ :</span> {employee[0].position}
+              <span>Chức vụ :</span> {employee.roleName}
             </p>
             <p>
-              <span>Bộ phận :</span> {employee[0].department}
+              <span>Bộ phận :</span> {department ? department.name : ""}
             </p>
             <p>
-              <span>Bộ phận trực thuộc :</span>{" "}
-              {employee[0].affiliatedDepartment}
+              <span>Email :</span> {employee.email}
             </p>
             <p>
-              <span>Email :</span> {employee[0].email}
+              <span>Số điện thoại :</span> {employee.phoneNumber}
             </p>
-            <p>
-              <span>Số điện thoại :</span> {employee[0].phoneNumber}
-            </p>
-            <p>
-              <span>Làm việc từ :</span> {employee[0].startDate}
-            </p>
-            <Link to={`/add-employee-${employee[0].id}`}>
+            <Link to={`/add-employee-${employee.id}`}>
               <button>Cập nhật nhân viên</button>
             </Link>
           </div>

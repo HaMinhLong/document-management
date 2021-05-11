@@ -47,6 +47,13 @@ a:hover {
   font-size: 20px;
   border-bottom: 2px solid rgba($color: #000, $alpha: 0.3);
 }
+option {
+  background: #04143d;
+  color: #fff;
+  cursor: pointer;
+  height: 20px;
+  padding: 5px;
+}
 
 // HEADER
 header {
@@ -1462,13 +1469,12 @@ header {
     }
   }
   .filter {
-    width: 550px;
+    width: 350px;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    .filter-department,
-    .filter-affiliated-department {
+    justify-content: flex-end;
+    .filter-department {
       display: flex;
       justify-content: center;
       align-items: center;

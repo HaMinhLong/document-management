@@ -49,6 +49,14 @@ a:hover {
   border-bottom: 2px solid rgba(0, 0, 0, 0.3);
 }
 
+option {
+  background: #04143d;
+  color: #fff;
+  cursor: pointer;
+  height: 20px;
+  padding: 5px;
+}
+
 header {
   position: fixed;
   width: 100%;
@@ -1704,14 +1712,13 @@ header .tasks.active {
   color: #ff1944;
 }
 .filter-container .filter {
-  width: 550px;
+  width: 350px;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
-.filter-container .filter .filter-department,
-.filter-container .filter .filter-affiliated-department {
+.filter-container .filter .filter-department {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1721,14 +1728,12 @@ header .tasks.active {
   font-size: 15px;
   cursor: pointer;
 }
-.filter-container .filter .filter-department p,
-.filter-container .filter .filter-affiliated-department p {
+.filter-container .filter .filter-department p {
   font-weight: bold;
   margin-right: 10px;
   font-size: 16px;
 }
-.filter-container .filter .filter-department select,
-.filter-container .filter .filter-affiliated-department select {
+.filter-container .filter .filter-department select {
   outline: none;
   border: none;
   background: transparent;
@@ -1736,8 +1741,7 @@ header .tasks.active {
   color: #04143d;
   cursor: pointer;
 }
-.filter-container .filter .filter-department select option,
-.filter-container .filter .filter-affiliated-department select option {
+.filter-container .filter .filter-department select option {
   display: inline-block;
   background: #04143d;
   color: #fff;

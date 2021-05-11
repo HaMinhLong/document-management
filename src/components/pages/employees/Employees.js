@@ -13,6 +13,8 @@ import {
   deleteEmployee,
 } from "../../../redux/employees/employeesActions";
 
+import { fetchOrganizational } from "../../../redux/organizational-structure/organizationalActions";
+
 const Employees = () => {
   useEffect(() => {
     document.title = "TLU | Quản lí nhân viên";
@@ -31,10 +33,18 @@ const Employees = () => {
   const [employees, setEmployees] = useState();
 
   useEffect(() => {
-    setEmployees(
-      employeesList.slice(10 * (currentIndex - 1), 10 * currentIndex)
-    );
+    if (employeesList.length > 10) {
+      setEmployees(
+        employeesList.slice((currentIndex - 1) * 10, currentIndex * 10)
+      );
+      dispatch(fetchOrganizational());
+    } else {
+      setEmployees(employeesList);
+      dispatch(fetchOrganizational());
+    }
   }, [employeesList]);
+
+  const organizational = useSelector((state) => state.organizational);
 
   const nextPagination = (employeesNumber, currentIndex) => {
     setEmployees(
@@ -51,6 +61,14 @@ const Employees = () => {
   const deleteEmployeeFunction = (id) => {
     dispatch(deleteEmployee(id));
     setConfirmDelete(false);
+  };
+
+  const filterEmployee = (e) => {
+    setEmployees(
+      employeesList
+        .filter((emp) => emp.departmentId == e.target.value)
+        .slice(0, 10)
+    );
   };
 
   return (
@@ -96,17 +114,11 @@ const Employees = () => {
           </div>
           <div className="filter">
             <div className="filter-department">
-              <p>Phòng ban: </p>
-              <select>
-                <option value="toantin">Toán - Tin</option>
-                <option value="kinhtequanli">Kinh tế - Quản lí</option>
-              </select>
-            </div>
-            <div className="filter-affiliated-department">
-              <p>Bộ phận:</p>
-              <select>
-                <option value="toan">Bộ môn Toán</option>
-                <option value="tin">Bộ môn Tin</option>
+              <p>Bộ phận: </p>
+              <select onClick={(e) => filterEmployee(e)}>
+                {organizational.map((org) => (
+                  <option value={org.id}>{org.name}</option>
+                ))}
               </select>
             </div>
           </div>

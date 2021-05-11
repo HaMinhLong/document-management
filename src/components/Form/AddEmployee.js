@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Banner2 from "../layout/Banner2";
 import Footer2 from "../layout/Footer2";
 
-import { organizational } from "../../data/organizational.json";
 import { position } from "../../data/position.json";
 
 import {
-  fetchEmployee,
   addEmployee,
+  fetchEmployee,
   updateEmployee,
 } from "../../redux/employees/employeesActions";
+
+import { fetchOrganizational } from "../../redux/organizational-structure/organizationalActions";
 
 import { Formik, Form } from "formik";
 import { employeeValidation } from "./Validation/employeeValidation";
@@ -26,68 +27,60 @@ import "react-notifications-component/dist/theme.css";
 
 const AddEmployee = (props) => {
   const dispatch = useDispatch();
-  const url = props.match.url;
-  const id = url.slice(14, url.length);
+  const id = props.match.params.id;
 
   useEffect(() => {
     document.title = id
       ? "TLU | Thêm nhân viên"
       : "TLU | Cập nhật thông tin nhân viên";
-    dispatch(fetchEmployee(id));
   }, []);
 
-  const data = useSelector((state) => state.employees[0]);
+  const employeeUpdate = useSelector((state) => state.employees);
 
   const [employee, setEmployee] = useState(
     id
-      ? data
+      ? employeeUpdate.length > 2
+        ? employeeUpdate.find((emp) => emp.id === id)
+        : employeeUpdate
       : {
           id: Math.floor(Math.random() * 1000000000000000000).toString(),
           name: "",
-          code: "",
           email: "",
           phoneNumber: "",
-          organizational: "",
-          department: "",
-          affiliatedDepartment: "",
-          position: "",
-          startDate: "20/10/2021",
-          image: "https://i.stack.imgur.com/l60Hf.png",
+          departmentId: "",
+          roleId: "0",
+          roleName: "",
         }
   );
 
-  const handleSubmit = (values) => {
-    if (!id) {
-      dispatch(addEmployee(values));
-    } else {
-      dispatch(updateEmployee(values));
-    }
-    SuccessNoti();
-    // props.history.push("/employees");
-    values.image = employee.image;
-    values.startDate = employee.startDate;
-    console.log(values);
-  };
-
-  // Tu thay doi thong tin cua phong ban khi lua chon co cau to chuc
-  const [department, setDepartment] = useState();
-  const handleDepartment = (value) => {
-    const data = organizational.find((org) => org.name === value);
-    if (data) setDepartment(data.departments);
-  };
-
-  // Tu thay doi thong tin cua bo phan truc thuoc phong ban
-  const [affiliatedDepartment, setAffiliatedDepartment] = useState();
-  const handleAffiliatedDepartment = (value) => {
-    const data = department.find((dpm) => dpm.name === value);
-    if (data) setAffiliatedDepartment(data.affiliatedDepartment);
-  };
-
-  // Dat gia tri cua bo phan truc thuoc phong ban la rỗng
-  // khi lua chon co cau to chuc
   useEffect(() => {
-    setAffiliatedDepartment();
-  }, [department]);
+    dispatch(fetchOrganizational());
+  }, [employee]);
+  const organizational = useSelector((state) => state.organizational);
+
+  const [department, setDepartment] = useState();
+  useEffect(() => {
+    setDepartment(organizational);
+  }, [organizational]);
+
+  const handleSubmit = (values) => {
+    values.departmentId = employee.departmentId;
+    values.roleId = values.roleName === "Trưởng phòng" ? "1" : "0";
+    if (id) {
+      dispatch(updateEmployee(values));
+    } else {
+      dispatch(addEmployee(values));
+    }
+    props.history.push("/employees");
+  };
+  // Tu thay doi thong tin cua phong ban khi lua chon co cau to chuc
+  const handleDepartment = (value) => {
+    const departmentValue = organizational.find((org) => org.name === value);
+    setEmployee({
+      ...employee,
+      departmentId: departmentValue.id,
+    });
+  };
 
   // Ham nay khong de lam gi
   const handleChange = () => {};
@@ -95,7 +88,7 @@ const AddEmployee = (props) => {
   // Thong bao
   const SuccessNoti = () => {
     store.addNotification({
-      title: !id ? "Bộ phận mới được thêm" : "Thông tin được cập nhật",
+      title: !id ? "Nhân viên mới được thêm" : "Thông tin được cập nhật",
       message: !id
         ? "Thêm mới nhân viên thành công"
         : "Cập nhật thông tin nhân viên thành công",
@@ -116,7 +109,9 @@ const AddEmployee = (props) => {
   const ErrorNoti = () => {
     store.addNotification({
       title: "Lỗi",
-      message: "Đã xảy ra lỗi khi thêm mới nhân viên",
+      message: !id
+        ? "Đã xảy ra lỗi khi thêm mới nhân viên"
+        : "Đã xảy ra lỗi khi cập nhật nhân viên",
       type: "warning",
       container: "top-right",
       insert: "top",
@@ -154,34 +149,20 @@ const AddEmployee = (props) => {
                   type="text"
                 />
                 <SelectField
-                  label="Cơ cấu tổ chức :"
-                  name="organizational"
-                  id="organizational"
-                  optionsData={organizational}
+                  label="Bộ phận :"
+                  name="departmentId"
+                  optionsData={department ? department : [{ name: "" }]}
                   onChange={handleDepartment}
                 />
-                <SelectField
-                  label="Bộ phận :"
-                  name="department"
-                  optionsData={department ? department : [{ name: "" }]}
-                  onChange={handleAffiliatedDepartment}
-                />
-                <SelectField
-                  label="Bộ phận trực thuộc :"
-                  name="affiliatedDepartment"
-                  optionsData={
-                    affiliatedDepartment ? affiliatedDepartment : [{ name: "" }]
-                  }
-                  onChange={handleChange}
-                />
+
                 <SelectField
                   label="Chức vụ :"
-                  name="position"
+                  name="roleName"
                   optionsData={position}
                   onChange={handleChange}
                 />
 
-                <FileBase64 data={employee} setData={setEmployee} />
+                {/* <FileBase64 data={employee} setData={setEmployee} /> */}
 
                 <input
                   type="submit"
