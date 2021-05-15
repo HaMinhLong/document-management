@@ -77,7 +77,7 @@ const OrganizationalStructure = () => {
             </button>
           </div>
 
-          <div className="add-organizational-structure-button">
+          <div className="add-button">
             <button>
               <Link to="/add-department">
                 Thêm bộ phận trực thuộc <i className="far fa-plus-square"></i>

@@ -84,7 +84,7 @@ const Employees = () => {
       <section className="employees-container padding">
         <h1>
           Danh sách cán bộ / giảng viên / nhân viên làm việc tại Trường Đại học
-          Thăng Long:{" "}
+          Thăng Long :{" "}
         </h1>
 
         <div className="search-box">
@@ -99,7 +99,7 @@ const Employees = () => {
           </button>
         </div>
 
-        <div className="add-employee-button">
+        <div className="add-button">
           <button>
             <Link to="/add-employee">
               Thêm nhân viên <i className="fas fa-user-plus"></i>
