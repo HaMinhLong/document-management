@@ -12,6 +12,17 @@ body {
   background: linear-gradient(135deg, #485461 0%, #28313b 74%);
 }
 
+body {
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  /* WebKit */
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  width: 5px;
+  height: 100%;
+}
+
 p {
   color: #04143d;
   font-size: 18px;
@@ -151,9 +162,10 @@ header .tasks ul {
   align-items: flex-start;
 }
 header .tasks ul li {
+  position: relative;
   list-style: none;
   margin-bottom: 40px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 header .tasks ul li a {
   display: inline-block;
@@ -162,6 +174,7 @@ header .tasks ul li a {
   font-weight: bold;
   text-transform: uppercase;
   transition: 0.5s;
+  letter-spacing: 1px;
 }
 header .tasks ul li span {
   position: relative;
@@ -178,6 +191,21 @@ header .tasks ul li:hover span {
 }
 header .tasks ul li:hover a {
   letter-spacing: 2px;
+}
+header .tasks ul #check {
+  transition: 0.5s;
+  transform: rotateZ(180deg);
+}
+header .tasks ul .child {
+  position: relative;
+  top: -15px;
+  margin-left: 20px;
+  margin-bottom: 35px;
+}
+header .tasks ul .child a {
+  font-size: 14px;
+  text-decoration: underline;
+  letter-spacing: 1px;
 }
 header .tasks ul p {
   position: absolute;
@@ -774,9 +802,8 @@ header .tasks.active {
 .employees-container,
 .organizational-structure-container,
 .organizational-information-container,
-.departments-container,
-.department-information-container,
-.affiliated-department-container {
+.role-management,
+.user-management {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -785,17 +812,15 @@ header .tasks.active {
 .employees-container h1,
 .organizational-structure-container h1,
 .organizational-information-container h1,
-.departments-container h1,
-.department-information-container h1,
-.affiliated-department-container h1 {
+.role-management h1,
+.user-management h1 {
   font-size: 25px;
 }
 .employees-container .search-box,
 .organizational-structure-container .search-box,
 .organizational-information-container .search-box,
-.departments-container .search-box,
-.department-information-container .search-box,
-.affiliated-department-container .search-box {
+.role-management .search-box,
+.user-management .search-box {
   position: absolute;
   top: 0;
   right: 0;
@@ -805,18 +830,16 @@ header .tasks.active {
 .employees-container .search-box button,
 .organizational-structure-container .search-box button,
 .organizational-information-container .search-box button,
-.departments-container .search-box button,
-.department-information-container .search-box button,
-.affiliated-department-container .search-box button {
+.role-management .search-box button,
+.user-management .search-box button {
   border: none;
   background: transparent;
 }
 .employees-container .search-box button input,
 .organizational-structure-container .search-box button input,
 .organizational-information-container .search-box button input,
-.departments-container .search-box button input,
-.department-information-container .search-box button input,
-.affiliated-department-container .search-box button input {
+.role-management .search-box button input,
+.user-management .search-box button input {
   border-radius: 20px;
   height: 30px;
   width: 240px;
@@ -831,17 +854,15 @@ header .tasks.active {
 .employees-container .search-box button input:focus,
 .organizational-structure-container .search-box button input:focus,
 .organizational-information-container .search-box button input:focus,
-.departments-container .search-box button input:focus,
-.department-information-container .search-box button input:focus,
-.affiliated-department-container .search-box button input:focus {
+.role-management .search-box button input:focus,
+.user-management .search-box button input:focus {
   border-radius: 0px;
 }
 .employees-container .search-box button i,
 .organizational-structure-container .search-box button i,
 .organizational-information-container .search-box button i,
-.departments-container .search-box button i,
-.department-information-container .search-box button i,
-.affiliated-department-container .search-box button i {
+.role-management .search-box button i,
+.user-management .search-box button i {
   margin-left: 19px;
   font-size: 20px;
   color: #04143d;
@@ -852,35 +873,15 @@ header .tasks.active {
 .employees-container .search-box button i:hover,
 .organizational-structure-container .search-box button i:hover,
 .organizational-information-container .search-box button i:hover,
-.departments-container .search-box button i:hover,
-.department-information-container .search-box button i:hover,
-.affiliated-department-container .search-box button i:hover {
+.role-management .search-box button i:hover,
+.user-management .search-box button i:hover {
   opacity: 1;
 }
-.employees-container .add-employee-button,
-.employees-container .add-organizational-structure-button,
-.employees-container .add-department-button,
-.employees-container .add-affiliated-department-button,
-.organizational-structure-container .add-employee-button,
-.organizational-structure-container .add-organizational-structure-button,
-.organizational-structure-container .add-department-button,
-.organizational-structure-container .add-affiliated-department-button,
-.organizational-information-container .add-employee-button,
-.organizational-information-container .add-organizational-structure-button,
-.organizational-information-container .add-department-button,
-.organizational-information-container .add-affiliated-department-button,
-.departments-container .add-employee-button,
-.departments-container .add-organizational-structure-button,
-.departments-container .add-department-button,
-.departments-container .add-affiliated-department-button,
-.department-information-container .add-employee-button,
-.department-information-container .add-organizational-structure-button,
-.department-information-container .add-department-button,
-.department-information-container .add-affiliated-department-button,
-.affiliated-department-container .add-employee-button,
-.affiliated-department-container .add-organizational-structure-button,
-.affiliated-department-container .add-department-button,
-.affiliated-department-container .add-affiliated-department-button {
+.employees-container .add-button,
+.organizational-structure-container .add-button,
+.organizational-information-container .add-button,
+.role-management .add-button,
+.user-management .add-button {
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -888,56 +889,18 @@ header .tasks.active {
   margin-bottom: 40px;
   margin-top: 50px;
 }
-.employees-container .add-employee-button button,
-.employees-container .add-organizational-structure-button button,
-.employees-container .add-department-button button,
-.employees-container .add-affiliated-department-button button,
-.organizational-structure-container .add-employee-button button,
-.organizational-structure-container .add-organizational-structure-button button,
-.organizational-structure-container .add-department-button button,
-.organizational-structure-container .add-affiliated-department-button button,
-.organizational-information-container .add-employee-button button,
-.organizational-information-container .add-organizational-structure-button button,
-.organizational-information-container .add-department-button button,
-.organizational-information-container .add-affiliated-department-button button,
-.departments-container .add-employee-button button,
-.departments-container .add-organizational-structure-button button,
-.departments-container .add-department-button button,
-.departments-container .add-affiliated-department-button button,
-.department-information-container .add-employee-button button,
-.department-information-container .add-organizational-structure-button button,
-.department-information-container .add-department-button button,
-.department-information-container .add-affiliated-department-button button,
-.affiliated-department-container .add-employee-button button,
-.affiliated-department-container .add-organizational-structure-button button,
-.affiliated-department-container .add-department-button button,
-.affiliated-department-container .add-affiliated-department-button button {
+.employees-container .add-button button,
+.organizational-structure-container .add-button button,
+.organizational-information-container .add-button button,
+.role-management .add-button button,
+.user-management .add-button button {
   border: none;
 }
-.employees-container .add-employee-button button a,
-.employees-container .add-organizational-structure-button button a,
-.employees-container .add-department-button button a,
-.employees-container .add-affiliated-department-button button a,
-.organizational-structure-container .add-employee-button button a,
-.organizational-structure-container .add-organizational-structure-button button a,
-.organizational-structure-container .add-department-button button a,
-.organizational-structure-container .add-affiliated-department-button button a,
-.organizational-information-container .add-employee-button button a,
-.organizational-information-container .add-organizational-structure-button button a,
-.organizational-information-container .add-department-button button a,
-.organizational-information-container .add-affiliated-department-button button a,
-.departments-container .add-employee-button button a,
-.departments-container .add-organizational-structure-button button a,
-.departments-container .add-department-button button a,
-.departments-container .add-affiliated-department-button button a,
-.department-information-container .add-employee-button button a,
-.department-information-container .add-organizational-structure-button button a,
-.department-information-container .add-department-button button a,
-.department-information-container .add-affiliated-department-button button a,
-.affiliated-department-container .add-employee-button button a,
-.affiliated-department-container .add-organizational-structure-button button a,
-.affiliated-department-container .add-department-button button a,
-.affiliated-department-container .add-affiliated-department-button button a {
+.employees-container .add-button button a,
+.organizational-structure-container .add-button button a,
+.organizational-information-container .add-button button a,
+.role-management .add-button button a,
+.user-management .add-button button a {
   border-radius: 20px;
   padding: 10px 29.5px;
   color: #fff;
@@ -946,39 +909,19 @@ header .tasks.active {
   font-weight: bold;
   font-size: 16px;
 }
-.employees-container .add-employee-button button a i,
-.employees-container .add-organizational-structure-button button a i,
-.employees-container .add-department-button button a i,
-.employees-container .add-affiliated-department-button button a i,
-.organizational-structure-container .add-employee-button button a i,
-.organizational-structure-container .add-organizational-structure-button button a i,
-.organizational-structure-container .add-department-button button a i,
-.organizational-structure-container .add-affiliated-department-button button a i,
-.organizational-information-container .add-employee-button button a i,
-.organizational-information-container .add-organizational-structure-button button a i,
-.organizational-information-container .add-department-button button a i,
-.organizational-information-container .add-affiliated-department-button button a i,
-.departments-container .add-employee-button button a i,
-.departments-container .add-organizational-structure-button button a i,
-.departments-container .add-department-button button a i,
-.departments-container .add-affiliated-department-button button a i,
-.department-information-container .add-employee-button button a i,
-.department-information-container .add-organizational-structure-button button a i,
-.department-information-container .add-department-button button a i,
-.department-information-container .add-affiliated-department-button button a i,
-.affiliated-department-container .add-employee-button button a i,
-.affiliated-department-container .add-organizational-structure-button button a i,
-.affiliated-department-container .add-department-button button a i,
-.affiliated-department-container .add-affiliated-department-button button a i {
+.employees-container .add-button button a i,
+.organizational-structure-container .add-button button a i,
+.organizational-information-container .add-button button a i,
+.role-management .add-button button a i,
+.user-management .add-button button a i {
   margin-left: 10px;
   color: #fff;
 }
 .employees-container .table-container table,
 .organizational-structure-container .table-container table,
 .organizational-information-container .table-container table,
-.departments-container .table-container table,
-.department-information-container .table-container table,
-.affiliated-department-container .table-container table {
+.role-management .table-container table,
+.user-management .table-container table {
   width: 100%;
   height: 100%;
   border: 1px solid #04143d;
@@ -989,12 +932,10 @@ header .tasks.active {
 .organizational-structure-container .table-container table td,
 .organizational-information-container .table-container table th,
 .organizational-information-container .table-container table td,
-.departments-container .table-container table th,
-.departments-container .table-container table td,
-.department-information-container .table-container table th,
-.department-information-container .table-container table td,
-.affiliated-department-container .table-container table th,
-.affiliated-department-container .table-container table td {
+.role-management .table-container table th,
+.role-management .table-container table td,
+.user-management .table-container table th,
+.user-management .table-container table td {
   padding: 20px 15px;
   border: 1px solid #04143d;
   text-align: center;
@@ -1002,9 +943,8 @@ header .tasks.active {
 .employees-container .table-container table tr th,
 .organizational-structure-container .table-container table tr th,
 .organizational-information-container .table-container table tr th,
-.departments-container .table-container table tr th,
-.department-information-container .table-container table tr th,
-.affiliated-department-container .table-container table tr th {
+.role-management .table-container table tr th,
+.user-management .table-container table tr th {
   background: #04143d;
   color: #fff;
   font-weight: bold;
@@ -1014,9 +954,8 @@ header .tasks.active {
 .employees-container .table-container table tr th:hover,
 .organizational-structure-container .table-container table tr th:hover,
 .organizational-information-container .table-container table tr th:hover,
-.departments-container .table-container table tr th:hover,
-.department-information-container .table-container table tr th:hover,
-.affiliated-department-container .table-container table tr th:hover {
+.role-management .table-container table tr th:hover,
+.user-management .table-container table tr th:hover {
   color: red;
 }
 .employees-container .table-container table tr .code,
@@ -1025,20 +964,17 @@ header .tasks.active {
 .organizational-structure-container .table-container table tr .name,
 .organizational-information-container .table-container table tr .code,
 .organizational-information-container .table-container table tr .name,
-.departments-container .table-container table tr .code,
-.departments-container .table-container table tr .name,
-.department-information-container .table-container table tr .code,
-.department-information-container .table-container table tr .name,
-.affiliated-department-container .table-container table tr .code,
-.affiliated-department-container .table-container table tr .name {
+.role-management .table-container table tr .code,
+.role-management .table-container table tr .name,
+.user-management .table-container table tr .code,
+.user-management .table-container table tr .name {
   font-weight: bold;
 }
 .employees-container .table-container table tr i,
 .organizational-structure-container .table-container table tr i,
 .organizational-information-container .table-container table tr i,
-.departments-container .table-container table tr i,
-.department-information-container .table-container table tr i,
-.affiliated-department-container .table-container table tr i {
+.role-management .table-container table tr i,
+.user-management .table-container table tr i {
   width: 50%;
   text-align: center;
   color: #04143d;
@@ -1048,17 +984,15 @@ header .tasks.active {
 .employees-container .table-container table tr i:hover,
 .organizational-structure-container .table-container table tr i:hover,
 .organizational-information-container .table-container table tr i:hover,
-.departments-container .table-container table tr i:hover,
-.department-information-container .table-container table tr i:hover,
-.affiliated-department-container .table-container table tr i:hover {
+.role-management .table-container table tr i:hover,
+.user-management .table-container table tr i:hover {
   color: red;
 }
 .employees-container .pagination-container,
 .organizational-structure-container .pagination-container,
 .organizational-information-container .pagination-container,
-.departments-container .pagination-container,
-.department-information-container .pagination-container,
-.affiliated-department-container .pagination-container {
+.role-management .pagination-container,
+.user-management .pagination-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1067,9 +1001,8 @@ header .tasks.active {
 .employees-container .pagination-container span,
 .organizational-structure-container .pagination-container span,
 .organizational-information-container .pagination-container span,
-.departments-container .pagination-container span,
-.department-information-container .pagination-container span,
-.affiliated-department-container .pagination-container span {
+.role-management .pagination-container span,
+.user-management .pagination-container span {
   width: 30px;
   height: 30px;
   text-align: center;
@@ -1084,18 +1017,16 @@ header .tasks.active {
 .employees-container .pagination-container span.activePagination,
 .organizational-structure-container .pagination-container span.activePagination,
 .organizational-information-container .pagination-container span.activePagination,
-.departments-container .pagination-container span.activePagination,
-.department-information-container .pagination-container span.activePagination,
-.affiliated-department-container .pagination-container span.activePagination {
+.role-management .pagination-container span.activePagination,
+.user-management .pagination-container span.activePagination {
   background: red;
   color: #fff;
 }
 .employees-container .bg,
 .organizational-structure-container .bg,
 .organizational-information-container .bg,
-.departments-container .bg,
-.department-information-container .bg,
-.affiliated-department-container .bg {
+.role-management .bg,
+.user-management .bg {
   position: absolute;
   top: 0;
   left: 0;
@@ -1106,9 +1037,8 @@ header .tasks.active {
 .employees-container .delete-employee,
 .organizational-structure-container .delete-employee,
 .organizational-information-container .delete-employee,
-.departments-container .delete-employee,
-.department-information-container .delete-employee,
-.affiliated-department-container .delete-employee {
+.role-management .delete-employee,
+.user-management .delete-employee {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1124,9 +1054,8 @@ header .tasks.active {
 .employees-container .delete-employee p,
 .organizational-structure-container .delete-employee p,
 .organizational-information-container .delete-employee p,
-.departments-container .delete-employee p,
-.department-information-container .delete-employee p,
-.affiliated-department-container .delete-employee p {
+.role-management .delete-employee p,
+.user-management .delete-employee p {
   color: #fff;
   font-weight: bold;
   margin-bottom: 50px;
@@ -1134,9 +1063,8 @@ header .tasks.active {
 .employees-container .delete-employee .confirm,
 .organizational-structure-container .delete-employee .confirm,
 .organizational-information-container .delete-employee .confirm,
-.departments-container .delete-employee .confirm,
-.department-information-container .delete-employee .confirm,
-.affiliated-department-container .delete-employee .confirm {
+.role-management .delete-employee .confirm,
+.user-management .delete-employee .confirm {
   width: 100%;
   margin-top: 20px;
   margin-bottom: 50px;
@@ -1146,9 +1074,8 @@ header .tasks.active {
 .employees-container .delete-employee .confirm button,
 .organizational-structure-container .delete-employee .confirm button,
 .organizational-information-container .delete-employee .confirm button,
-.departments-container .delete-employee .confirm button,
-.department-information-container .delete-employee .confirm button,
-.affiliated-department-container .delete-employee .confirm button {
+.role-management .delete-employee .confirm button,
+.user-management .delete-employee .confirm button {
   padding: 10px 40px;
   background: red;
   cursor: pointer;
@@ -1160,35 +1087,31 @@ header .tasks.active {
 .employees-container .delete-employee .confirm button:nth-child(2),
 .organizational-structure-container .delete-employee .confirm button:nth-child(2),
 .organizational-information-container .delete-employee .confirm button:nth-child(2),
-.departments-container .delete-employee .confirm button:nth-child(2),
-.department-information-container .delete-employee .confirm button:nth-child(2),
-.affiliated-department-container .delete-employee .confirm button:nth-child(2) {
+.role-management .delete-employee .confirm button:nth-child(2),
+.user-management .delete-employee .confirm button:nth-child(2) {
   margin-left: 100px;
   background: green;
 }
 .employees-container .delete-employee .confirm button:hover,
 .organizational-structure-container .delete-employee .confirm button:hover,
 .organizational-information-container .delete-employee .confirm button:hover,
-.departments-container .delete-employee .confirm button:hover,
-.department-information-container .delete-employee .confirm button:hover,
-.affiliated-department-container .delete-employee .confirm button:hover {
+.role-management .delete-employee .confirm button:hover,
+.user-management .delete-employee .confirm button:hover {
   opacity: 1;
 }
 .employees-container > p,
 .organizational-structure-container > p,
 .organizational-information-container > p,
-.departments-container > p,
-.department-information-container > p,
-.affiliated-department-container > p {
+.role-management > p,
+.user-management > p {
   cursor: pointer;
   margin-top: 20px;
 }
 .employees-container > p:hover,
 .organizational-structure-container > p:hover,
 .organizational-information-container > p:hover,
-.departments-container > p:hover,
-.department-information-container > p:hover,
-.affiliated-department-container > p:hover {
+.role-management > p:hover,
+.user-management > p:hover {
   text-decoration: underline;
 }
 
@@ -1891,7 +1814,6 @@ footer .links .links-list ul li i:hover {
   height: 50px;
   display: flex;
   justify-content: center;
-  align-items: center;
   background: #04143d;
 }
 .footer2 p {
@@ -1900,6 +1822,159 @@ footer .links .links-list ul li i:hover {
 }
 .footer2 p span {
   font-weight: bold;
+}
+
+.login-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+.login-page .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("https://lh3.googleusercontent.com/proxy/Q8NsMmfsmRVL-6ztjzT3xo76nH8du70hEQ_dOicCcab8dlXg1kTnrU1FOxZ9ttTzsc_PaW9mLcYnq7pY9emAFgnugItjrkJDlJNXfqnfgUSH8wkePA");
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  z-index: -1;
+}
+.login-page > p {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+}
+.login-page .form-login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 750px;
+  background: rgba(255, 255, 255, 0.8);
+}
+.login-page .form-login .text-box {
+  margin-top: 50px;
+  height: 200px;
+}
+.login-page .form-login .text-box .image-box {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+.login-page .form-login .text-box .image-box img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.login-page .form-login .text-box h1,
+.login-page .form-login .text-box p {
+  position: relative;
+  text-align: center;
+}
+.login-page .form-login .text-box p::after {
+  content: "";
+  position: absolute;
+  width: 40%;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  background: #04143d;
+}
+.login-page .form-login form {
+  margin-top: 70px;
+  padding: 0px 50px;
+}
+.login-page .form-login form label {
+  color: #04143d;
+  text-transform: uppercase;
+}
+.login-page .form-login form input {
+  width: 100%;
+  height: 45px;
+}
+.login-page .form-login form input[type=text],
+.login-page .form-login form input[type=password] {
+  padding: 0px 10px;
+  color: #04143d;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  outline: none;
+  font-size: 16px;
+}
+.login-page .form-login form input[type=submit] {
+  color: #fff;
+  background: #04143d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  font-size: 17px;
+  cursor: pointer;
+}
+.login-page .form-login form a {
+  display: block;
+  text-align: right;
+  margin-bottom: 20px;
+}
+.login-page .form-login form .error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.page-not-found {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+.page-not-found img {
+  position: absolute;
+  bottom: 50px;
+  right: 100px;
+  width: 500px;
+  height: 400px;
+}
+.page-not-found h1 {
+  font-size: 85px;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 30px;
+}
+.page-not-found p {
+  font-size: 20px;
+  padding-top: 40px;
+  border-top: 1px solid #666;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.page-not-found p span {
+  cursor: pointer;
+  display: inline-block;
+  background: #666;
+  width: 150px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 20px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=index.css.map */

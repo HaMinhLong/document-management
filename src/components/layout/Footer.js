@@ -12,17 +12,23 @@ const Footer = () => {
           <div className="footer-list">
             <ul>
               <li>
-                <Link to="/organizational">Quản lí cơ cấu tổ chức</Link>
+                <Link to="/organizational">Quản lý cơ cấu tổ chức</Link>
               </li>
               <li>
-                <Link to="/employees">Quản lí nhân viên</Link>
+                <Link to="/user">Quản lý tài khoản</Link>
+              </li>
+              <li>
+                <Link to="/role">Quản lý chức vụ</Link>
+              </li>
+              <li>
+                <Link to="/employees">Quản lý nhân viên</Link>
               </li>
               <li>
                 <Link to="/about">Giới thiệu</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/contact">Liên hệ</Link>
-              </li>
+              </li> */}
               <li to="/about-we">
                 <Link>Về chúng tôi</Link>
               </li>

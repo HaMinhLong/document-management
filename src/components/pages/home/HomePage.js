@@ -115,6 +115,27 @@ const HomePage = () => {
                   </button>
                 </Link>
               </div>
+
+              <div className="box">
+                <p>Quản lý tài khoản</p>
+                <Link to="/user">
+                  <button>
+                    Xem
+                    <i className="fas fa-long-arrow-alt-right"></i>
+                  </button>
+                </Link>
+              </div>
+
+              <div className="box">
+                <p>Quản lý chức vụ</p>
+                <Link to="/role">
+                  <button>
+                    Xem
+                    <i className="fas fa-long-arrow-alt-right"></i>
+                  </button>
+                </Link>
+              </div>
+
               <div className="box">
                 <p>Quản lý nhân viên</p>
                 <Link to="/employees">

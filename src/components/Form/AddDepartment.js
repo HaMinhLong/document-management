@@ -23,7 +23,9 @@ import {
 
 const AddDepartment = (props) => {
   const dispatch = useDispatch();
-  const id = props.match.params.id.slice(0, props.match.params.id.length - 1);
+  const id =
+    props.match.params.id &&
+    props.match.params.id.slice(0, props.match.params.id.length - 1);
 
   useEffect(() => {
     document.title = id
