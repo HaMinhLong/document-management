@@ -44,12 +44,14 @@ const AddEmployee = (props) => {
         : employeeUpdate
       : {
           id: Math.floor(Math.random() * 1000000000000000000).toString(),
+          code: "",
           name: "",
           email: "",
-          phoneNumber: "",
+          phoneNumber: "0963339657",
           departmentId: "",
           roleId: "0",
           roleName: "",
+          image: "",
         }
   );
 
@@ -65,7 +67,8 @@ const AddEmployee = (props) => {
 
   const handleSubmit = (values) => {
     values.departmentId = employee.departmentId;
-    values.roleId = values.roleName === "Trưởng phòng" ? "1" : "0";
+    values.roleId = employee.roleId;
+    values.image = employee.image;
     if (id) {
       dispatch(updateEmployee(values));
     } else {
@@ -73,6 +76,7 @@ const AddEmployee = (props) => {
     }
     props.history.push("/employees");
   };
+
   // Tu thay doi thong tin cua phong ban khi lua chon co cau to chuc
   const handleDepartment = (value) => {
     const departmentValue = organizational.find((org) => org.name === value);
@@ -83,7 +87,13 @@ const AddEmployee = (props) => {
   };
 
   // Ham nay khong de lam gi
-  const handleChange = () => {};
+  const handleChange = (value) => {
+    const roleValue = roles.find((role) => role.name === value);
+    setEmployee({
+      ...employee,
+      roleId: roleValue.roleId,
+    });
+  };
 
   // Thong bao
   const SuccessNoti = () => {
@@ -130,7 +140,7 @@ const AddEmployee = (props) => {
     <>
       <ReactNotification />
       <Banner2 title={[!id ? "Thêm nhân viên" : "Cập nhật thông tin"]} />
-      <section className="add-employee-container padding">
+      <section className="add-form-container padding">
         <h1>{!id ? "Thêm nhân viên :" : "Cập nhật thông tin nhân viên :"}</h1>
         {employee && (
           <Formik
@@ -162,7 +172,14 @@ const AddEmployee = (props) => {
                   onChange={handleChange}
                 />
 
-                {/* <FileBase64 data={employee} setData={setEmployee} /> */}
+                {/* <SelectField
+                  label="Tài khoản :"
+                  name="username"
+                  optionsData={department ? department : [{ name: "" }]}
+                  onChange={handleDepartment}
+                /> */}
+
+                <FileBase64 data={employee} setData={setEmployee} />
 
                 <input
                   type="submit"

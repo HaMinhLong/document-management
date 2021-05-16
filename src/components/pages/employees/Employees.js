@@ -64,18 +64,22 @@ const Employees = () => {
   };
 
   const filterEmployee = (e) => {
-    setEmployees(
-      employeesList
-        .filter((emp) => emp.departmentId == e.target.value)
-        .slice(0, 10)
-    );
+    if (!e.target.value) {
+      setEmployees(employeesList.slice(0, 10));
+    } else {
+      setEmployees(
+        employeesList
+          .filter((emp) => emp.departmentId == e.target.value)
+          .slice(0, 10)
+      );
+    }
   };
 
   const searchEmployees = (value) => {
     const dataSearch = employeesList.filter(
       (employee) => employee.name.toLowerCase().indexOf(value) !== -1
     );
-    setEmployees(dataSearch);
+    setEmployees(dataSearch.slice(0, 10));
   };
 
   return (
@@ -128,8 +132,11 @@ const Employees = () => {
             <div className="filter-department">
               <p>Bộ phận: </p>
               <select onClick={(e) => filterEmployee(e)}>
+                <option value="">Tất cả</option>
                 {organizational.map((org) => (
-                  <option value={org.id}>{org.name}</option>
+                  <option key={org.id} value={org.id}>
+                    {org.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -141,15 +148,18 @@ const Employees = () => {
           setEmployeeDeleteId={setEmployeeDeleteId}
         />
 
-        {employeesList && employeesList.length > 0 && (
-          <Pagination
-            recordsTotal={employeesList.length}
-            recordsNumber={10}
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-            nextPagination={nextPagination}
-          />
-        )}
+        {employees &&
+          employees.length > 0 &&
+          employeesList &&
+          employeesList.length > 0 && (
+            <Pagination
+              recordsTotal={employeesList.length}
+              recordsNumber={10}
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
+              nextPagination={nextPagination}
+            />
+          )}
         {confirmDelete && <span className="bg"></span>}
         {confirmDelete && (
           <div className="delete-employee">

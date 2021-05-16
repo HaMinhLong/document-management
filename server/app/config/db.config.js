@@ -1,6 +1,6 @@
-const env = require('./env.js');
+const env = require("./env.js");
 
-const {Sequelize, Op} = require('sequelize');
+const { Sequelize, Op } = require("sequelize");
 const sequelize = new Sequelize(env.database, env.username, env.password, {
   host: env.host,
   port: env.port,
@@ -11,8 +11,8 @@ const sequelize = new Sequelize(env.database, env.username, env.password, {
     max: env.max,
     min: env.pool.min,
     acquire: env.pool.acquire,
-    idle: env.pool.idle
-  }
+    idle: env.pool.idle,
+  },
 });
 
 const db = {};
@@ -21,9 +21,9 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 //Models/tables
-db.customers = require('../model/customer.model.js')(sequelize, Sequelize);
-db.departments = require('../model/department.model.js')(sequelize, Sequelize);
-db.employees = require('../model/employee.model.js')(sequelize, Sequelize);
+db.customers = require("../model/customer.model.js")(sequelize, Sequelize);
+db.departments = require("../model/department.model.js")(sequelize, Sequelize);
+db.employees = require("../model/employee.model.js")(sequelize, Sequelize);
 
 db.departments.hasMany(db.employees, { as: "employees" });
 

@@ -1130,15 +1130,13 @@ header .tasks.active {
   font-style: italic;
 }
 
-.add-employee-container,
-.add-department-container {
+.add-form-container {
   position: relative;
   width: 100%;
   min-height: 100vh;
   background: #f6f7fa;
 }
-.add-employee-container form,
-.add-department-container form {
+.add-form-container form {
   width: 600px;
   height: 100%;
   padding: 20px 0px;
@@ -1148,18 +1146,15 @@ header .tasks.active {
   justify-content: center;
   align-items: flex-start;
 }
-.add-employee-container form label,
-.add-department-container form label {
+.add-form-container form label {
   color: #04143d;
   font-weight: bold;
   margin-bottom: 20px;
 }
-.add-employee-container form input[type=text],
-.add-employee-container form input[type=email],
-.add-employee-container form input[type=number],
-.add-department-container form input[type=text],
-.add-department-container form input[type=email],
-.add-department-container form input[type=number] {
+.add-form-container form input[type=text],
+.add-form-container form input[type=email],
+.add-form-container form input[type=number],
+.add-form-container form input[type=password] {
   width: 100%;
   height: 20px;
   border: none;
@@ -1170,29 +1165,23 @@ header .tasks.active {
   transition: 0.5s;
   font-size: 16px;
 }
-.add-employee-container form input[type=text]:focus,
-.add-employee-container form input[type=email]:focus,
-.add-employee-container form input[type=number]:focus,
-.add-department-container form input[type=text]:focus,
-.add-department-container form input[type=email]:focus,
-.add-department-container form input[type=number]:focus {
+.add-form-container form input[type=text]:focus,
+.add-form-container form input[type=email]:focus,
+.add-form-container form input[type=number]:focus,
+.add-form-container form input[type=password]:focus {
   margin-top: 20px;
 }
-.add-employee-container form input.invalid,
-.add-department-container form input.invalid {
+.add-form-container form input.invalid {
   border-color: red;
 }
-.add-employee-container form .error-message,
-.add-department-container form .error-message {
+.add-form-container form .error-message {
   color: red;
   margin-bottom: 10px;
 }
-.add-employee-container form input:last-child,
-.add-department-container form input:last-child {
+.add-form-container form input:last-child {
   margin-top: 30px;
 }
-.add-employee-container form textarea,
-.add-department-container form textarea {
+.add-form-container form textarea {
   width: 100%;
   height: 250px;
   margin-bottom: 20px;
@@ -1200,26 +1189,22 @@ header .tasks.active {
   border: 1px solid #04143d;
   padding: 10px;
 }
-.add-employee-container form select,
-.add-department-container form select {
+.add-form-container form select {
   margin-left: 20px;
   margin-bottom: 20px;
   margin-top: 10px;
 }
-.add-employee-container form .input-img,
-.add-department-container form .input-img {
+.add-form-container form .input-img {
   display: flex;
   flex-direction: column;
 }
-.add-employee-container form .input-img img,
-.add-department-container form .input-img img {
+.add-form-container form .input-img img {
   margin-top: 20px;
   width: 70px;
   height: 70px;
   object-fit: cover;
 }
-.add-employee-container form input[type=submit],
-.add-department-container form input[type=submit] {
+.add-form-container form input[type=submit] {
   width: 100%;
   height: 40px;
   background: #04143d;
@@ -1228,13 +1213,11 @@ header .tasks.active {
   cursor: pointer;
   text-transform: uppercase;
 }
-.add-employee-container a,
-.add-department-container a {
+.add-form-container a {
   display: inline-block;
   margin-top: 50px;
 }
-.add-employee-container p:hover,
-.add-department-container p:hover {
+.add-form-container p:hover {
   text-decoration: underline;
   cursor: pointer;
 }
@@ -1827,7 +1810,7 @@ footer .links .links-list ul li i:hover {
 .login-page {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
 .login-page .bg {
   position: absolute;
@@ -1835,14 +1818,14 @@ footer .links .links-list ul li i:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("https://lh3.googleusercontent.com/proxy/Q8NsMmfsmRVL-6ztjzT3xo76nH8du70hEQ_dOicCcab8dlXg1kTnrU1FOxZ9ttTzsc_PaW9mLcYnq7pY9emAFgnugItjrkJDlJNXfqnfgUSH8wkePA");
+  background: url("./images/bg_login.jpg");
   background-size: cover;
   background-position: center;
   filter: blur(10px);
   z-index: -1;
 }
 .login-page > p {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);

@@ -23,13 +23,6 @@ const EmployeeDetails = (props) => {
   const employee = useSelector((state) => state.employees);
   const organizational = useSelector((state) => state.organizational);
 
-  console.log("====================================");
-  console.log(employee);
-  console.log("====================================");
-  console.log(organizational);
-  console.log("====================================");
-  console.log("====================================");
-
   const [department, setDepartment] = useState();
   useEffect(() => {
     setDepartment(
@@ -76,6 +69,9 @@ const EmployeeDetails = (props) => {
               <h1>{employee.name}</h1>
               <p>{employee.code}</p>
             </div>
+            <p>
+              <span>Tài khoản: </span> {employee.username}
+            </p>
             <p>
               <span>Chức vụ :</span> {employee.roleName}
             </p>

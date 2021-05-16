@@ -22,6 +22,8 @@ import Users from "../pages/users/Users";
 
 import About from "../pages/about/About";
 import AboutWe from "../pages/about we/AboutWe";
+import AddUser from "../Form/AddUser";
+import AddRole from "../Form/AddRole";
 
 class Home extends Component {
   render() {
@@ -49,8 +51,10 @@ class Home extends Component {
           <Route exact path="/add-department-:id" component={AddDepartment} />
 
           <Route exact path="/role" component={Roles} />
+          <Route exact path="/add-role" component={AddRole} />
 
           <Route exact path="/user" component={Users} />
+          <Route exact path="/add-user" component={AddUser} />
 
           <Route exact path="/about" component={About} />
           <Route exact path="/about-we" component={AboutWe} />
