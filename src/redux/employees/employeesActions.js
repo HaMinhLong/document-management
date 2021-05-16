@@ -1,5 +1,4 @@
 import * as actions from "./employeesTypes";
-import data from "../../data/employees.json";
 import * as api from "../../api/index";
 
 export const fetchEmployees = () => async (dispatch) => {
