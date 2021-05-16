@@ -31,7 +31,7 @@ const Roles = () => {
 
         <div className="add-button">
           <button>
-            <Link to="/add-user">
+            <Link to="/add-role">
               Thêm chức vụ <i className="fas fa-user-plus"></i>
             </Link>
           </button>

@@ -5,10 +5,10 @@ export const employeeValidation = yup.object().shape({
     .string()
     .max(20, "Tên không được vượt quá 20 ký tự")
     .required("Không được để trống tên"),
-  // code: yup
-  //   .string()
-  //   .max(5, "Mã nhân viên không đượt vượt quá 5 ký tự")
-  //   .required("Không được để trống mã nhân viên"),
+  code: yup
+    .string()
+    .max(5, "Mã nhân viên không đượt vượt quá 5 ký tự")
+    .required("Không được để trống mã nhân viên"),
   email: yup
     .string()
     .email("Email có dạng email@gmail.com hoặc email@thanglong.edu.vn")

@@ -9,4 +9,9 @@ export const userValidation = yup.object({
     .string()
     .min(6, "Mật khẩu không được ít hơn 6 ký tự")
     .required("Mât khẩu không được để trống"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Mật khẩu không trùng nhau")
+    .required("Xác nhận mật khẩu không được để trống"),
+  roleName: yup.string().required("Chức vụ không được để trống"),
 });

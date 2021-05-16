@@ -55,13 +55,13 @@ const OrganizationalStructure = () => {
     const dataSearch = organizational.filter(
       (org) => org.name.toLowerCase().indexOf(value) !== -1
     );
-    setData(dataSearch);
+    setData(dataSearch.slice(0, 10));
   };
 
   return (
     <>
       <Banner2 title={["Quản lý cơ cấu tổ chức"]} />
-      {data ? (
+      {data && (
         <section className="organizational-structure-container padding">
           <h1>Quản lý cơ cấu tổ chức trường Đại học Thăng Long :</h1>
 
@@ -85,6 +85,24 @@ const OrganizationalStructure = () => {
             </button>
           </div>
 
+          <div className="filter-container">
+            <div className="filter-result">
+              <p>
+                Hiển thị{" "}
+                {data &&
+                data.length > 0 &&
+                organizational &&
+                organizational.length > 0 ? (
+                  <span>
+                    {data.length}/{organizational.length}
+                  </span>
+                ) : (
+                  <span>0 </span>
+                )}{" "}
+                bộ phận
+              </p>
+            </div>
+          </div>
           <div className="table-container">
             <table>
               <thead>
@@ -143,10 +161,6 @@ const OrganizationalStructure = () => {
               </div>
             </div>
           )}
-        </section>
-      ) : (
-        <section className="organizational-structure-container padding">
-          <h1>Opps... Something went wrong</h1>
         </section>
       )}
       <Footer2 />

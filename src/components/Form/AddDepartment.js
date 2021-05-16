@@ -58,10 +58,14 @@ const AddDepartment = (props) => {
   const handleDepartment = (value) => {};
 
   const handleSubmit = (values) => {
-    const department = organizational.find(
-      (org) => org.name === values.belongto
-    );
-    if (department) values.belongto = department.id;
+    if (!values.belongto) {
+      values.belongto = values.id;
+    } else {
+      const department = organizational.find(
+        (org) => org.name === values.belongto
+      );
+      if (department) values.belongto = department.id;
+    }
     if (id) {
       dispatch(updateDepartment(values));
     } else {
@@ -118,7 +122,7 @@ const AddDepartment = (props) => {
     <>
       <ReactNotification /> {/* react notification component */}
       <Banner2 title={[id ? "Cập nhật bộ phận" : "Thêm bộ phận"]} />
-      <section className="add-department-container padding">
+      <section className="add-form-container padding">
         <h1>{id ? "Cập nhập bộ phận :" : "Thêm bộ phận :"}</h1>
 
         {department && (
@@ -149,7 +153,7 @@ const AddDepartment = (props) => {
 
                 <input
                   type="submit"
-                  value={id ? "Cập nhật bộ phận" : "Thêm nhân viên"}
+                  value={id ? "Cập nhật bộ phận" : "Thêm bộ phận"}
                 />
               </Form>
             )}

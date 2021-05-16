@@ -16,6 +16,11 @@ const Navbar = () => {
     if (data) setCheck(check ? false : true);
   };
 
+  const logOut = () => {
+    localStorage.setItem("status", "");
+    window.location = "/";
+  };
+
   return (
     <header>
       <Link to="/" className="logo">
@@ -72,6 +77,7 @@ const Navbar = () => {
             </Link>
             <span></span>
           </li>
+
           {/* <li>
             <Link to="/contact" onClick={() => toggleTasks(0)}>
               Liên hệ
@@ -82,6 +88,10 @@ const Navbar = () => {
             <Link to="/about-we" onClick={() => toggleTasks(0)}>
               Về chúng tôi
             </Link>
+            <span></span>
+          </li>
+          <li>
+            <Link onClick={() => logOut()}>Đăng xuất</Link>
             <span></span>
           </li>
           <p>TLU</p>

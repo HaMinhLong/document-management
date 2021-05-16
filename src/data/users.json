@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "admin_vga",
+      "roleId": "89",
+      "employeeId": "admin"
+    },
+    {
+      "username": "haminhlong",
+      "password": "haminhlong",
+      "roleId": "1",
+      "employeeId": "haminhlong"
+    }
+  ]
+}
