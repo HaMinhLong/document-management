@@ -1,10 +1,12 @@
 {
-  "position": [
+  "roles": [
     {
+      "roleId": "1",
       "name": "Trưởng phòng"
     },
 
     {
+      "roleId": "0",
       "name": "Nhân viên"
     }
   ]

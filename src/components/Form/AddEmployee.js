@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Banner2 from "../layout/Banner2";
 import Footer2 from "../layout/Footer2";
 
-import { position } from "../../data/position.json";
+import { roles } from "../../data/roles.json";
 
 import {
   addEmployee,
@@ -158,7 +158,7 @@ const AddEmployee = (props) => {
                 <SelectField
                   label="Chức vụ :"
                   name="roleName"
-                  optionsData={position}
+                  optionsData={roles}
                   onChange={handleChange}
                 />
 
