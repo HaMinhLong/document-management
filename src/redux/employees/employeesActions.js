@@ -27,10 +27,10 @@ export const fetchEmployee = (id) => async (dispatch) => {
 
 export const addEmployee = (employee) => async (dispatch) => {
   try {
-    await api.createEmployee(employee.departmentId, employee);
+    const { data } = await api.createEmployee(employee.departmentId, employee);
     dispatch({
       type: actions.ADD_EMPLOYEE,
-      payload: employee,
+      payload: data,
     });
   } catch (error) {
     console.log("Error Add Employee: " + error.message);

@@ -39,7 +39,9 @@ const AddDepartment = (props) => {
   // Du lieu ban dau cua bo phan khi them moi
   const [department, setDepartment] = useState(
     id
-      ? organizational.find((org) => org.id === id)
+      ? organizational &&
+          organizational.length > 0 &&
+          organizational.find((org) => org.id === id)
       : {
           id: Math.floor(Math.random() * 1000000000000000000).toString(),
           name: "",
@@ -49,7 +51,6 @@ const AddDepartment = (props) => {
           belongto: "",
         }
   );
-
   const [departmentSelect, setDepartmentSelect] = useState([]);
   useEffect(() => {
     setDepartmentSelect(organizational);
@@ -61,9 +62,10 @@ const AddDepartment = (props) => {
     if (!values.belongto) {
       values.belongto = values.id;
     } else {
-      const department = organizational.find(
-        (org) => org.name === values.belongto
-      );
+      const department =
+        organizational &&
+        organizational.length > 0 &&
+        organizational.find((org) => org.name === values.belongto);
       if (department) values.belongto = department.id;
     }
     if (id) {

@@ -28,16 +28,16 @@ exports.findAll = (req, res) => {
 };
 
 //
-exports.findSub = (req, res) => {
-  Department.findAll({
-    where: {
-      belongto: req.params.id,
-    },
-  }).then((departments) => {
-    // Send all departments to Client
-    res.send(departments);
-  });
-};
+// exports.findSub = (req, res) => {
+//   Department.findAll({
+//     where: {
+//       belongto: req.params.id,
+//     },
+//   }).then((departments) => {
+//     // Send all departments to Client
+//     res.send(departments);
+//   });
+// };
 
 // Find a Department by Id
 exports.findById = (req, res) => {

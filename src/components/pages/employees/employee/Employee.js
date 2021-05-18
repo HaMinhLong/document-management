@@ -1,8 +1,14 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import moment from "moment";
 
-const Employee = ({ employees, setConfirmDelete, setEmployeeDeleteId }) => {
+const Employee = ({
+  employees,
+  setConfirmDelete,
+  setEmployeeDeleteId,
+  roleId,
+}) => {
   const deleteEmployee = (id) => {
     setConfirmDelete(true);
     setEmployeeDeleteId(id);
@@ -17,7 +23,8 @@ const Employee = ({ employees, setConfirmDelete, setEmployeeDeleteId }) => {
             <th>Chức vụ</th>
             <th>Email</th>
             <th>Phone Number</th>
-            <th>Hành động</th>
+            <th>Ngày vào làm</th>
+            {(roleId === "89" || roleId === "1") && <th>Hành động</th>}
           </tr>
         </thead>
         <tbody>
@@ -34,15 +41,18 @@ const Employee = ({ employees, setConfirmDelete, setEmployeeDeleteId }) => {
                 <td>{employee.roleName}</td>
                 <td>{employee.email}</td>
                 <td>{employee.phoneNumber}</td>
-                <td>
-                  <Link to={`/add-employee-${employee.id}`}>
-                    <i className="fas fa-edit"></i>
-                  </Link>
-                  <i
-                    className="fas fa-trash"
-                    onClick={() => deleteEmployee(employee.id)}
-                  ></i>
-                </td>
+                <td>{moment(employee.createdAt).format("L")}</td>
+                {(roleId === "89" || roleId === "1") && (
+                  <td>
+                    <Link to={`/add-employee-${employee.id}`}>
+                      <i className="fas fa-edit"></i>
+                    </Link>
+                    <i
+                      className="fas fa-trash"
+                      onClick={() => deleteEmployee(employee.id)}
+                    ></i>
+                  </td>
+                )}
               </tr>
             ))}
         </tbody>

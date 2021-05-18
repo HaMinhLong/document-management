@@ -16,8 +16,11 @@ const SelectField = ({ label, optionsData, id, onChange, ...props }) => {
       >
         <option value="">Select</option>
         {optionsData.map((option) => (
-          <option key={option.name} value={option.name}>
-            {option.name}
+          <option
+            key={option.name ? option.name : option.username}
+            value={option.name}
+          >
+            {option.name ? option.name : option.username}
           </option>
         ))}
       </select>

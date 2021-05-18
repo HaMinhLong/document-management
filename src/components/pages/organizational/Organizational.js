@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 import Banner2 from "../../layout/Banner2";
 import Footer2 from "../../layout/Footer2";
@@ -16,6 +17,8 @@ import {
 const OrganizationalStructure = () => {
   const dispatch = useDispatch();
 
+  const roleId = localStorage.getItem("status");
+
   useEffect(() => {
     document.title = "TLU | Quản lý cơ cấu tổ chức";
     dispatch(fetchOrganizational());
@@ -27,7 +30,9 @@ const OrganizationalStructure = () => {
 
   const [data, setData] = useState();
   useEffect(() => {
-    setData(organizational.slice((currentIndex - 1) * 10, currentIndex * 10));
+    organizational &&
+      organizational.length > 0 &&
+      setData(organizational.slice((currentIndex - 1) * 10, currentIndex * 10));
   }, [organizational]);
 
   const nextPagination = (organizationalNumber, currentIndex) => {
@@ -61,73 +66,72 @@ const OrganizationalStructure = () => {
   return (
     <>
       <Banner2 title={["Quản lý cơ cấu tổ chức"]} />
-      {data && (
-        <section className="organizational-structure-container padding">
-          <h1>Quản lý cơ cấu tổ chức trường Đại học Thăng Long :</h1>
+      <section className="organizational-structure-container padding">
+        <h1>Quản lý cơ cấu tổ chức trường Đại học Thăng Long :</h1>
 
-          <div className="search-box">
-            <button>
-              <input
-                type="text"
-                name="search"
-                id="search"
-                onChange={(e) => searchDepartments(e.target.value)}
-              />
-              <i className="fas fa-search"></i>
-            </button>
-          </div>
-
+        <div className="search-box">
+          <button>
+            <input
+              type="text"
+              name="search"
+              id="search"
+              onChange={(e) => searchDepartments(e.target.value)}
+            />
+            <i className="fas fa-search"></i>
+          </button>
+        </div>
+        {roleId && roleId === "89" && (
           <div className="add-button">
             <button>
               <Link to="/add-department">
-                Thêm bộ phận trực thuộc <i className="far fa-plus-square"></i>
+                Thêm bộ phận <i className="far fa-plus-square"></i>
               </Link>
             </button>
           </div>
-
-          <div className="filter-container">
-            <div className="filter-result">
-              <p>
-                Hiển thị{" "}
-                {data &&
-                data.length > 0 &&
-                organizational &&
-                organizational.length > 0 ? (
-                  <span>
-                    {data.length}/{organizational.length}
-                  </span>
-                ) : (
-                  <span>0 </span>
-                )}{" "}
-                bộ phận
-              </p>
-            </div>
+        )}
+        <div className="filter-container">
+          <div className="filter-result">
+            <p>
+              Hiển thị{" "}
+              {data &&
+              data.length > 0 &&
+              organizational &&
+              organizational.length > 0 ? (
+                <span>
+                  {data.length}/{organizational.length}
+                </span>
+              ) : (
+                <span>0 </span>
+              )}{" "}
+              bộ phận
+            </p>
           </div>
-          <div className="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Cơ cấu tổ chức</th>
-                  <th>Mô tả</th>
-                  <th>Email</th>
-                  <th>Phone Number</th>
-                  <th>Hành động</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data &&
-                  data.length > 0 &&
-                  data.map((data) => (
-                    <tr key={data.id}>
-                      <td className="name">
-                        <Link to={`/organizational/${data.id}`}>
-                          {data.name}
-                        </Link>
-                      </td>
-                      <td>{data.description.slice(0, 30)}...</td>
-                      <td>{data.email}</td>
-                      <td>{data.phoneNumber}</td>
-
+        </div>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Cơ cấu tổ chức</th>
+                <th>Mô tả</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Ngày thành lập</th>
+                {roleId && roleId === "89" && <th>Hành động</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {data &&
+                data.length > 0 &&
+                data.map((data) => (
+                  <tr key={data.id}>
+                    <td className="name">
+                      <Link to={`/organizational/${data.id}`}>{data.name}</Link>
+                    </td>
+                    <td>{data.description.slice(0, 30)}...</td>
+                    <td>{data.email}</td>
+                    <td>{data.phoneNumber}</td>
+                    <td>{moment(data.createdAt).format("L")}</td>
+                    {roleId && roleId === "89" && (
                       <td>
                         <Link to={`/add-department-${data.id}}`}>
                           <i className="fas fa-edit"></i>
@@ -137,32 +141,32 @@ const OrganizationalStructure = () => {
                           onClick={() => dlp(data.id)}
                         ></i>
                       </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-          {data && data.length > 0 && (
-            <Pagination
-              recordsTotal={organizational.length}
-              recordsNumber={10}
-              currentIndex={currentIndex}
-              setCurrentIndex={setCurrentIndex}
-              nextPagination={nextPagination}
-            />
-          )}
-          {confirmDelete && <span className="bg"></span>}
-          {confirmDelete && (
-            <div className="delete-employee">
-              <p>Bạn có muốn xóa bộ phận này không?</p>
-              <div className="confirm">
-                <button onClick={() => deleteDpm()}>Có</button>
-                <button onClick={() => setConfirmDelete(false)}>Không</button>
-              </div>
+                    )}
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+        {data && data.length > 0 && (
+          <Pagination
+            recordsTotal={organizational.length}
+            recordsNumber={10}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            nextPagination={nextPagination}
+          />
+        )}
+        {confirmDelete && <span className="bg"></span>}
+        {confirmDelete && (
+          <div className="delete-employee">
+            <p>Bạn có muốn xóa bộ phận này không?</p>
+            <div className="confirm">
+              <button onClick={() => deleteDpm()}>Có</button>
+              <button onClick={() => setConfirmDelete(false)}>Không</button>
             </div>
-          )}
-        </section>
-      )}
+          </div>
+        )}
+      </section>
       <Footer2 />
     </>
   );

@@ -7,7 +7,7 @@ export const departmentValidation = yup.object().shape({
     .required("Không được để trống tên"),
   description: yup
     .string()
-    .max(500, "Mô tả bộ phận không đượt vượt quá 500 ký tự")
+    .max(256, "Mô tả bộ phận không đượt vượt quá 256 ký tự")
     .required("Không được để trống mô tả"),
   email: yup
     .string()

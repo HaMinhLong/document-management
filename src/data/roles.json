@@ -1,6 +1,10 @@
 {
   "roles": [
     {
+      "roleId": "89",
+      "name": "admin"
+    },
+    {
       "roleId": "1",
       "name": "Trưởng phòng"
     },

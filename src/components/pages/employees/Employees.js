@@ -13,16 +13,20 @@ import {
   deleteEmployee,
 } from "../../../redux/employees/employeesActions";
 
+import { fetchRoles } from "../../../redux/roles/rolesActions";
+
 import { fetchOrganizational } from "../../../redux/organizational-structure/organizationalActions";
 
 const Employees = () => {
+  const dispatch = useDispatch();
+  const roleId = localStorage.getItem("status");
   useEffect(() => {
     document.title = "TLU | Quản lí nhân viên";
-  });
+    dispatch(fetchRoles());
+  }, []);
+  const roles = useSelector((state) => state.roles);
 
   const [currentIndex, setCurrentIndex] = useState(1);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchEmployees());
@@ -75,6 +79,37 @@ const Employees = () => {
     }
   };
 
+  const filterEmployeeByRole = (role) => {
+    if (role) {
+      setEmployees(
+        employeesList
+          .filter((employee) => employee.roleName === role)
+          .slice(0, 10)
+      );
+    } else {
+      setEmployees(employeesList.slice(0, 10));
+    }
+  };
+  const filterEmployeeByUser = (user) => {
+    if (user) {
+      if (user === "có") {
+        setEmployees(
+          employeesList
+            .filter((employee) => employee.username !== null)
+            .slice(0, 10)
+        );
+      } else {
+        setEmployees(
+          employeesList
+            .filter((employee) => employee.username === null)
+            .slice(0, 10)
+        );
+      }
+    } else {
+      setEmployees(employeesList.slice(0, 10));
+    }
+  };
+
   const searchEmployees = (value) => {
     const dataSearch = employeesList.filter(
       (employee) => employee.name.toLowerCase().indexOf(value) !== -1
@@ -102,14 +137,15 @@ const Employees = () => {
             <i className="fas fa-search"></i>
           </button>
         </div>
-
-        <div className="add-button">
-          <button>
-            <Link to="/add-employee">
-              Thêm nhân viên <i className="fas fa-user-plus"></i>
-            </Link>
-          </button>
-        </div>
+        {roleId && (roleId === "89" || roleId === "1") && (
+          <div className="add-button">
+            <button>
+              <Link to="/add-employee">
+                Thêm nhân viên <i className="fas fa-user-plus"></i>
+              </Link>
+            </button>
+          </div>
+        )}
 
         <div className="filter-container">
           <div className="filter-result">
@@ -124,7 +160,7 @@ const Employees = () => {
                 </span>
               ) : (
                 <span>0 </span>
-              )}
+              )}{" "}
               nhân viên
             </p>
           </div>
@@ -133,16 +169,44 @@ const Employees = () => {
               <p>Bộ phận: </p>
               <select onClick={(e) => filterEmployee(e)}>
                 <option value="">Tất cả</option>
-                {organizational.map((org) => (
-                  <option key={org.id} value={org.id}>
-                    {org.name}
-                  </option>
-                ))}
+                {organizational &&
+                  organizational.length > 0 &&
+                  organizational.map((org) => (
+                    <option key={org.id} value={org.id}>
+                      {org.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          </div>
+          <div className="filter">
+            <div className="filter-department">
+              <p>Chức vụ: </p>
+              <select onClick={(e) => filterEmployeeByRole(e.target.value)}>
+                <option value="">Tất cả</option>
+                {roles &&
+                  roles.length > 0 &&
+                  roles.map((role) => (
+                    <option key={role.id} value={role.name}>
+                      {role.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          </div>
+          <div className="filter">
+            <div className="filter-department">
+              <p>Tài khoản: </p>
+              <select onClick={(e) => filterEmployeeByUser(e.target.value)}>
+                <option value="">Tất cả</option>
+                <option value="có">Đã có</option>
+                <option value="chưa">Chưa có</option>
               </select>
             </div>
           </div>
         </div>
         <Employee
+          roleId={roleId}
           employees={employees}
           setConfirmDelete={setConfirmDelete}
           setEmployeeDeleteId={setEmployeeDeleteId}
