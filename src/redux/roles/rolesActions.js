@@ -13,6 +13,18 @@ export const fetchRoles = () => async (dispatch) => {
   }
 };
 
+export const fetchRole = (id) => async (dispatch) => {
+  try {
+    const data = roles.find((role) => role.roleId === id);
+    dispatch({
+      type: actions.FETCH_ROLE,
+      payload: data,
+    });
+  } catch (error) {
+    console.log("Error Fetch Role: " + error.message);
+  }
+};
+
 export const addRole = (role) => async (dispatch) => {
   try {
     roles.push(role);
@@ -28,7 +40,7 @@ export const addRole = (role) => async (dispatch) => {
 export const deleteRole = (id) => async (dispatch) => {
   try {
     for (var i = 0; i < roles.length; i++) {
-      if (roles[i].id === id) {
+      if (roles[i].roleId === id) {
         roles.splice(i, 1);
       }
     }
@@ -44,7 +56,7 @@ export const deleteRole = (id) => async (dispatch) => {
 export const updateRole = (role) => async (dispatch) => {
   try {
     for (var i = 0; i < roles.length; i++) {
-      if (roles[i].id === role.id) {
+      if (roles[i].roleId === role.roleId) {
         roles[i] = role;
       }
     }

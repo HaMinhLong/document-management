@@ -9,7 +9,10 @@ const Pagination = ({
 }) => {
   useEffect(() => {
     let thumbnails = document.getElementsByClassName("thumbnail");
-    thumbnails[currentIndex - 1].classList.add("activePagination");
+    thumbnails &&
+      thumbnails.length > 0 &&
+      thumbnails[currentIndex - 1] &&
+      thumbnails[currentIndex - 1].classList.add("activePagination");
   });
 
   const paginationNumber = [];

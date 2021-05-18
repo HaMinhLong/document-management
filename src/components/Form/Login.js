@@ -20,35 +20,53 @@ const Login = () => {
     password: "",
   });
 
+  const [checkLogin, setCheckLogin] = useState(false);
+
   const message = useSelector((state) => state.users);
-  console.log(message);
+
+  useEffect(() => {
+    message.username &&
+      !message.message &&
+      loginUser(message.roleId, message.username);
+    !message.username && message.message && errorNotification(message.message);
+    console.log(message);
+  });
 
   const handleSubmit = (values) => {
     dispatch(login(values));
-    if (message === "Đăng nhập thành công") {
-    } else {
-      // localStorage.setItem("status", message);
-      // window.location = "/";
-      ErrorNoti(message);
+    // if (message.username) {
+    //   loginUser(message.roleId, message.username);
+    // } else {
+    //   errorNotification(message.message);
+    // }
+  };
+
+  const loginUser = (roleId, username) => {
+    if (!checkLogin) {
+      localStorage.setItem("status", roleId);
+      localStorage.setItem("username", username);
+      window.location = "/";
+      setCheckLogin(true);
     }
   };
 
-  const ErrorNoti = (mes) => {
-    store.addNotification({
-      title: "Xảy ra lỗi khi đăng nhập",
-      message: mes,
-      type: "danger",
-      container: "top-right",
-      insert: "top",
-      animationIn: ["animate__animated", "animate__fadeIn"],
-      animationOut: ["animate__animated", "animate__fadeOut"],
-      dismiss: {
-        duration: 4000,
-        showIcon: true,
-        onScreen: true,
-      },
-      width: 350,
-    });
+  const errorNotification = (mes) => {
+    mes &&
+      store.addNotification({
+        title: "Xảy ra lỗi khi đăng nhập",
+        message: mes,
+        type: "danger",
+        container: "top-right",
+        insert: "top",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 4000,
+          showIcon: true,
+          onScreen: true,
+        },
+        width: 350,
+      });
   };
 
   return (

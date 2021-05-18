@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const roleId = localStorage.getItem("status");
   return (
     <footer>
       <a href="#banner"></a>
@@ -14,12 +15,16 @@ const Footer = () => {
               <li>
                 <Link to="/organizational">Quản lý cơ cấu tổ chức</Link>
               </li>
-              <li>
-                <Link to="/user">Quản lý tài khoản</Link>
-              </li>
-              <li>
-                <Link to="/role">Quản lý chức vụ</Link>
-              </li>
+              {roleId && roleId === "89" && (
+                <>
+                  <li>
+                    <Link to="/user">Quản lý tài khoản</Link>
+                  </li>
+                  <li>
+                    <Link to="/role">Quản lý chức vụ</Link>
+                  </li>
+                </>
+              )}
               <li>
                 <Link to="/employees">Quản lý nhân viên</Link>
               </li>

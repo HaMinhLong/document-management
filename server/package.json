@@ -12,8 +12,10 @@
   "author": "Kamran Yaseen",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.16.3",
     "mysql2": "^1.5.3",
+    "nodemon": "^2.0.7",
     "sequelize": "^4.37.6"
   }
 }

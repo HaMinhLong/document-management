@@ -5,14 +5,15 @@ const usersReducers = (state = [], action) => {
     case actions.LOGIN:
     case actions.FETCH_USERS:
     case actions.FETCH_USER:
+    case actions.FETCH_AVAILABLE_USER:
       return action.payload;
     case actions.ADD_USER:
-      return [...state, action.payload];
+      return action.payload;
     case actions.DELETE_USER:
-      return state.filter((user) => user.id !== action.payload.id);
+      return state.filter((user) => user.username !== action.payload);
     case actions.UPDATE_USER:
       return state.map((user) =>
-        user.id === action.payload.id ? action.payload : user
+        user.username === action.payload ? action.payload : user
       );
     default:
       return state;

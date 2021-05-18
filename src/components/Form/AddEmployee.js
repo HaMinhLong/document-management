@@ -14,6 +14,10 @@ import {
 } from "../../redux/employees/employeesActions";
 
 import { fetchOrganizational } from "../../redux/organizational-structure/organizationalActions";
+import {
+  fetchUsers,
+  fetchAvailableUsers,
+} from "../../redux/users/usersActions";
 
 import { Formik, Form } from "formik";
 import { employeeValidation } from "./Validation/employeeValidation";
@@ -26,8 +30,9 @@ import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
 const AddEmployee = (props) => {
+  const roleId = localStorage.getItem("status");
   const dispatch = useDispatch();
-  const id = props.match.params.id;
+  const id = props.match.params.id && props.match.params.id;
 
   useEffect(() => {
     document.title = id
@@ -46,17 +51,19 @@ const AddEmployee = (props) => {
           id: Math.floor(Math.random() * 1000000000000000000).toString(),
           code: "",
           name: "",
-          email: "",
+          email: "@gmail.com",
           phoneNumber: "0963339657",
           departmentId: "",
           roleId: "0",
           roleName: "",
+          username: "",
           image: "",
         }
   );
 
   useEffect(() => {
     dispatch(fetchOrganizational());
+    // dispatch(fetchUsers());
   }, [employee]);
   const organizational = useSelector((state) => state.organizational);
 
@@ -64,6 +71,8 @@ const AddEmployee = (props) => {
   useEffect(() => {
     setDepartment(organizational);
   }, [organizational]);
+
+  const [usersSelect, setUsersSelect] = useState();
 
   const handleSubmit = (values) => {
     values.departmentId = employee.departmentId;
@@ -77,23 +86,36 @@ const AddEmployee = (props) => {
     props.history.push("/employees");
   };
 
-  // Tu thay doi thong tin cua phong ban khi lua chon co cau to chuc
+  // set id cua department cho employee
   const handleDepartment = (value) => {
     const departmentValue = organizational.find((org) => org.name === value);
-    setEmployee({
-      ...employee,
-      departmentId: departmentValue.id,
-    });
+    departmentValue &&
+      departmentValue.id &&
+      setEmployee({
+        ...employee,
+        departmentId: departmentValue.id,
+      });
   };
+
+  // set username cho employee
+  const handleUser = (value) => {};
 
   // Ham nay khong de lam gi
   const handleChange = (value) => {
     const roleValue = roles.find((role) => role.name === value);
-    setEmployee({
-      ...employee,
-      roleId: roleValue.roleId,
-    });
+    roleValue &&
+      roleValue.id &&
+      setEmployee({
+        ...employee,
+        roleId: roleValue.roleId,
+      });
+    dispatch(fetchAvailableUsers(roleValue.roleId));
   };
+
+  const users = useSelector((state) => state.users);
+  useEffect(() => {
+    setUsersSelect(users);
+  }, [users]);
 
   // Thong bao
   const SuccessNoti = () => {
@@ -151,35 +173,43 @@ const AddEmployee = (props) => {
             {(formik) => (
               <Form>
                 <TextField label="Tên nhân viên :" name="name" type="text" />
-                <TextField label="Mã nhân viên :" name="code" type="text" />
+                {(roleId === "89" || roleId === "1") && (
+                  <TextField label="Mã nhân viên :" name="code" type="text" />
+                )}
                 <TextField label="Email :" name="email" type="email" />
                 <TextField
                   label="Số điện thoại :"
                   name="phoneNumber"
                   type="text"
                 />
-                <SelectField
-                  label="Bộ phận :"
-                  name="departmentId"
-                  optionsData={department ? department : [{ name: "" }]}
-                  onChange={handleDepartment}
-                />
+                {(roleId === "89" || roleId === "1") && (
+                  <SelectField
+                    label="Bộ phận :"
+                    name="departmentId"
+                    optionsData={department ? department : [{ name: "" }]}
+                    onChange={handleDepartment}
+                  />
+                )}
 
-                <SelectField
-                  label="Chức vụ :"
-                  name="roleName"
-                  optionsData={roles}
-                  onChange={handleChange}
-                />
+                {(roleId === "89" || roleId === "1") && (
+                  <SelectField
+                    label="Chức vụ :"
+                    name="roleName"
+                    optionsData={roles}
+                    onChange={handleChange}
+                  />
+                )}
 
-                {/* <SelectField
-                  label="Tài khoản :"
-                  name="username"
-                  optionsData={department ? department : [{ name: "" }]}
-                  onChange={handleDepartment}
-                /> */}
+                {(roleId === "89" || roleId === "1") && (
+                  <SelectField
+                    label="Tài khoản :"
+                    name="username"
+                    optionsData={usersSelect ? usersSelect : [{ name: "" }]}
+                    onChange={handleUser}
+                  />
+                )}
 
-                <FileBase64 data={employee} setData={setEmployee} />
+                {/* <FileBase64 data={employee} setData={setEmployee} /> */}
 
                 <input
                   type="submit"

@@ -1,17 +1,13 @@
 import * as actions from "./usersTypes";
-import { users } from "../../data/users.json";
+import * as api from "../../api/index";
 
 export const login = (user) => async (dispatch) => {
   try {
-    const userData = users.find((usr) => usr.username === user.username);
-    const message = !userData
-      ? "Không tìm thấy tài khoản"
-      : userData.password === user.password
-      ? "Đăng nhập thành công"
-      : "Sai mật khẩu";
+    const { data } = await api.SignIn(user);
+
     dispatch({
       type: actions.LOGIN,
-      payload: message,
+      payload: data,
     });
   } catch (error) {
     console.log("Error Login: " + error.message);
@@ -27,7 +23,7 @@ export const forgotPassword = () => async (dispatch) => {
 
 export const fetchUsers = () => async (dispatch) => {
   try {
-    const data = [];
+    const { data } = await api.fetchUsers();
     dispatch({
       type: actions.FETCH_USERS,
       payload: data,
@@ -37,9 +33,21 @@ export const fetchUsers = () => async (dispatch) => {
   }
 };
 
-export const fetchUser = () => async (dispatch) => {
+export const fetchAvailableUsers = (id) => async (dispatch) => {
   try {
-    const data = [];
+    const { data } = await api.fetchAvailableUsers(id);
+    dispatch({
+      type: actions.FETCH_AVAILABLE_USER,
+      payload: data,
+    });
+  } catch (error) {
+    console.log("Error Fetch Available Users: " + error.message);
+  }
+};
+
+export const fetchUser = (username) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchUser(username);
     dispatch({
       type: actions.FETCH_USER,
       payload: data,
@@ -51,20 +59,23 @@ export const fetchUser = () => async (dispatch) => {
 
 export const addUser = (user) => async (dispatch) => {
   try {
+    const { data } = await api.createUser(user);
+
     dispatch({
       type: actions.ADD_USER,
-      payload: user,
+      payload: data,
     });
   } catch (error) {
     console.log("Error Add User: " + error.message);
   }
 };
 
-export const deleteUser = (id) => async (dispatch) => {
+export const deleteUser = (username) => async (dispatch) => {
   try {
+    await api.deleteUser(username);
     dispatch({
       type: actions.DELETE_USER,
-      payload: id,
+      payload: username,
     });
   } catch (error) {
     console.log("Error Delete User: " + error.message);
@@ -73,6 +84,7 @@ export const deleteUser = (id) => async (dispatch) => {
 
 export const updateUser = (user) => async (dispatch) => {
   try {
+    await api.updateUser(user.username, user);
     dispatch({
       type: actions.UPDATE_USER,
       payload: user,

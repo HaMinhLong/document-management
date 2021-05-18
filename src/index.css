@@ -66,6 +66,14 @@ option {
   cursor: pointer;
   height: 20px;
   padding: 5px;
+  overflow-y: scroll;
+}
+
+option::-webkit-scrollbar {
+  /* WebKit */
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  width: 5px;
+  height: 100%;
 }
 
 header {
@@ -185,6 +193,11 @@ header .tasks ul li span {
   height: 2px;
   background: linear-gradient(90deg, transparent, #fff);
   transition: 0.5s;
+}
+header .tasks ul li i {
+  margin-left: 2px;
+  margin-right: 10px;
+  transform: scale(1.3);
 }
 header .tasks ul li:hover span {
   left: 0;
@@ -801,7 +814,7 @@ header .tasks.active {
 
 .employees-container,
 .organizational-structure-container,
-.organizational-information-container,
+.details-page,
 .role-management,
 .user-management {
   position: relative;
@@ -811,14 +824,14 @@ header .tasks.active {
 }
 .employees-container h1,
 .organizational-structure-container h1,
-.organizational-information-container h1,
+.details-page h1,
 .role-management h1,
 .user-management h1 {
   font-size: 25px;
 }
 .employees-container .search-box,
 .organizational-structure-container .search-box,
-.organizational-information-container .search-box,
+.details-page .search-box,
 .role-management .search-box,
 .user-management .search-box {
   position: absolute;
@@ -829,7 +842,7 @@ header .tasks.active {
 }
 .employees-container .search-box button,
 .organizational-structure-container .search-box button,
-.organizational-information-container .search-box button,
+.details-page .search-box button,
 .role-management .search-box button,
 .user-management .search-box button {
   border: none;
@@ -837,7 +850,7 @@ header .tasks.active {
 }
 .employees-container .search-box button input,
 .organizational-structure-container .search-box button input,
-.organizational-information-container .search-box button input,
+.details-page .search-box button input,
 .role-management .search-box button input,
 .user-management .search-box button input {
   border-radius: 20px;
@@ -853,14 +866,14 @@ header .tasks.active {
 }
 .employees-container .search-box button input:focus,
 .organizational-structure-container .search-box button input:focus,
-.organizational-information-container .search-box button input:focus,
+.details-page .search-box button input:focus,
 .role-management .search-box button input:focus,
 .user-management .search-box button input:focus {
   border-radius: 0px;
 }
 .employees-container .search-box button i,
 .organizational-structure-container .search-box button i,
-.organizational-information-container .search-box button i,
+.details-page .search-box button i,
 .role-management .search-box button i,
 .user-management .search-box button i {
   margin-left: 19px;
@@ -872,14 +885,14 @@ header .tasks.active {
 }
 .employees-container .search-box button i:hover,
 .organizational-structure-container .search-box button i:hover,
-.organizational-information-container .search-box button i:hover,
+.details-page .search-box button i:hover,
 .role-management .search-box button i:hover,
 .user-management .search-box button i:hover {
   opacity: 1;
 }
 .employees-container .add-button,
 .organizational-structure-container .add-button,
-.organizational-information-container .add-button,
+.details-page .add-button,
 .role-management .add-button,
 .user-management .add-button {
   width: 100%;
@@ -891,14 +904,14 @@ header .tasks.active {
 }
 .employees-container .add-button button,
 .organizational-structure-container .add-button button,
-.organizational-information-container .add-button button,
+.details-page .add-button button,
 .role-management .add-button button,
 .user-management .add-button button {
   border: none;
 }
 .employees-container .add-button button a,
 .organizational-structure-container .add-button button a,
-.organizational-information-container .add-button button a,
+.details-page .add-button button a,
 .role-management .add-button button a,
 .user-management .add-button button a {
   border-radius: 20px;
@@ -911,7 +924,7 @@ header .tasks.active {
 }
 .employees-container .add-button button a i,
 .organizational-structure-container .add-button button a i,
-.organizational-information-container .add-button button a i,
+.details-page .add-button button a i,
 .role-management .add-button button a i,
 .user-management .add-button button a i {
   margin-left: 10px;
@@ -919,7 +932,7 @@ header .tasks.active {
 }
 .employees-container .table-container table,
 .organizational-structure-container .table-container table,
-.organizational-information-container .table-container table,
+.details-page .table-container table,
 .role-management .table-container table,
 .user-management .table-container table {
   width: 100%;
@@ -930,8 +943,8 @@ header .tasks.active {
 .employees-container .table-container table td,
 .organizational-structure-container .table-container table th,
 .organizational-structure-container .table-container table td,
-.organizational-information-container .table-container table th,
-.organizational-information-container .table-container table td,
+.details-page .table-container table th,
+.details-page .table-container table td,
 .role-management .table-container table th,
 .role-management .table-container table td,
 .user-management .table-container table th,
@@ -942,7 +955,7 @@ header .tasks.active {
 }
 .employees-container .table-container table tr th,
 .organizational-structure-container .table-container table tr th,
-.organizational-information-container .table-container table tr th,
+.details-page .table-container table tr th,
 .role-management .table-container table tr th,
 .user-management .table-container table tr th {
   background: #04143d;
@@ -953,7 +966,7 @@ header .tasks.active {
 }
 .employees-container .table-container table tr th:hover,
 .organizational-structure-container .table-container table tr th:hover,
-.organizational-information-container .table-container table tr th:hover,
+.details-page .table-container table tr th:hover,
 .role-management .table-container table tr th:hover,
 .user-management .table-container table tr th:hover {
   color: red;
@@ -962,8 +975,8 @@ header .tasks.active {
 .employees-container .table-container table tr .name,
 .organizational-structure-container .table-container table tr .code,
 .organizational-structure-container .table-container table tr .name,
-.organizational-information-container .table-container table tr .code,
-.organizational-information-container .table-container table tr .name,
+.details-page .table-container table tr .code,
+.details-page .table-container table tr .name,
 .role-management .table-container table tr .code,
 .role-management .table-container table tr .name,
 .user-management .table-container table tr .code,
@@ -972,7 +985,7 @@ header .tasks.active {
 }
 .employees-container .table-container table tr i,
 .organizational-structure-container .table-container table tr i,
-.organizational-information-container .table-container table tr i,
+.details-page .table-container table tr i,
 .role-management .table-container table tr i,
 .user-management .table-container table tr i {
   width: 50%;
@@ -983,14 +996,14 @@ header .tasks.active {
 }
 .employees-container .table-container table tr i:hover,
 .organizational-structure-container .table-container table tr i:hover,
-.organizational-information-container .table-container table tr i:hover,
+.details-page .table-container table tr i:hover,
 .role-management .table-container table tr i:hover,
 .user-management .table-container table tr i:hover {
   color: red;
 }
 .employees-container .pagination-container,
 .organizational-structure-container .pagination-container,
-.organizational-information-container .pagination-container,
+.details-page .pagination-container,
 .role-management .pagination-container,
 .user-management .pagination-container {
   display: flex;
@@ -1000,7 +1013,7 @@ header .tasks.active {
 }
 .employees-container .pagination-container span,
 .organizational-structure-container .pagination-container span,
-.organizational-information-container .pagination-container span,
+.details-page .pagination-container span,
 .role-management .pagination-container span,
 .user-management .pagination-container span {
   width: 30px;
@@ -1016,7 +1029,7 @@ header .tasks.active {
 }
 .employees-container .pagination-container span.activePagination,
 .organizational-structure-container .pagination-container span.activePagination,
-.organizational-information-container .pagination-container span.activePagination,
+.details-page .pagination-container span.activePagination,
 .role-management .pagination-container span.activePagination,
 .user-management .pagination-container span.activePagination {
   background: red;
@@ -1024,7 +1037,7 @@ header .tasks.active {
 }
 .employees-container .bg,
 .organizational-structure-container .bg,
-.organizational-information-container .bg,
+.details-page .bg,
 .role-management .bg,
 .user-management .bg {
   position: absolute;
@@ -1036,7 +1049,7 @@ header .tasks.active {
 }
 .employees-container .delete-employee,
 .organizational-structure-container .delete-employee,
-.organizational-information-container .delete-employee,
+.details-page .delete-employee,
 .role-management .delete-employee,
 .user-management .delete-employee {
   position: absolute;
@@ -1053,7 +1066,7 @@ header .tasks.active {
 }
 .employees-container .delete-employee p,
 .organizational-structure-container .delete-employee p,
-.organizational-information-container .delete-employee p,
+.details-page .delete-employee p,
 .role-management .delete-employee p,
 .user-management .delete-employee p {
   color: #fff;
@@ -1062,7 +1075,7 @@ header .tasks.active {
 }
 .employees-container .delete-employee .confirm,
 .organizational-structure-container .delete-employee .confirm,
-.organizational-information-container .delete-employee .confirm,
+.details-page .delete-employee .confirm,
 .role-management .delete-employee .confirm,
 .user-management .delete-employee .confirm {
   width: 100%;
@@ -1073,7 +1086,7 @@ header .tasks.active {
 }
 .employees-container .delete-employee .confirm button,
 .organizational-structure-container .delete-employee .confirm button,
-.organizational-information-container .delete-employee .confirm button,
+.details-page .delete-employee .confirm button,
 .role-management .delete-employee .confirm button,
 .user-management .delete-employee .confirm button {
   padding: 10px 40px;
@@ -1086,7 +1099,7 @@ header .tasks.active {
 }
 .employees-container .delete-employee .confirm button:nth-child(2),
 .organizational-structure-container .delete-employee .confirm button:nth-child(2),
-.organizational-information-container .delete-employee .confirm button:nth-child(2),
+.details-page .delete-employee .confirm button:nth-child(2),
 .role-management .delete-employee .confirm button:nth-child(2),
 .user-management .delete-employee .confirm button:nth-child(2) {
   margin-left: 100px;
@@ -1094,14 +1107,14 @@ header .tasks.active {
 }
 .employees-container .delete-employee .confirm button:hover,
 .organizational-structure-container .delete-employee .confirm button:hover,
-.organizational-information-container .delete-employee .confirm button:hover,
+.details-page .delete-employee .confirm button:hover,
 .role-management .delete-employee .confirm button:hover,
 .user-management .delete-employee .confirm button:hover {
   opacity: 1;
 }
 .employees-container > p,
 .organizational-structure-container > p,
-.organizational-information-container > p,
+.details-page > p,
 .role-management > p,
 .user-management > p {
   cursor: pointer;
@@ -1109,7 +1122,7 @@ header .tasks.active {
 }
 .employees-container > p:hover,
 .organizational-structure-container > p:hover,
-.organizational-information-container > p:hover,
+.details-page > p:hover,
 .role-management > p:hover,
 .user-management > p:hover {
   text-decoration: underline;
@@ -1296,7 +1309,7 @@ header .tasks.active {
   color: gray;
 }
 .employee-information-container .employee-information .content p {
-  margin-bottom: 50px;
+  margin-bottom: 45px;
 }
 .employee-information-container .employee-information .content p span {
   font-weight: bold;
@@ -1609,6 +1622,9 @@ header .tasks.active {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+}
+.filter-container .filter-result {
+  width: 50%;
 }
 .filter-container .filter-result p {
   font-size: 18px;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Banner2 from "../../layout/Banner2";
 import Footer2 from "../../layout/Footer2";
+import moment from "moment";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDepartments } from "../../../redux/organizational-structure/organizationalActions";
@@ -18,7 +19,7 @@ const OrganizationalDetails = (props) => {
 
   const [data, setData] = useState({});
   useEffect(() => {
-    setData(departmentDetails[0]);
+    setData(departmentDetails);
   }, [departmentDetails]);
 
   return (
@@ -26,7 +27,7 @@ const OrganizationalDetails = (props) => {
       {data ? (
         <>
           <Banner2 title={["Quản lý cơ cấu tổ chức", data.name]} />
-          <section className="organizational-information-container padding">
+          <section className="details-page padding">
             <h1>Giới thiệu về {data.name} của trường Đại học Thăng Long :</h1>
             <div className="information">
               <p>
@@ -46,7 +47,11 @@ const OrganizationalDetails = (props) => {
               </p>
               <p>
                 <span>Ngày thành lập : </span>
-                {data.startDate}
+                {moment(data.createdAt).format("L")}
+              </p>
+              <p>
+                <span>Cập nhật lần cuối: </span>
+                {moment(data.updatedAt).format("L")}
               </p>
             </div>
             <p onClick={() => window.history.back()}>Quay lại trang trước</p>

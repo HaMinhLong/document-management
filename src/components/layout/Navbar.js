@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEmployees } from "../../redux/employees/employeesActions";
 
 const Navbar = () => {
-  const [check, setCheck] = useState(false);
+  const roleId = localStorage.getItem("status");
+  const username = localStorage.getItem("username");
+  const employeeId = localStorage.getItem("id");
 
   const toggleTasks = (data) => {
     const tasksLogo = document.querySelector(".tasks-logo");
@@ -18,8 +22,12 @@ const Navbar = () => {
 
   const logOut = () => {
     localStorage.setItem("status", "");
+    localStorage.setItem("username", "");
+    localStorage.setItem("id", "");
     window.location = "/";
   };
+
+  const [check, setCheck] = useState(false);
 
   return (
     <header>
@@ -30,6 +38,16 @@ const Navbar = () => {
       <span className="tasks-logo" onClick={() => toggleTasks(0)}></span>
       <div className="tasks active">
         <ul>
+          <li>
+            <Link
+              to={employeeId ? `/employees/${employeeId}` : "#"}
+              onClick={() => toggleTasks(0)}
+            >
+              <i className="far fa-user-circle"></i>
+              {username}
+            </Link>
+            <span></span>
+          </li>
           <li>
             <Link to="/" onClick={() => toggleTasks(0)}>
               Trang chủ
@@ -42,13 +60,16 @@ const Navbar = () => {
             </Link>
             <span></span>
           </li>
-          <li>
-            <Link onClick={() => setCheck(check ? false : true)}>
-              Quản lý người dùng{" "}
-              <i className="fas fa-angle-down" id={check ? "check" : ""}></i>
-            </Link>
-            <span></span>
-          </li>
+          {roleId && roleId === "89" && (
+            <li>
+              <Link onClick={() => setCheck(check ? false : true)}>
+                Quản lý người dùng{" "}
+                <i className="fas fa-angle-down" id={check ? "check" : ""}></i>
+              </Link>
+              <span></span>
+            </li>
+          )}
+
           {check && (
             <>
               <li className="child">

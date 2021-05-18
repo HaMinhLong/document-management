@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Banner2 from "../layout/Banner2";
 import Footer2 from "../layout/Footer2";
@@ -8,20 +8,63 @@ import { userValidation } from "./Validation/userValidation";
 import TextField from "./Field/TextField";
 import SelectField from "./Field/SelectField";
 
-import { roles } from "../../data/roles.json";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, updateUser } from "../../redux/users/usersActions";
+import { fetchRoles } from "../../redux/roles/rolesActions";
 
-const AddUser = () => {
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-    confirmPassword: "",
-    roleId: "",
-    roleName: "",
-  });
+import ReactNotification from "react-notifications-component";
+import { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+
+const AddUser = (props) => {
+  const username = props.match.params.id && props.match.params.id;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchRoles());
+  }, []);
+
+  const userUpdate = useSelector((state) => state.users);
+  const roles = useSelector((state) => state.roles);
+
+  const data =
+    userUpdate &&
+    userUpdate.length > 0 &&
+    userUpdate.find((user) => user.username === username);
+
+  const [user, setUser] = useState(
+    username && data
+      ? {
+          username: data.username,
+          password: data.password,
+          confirmPassword: data.password,
+          roleId: data.roleId,
+          roleName: data.roleName,
+        }
+      : {
+          username: "",
+          password: "",
+          confirmPassword: "",
+          roleId: "",
+          roleName: "",
+        }
+  );
+
+  const message = useSelector((state) => state.users);
 
   const handleSubmit = (values) => {
     values.roleId = user.roleId;
-    console.log(values);
+    if (message === "This username has been taken") {
+      ErrorNoti();
+    } else {
+      if (username) {
+        dispatch(updateUser(values));
+        props.history.push("/user");
+      } else {
+        dispatch(addUser(values));
+        props.history.push("/user");
+      }
+    }
   };
 
   // Ham nay khong de lam gi
@@ -33,11 +76,30 @@ const AddUser = () => {
     });
   };
 
+  const ErrorNoti = () => {
+    store.addNotification({
+      title: "Lỗi",
+      message: "Tên tài khoản đã được sử dụng",
+      type: "warning",
+      container: "top-right",
+      insert: "top",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 4000,
+        showIcon: true,
+        onScreen: true,
+      },
+      width: 350,
+    });
+  };
+
   return (
     <>
-      <Banner2 title={["Thêm tài khoản"]} />
+      <ReactNotification />
+      <Banner2 title={[username ? "Cập nhật tài khoản" : "Thêm tài khoản"]} />
       <section className="add-form-container padding">
-        <h1>{"Thêm tài khoản :"}</h1>
+        <h1>{username ? "Cập nhật tài khoản : " : "Thêm tài khoản :"}</h1>
         {user && (
           <Formik
             initialValues={user}
@@ -61,11 +123,14 @@ const AddUser = () => {
                 <SelectField
                   label="Chức vụ :"
                   name="roleName"
-                  optionsData={roles}
+                  optionsData={roles ? roles : [{ name: "" }]}
                   onChange={handleChange}
                 />
 
-                <input type="submit" value="Thêm tài khoản" />
+                <input
+                  type="submit"
+                  value={username ? "Cập nhật tài khoản" : "Thêm tài khoản"}
+                />
               </Form>
             )}
           </Formik>

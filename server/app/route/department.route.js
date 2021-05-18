@@ -7,7 +7,7 @@ module.exports = function (app) {
   // Retrieve all Customer
   app.get("/api/departments", departments.findAll);
 
-  app.get("/api/departments/:id", departments.findSub);
+  // app.get("/api/departments/:id", departments.findSub);
 
   // Retrieve a single Customer by Id
   app.get("/api/departments/:id", departments.findById);

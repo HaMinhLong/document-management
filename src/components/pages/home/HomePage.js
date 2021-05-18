@@ -4,11 +4,28 @@ import { Link } from "react-router-dom";
 
 import Banner from "../../layout/Banner";
 import Footer from "../../layout/Footer";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchEmployees } from "../../../redux/employees/employeesActions";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const roleId = localStorage.getItem("status");
+  const username = localStorage.getItem("username");
   useEffect(() => {
     document.title = "TLU | Hệ thống quản lý văn bản";
-  });
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchEmployees());
+  }, [dispatch]);
+  const employees = useSelector((state) => state.employees);
+
+  const employee =
+    employees &&
+    employees.length > 0 &&
+    employees.find((employee) => employee.username === username);
+  localStorage.setItem("id", employee && employee.id);
 
   return (
     <>
@@ -125,26 +142,29 @@ const HomePage = () => {
                   </button>
                 </Link>
               </div>
+              {roleId && roleId === "89" && (
+                <>
+                  <div className="box">
+                    <p>Quản lý chức vụ</p>
+                    <Link to="/role">
+                      <button>
+                        Xem
+                        <i className="fas fa-long-arrow-alt-right"></i>
+                      </button>
+                    </Link>
+                  </div>
 
-              <div className="box">
-                <p>Quản lý chức vụ</p>
-                <Link to="/role">
-                  <button>
-                    Xem
-                    <i className="fas fa-long-arrow-alt-right"></i>
-                  </button>
-                </Link>
-              </div>
-
-              <div className="box">
-                <p>Quản lý nhân viên</p>
-                <Link to="/employees">
-                  <button>
-                    Xem
-                    <i className="fas fa-long-arrow-alt-right"></i>
-                  </button>
-                </Link>
-              </div>
+                  <div className="box">
+                    <p>Quản lý nhân viên</p>
+                    <Link to="/employees">
+                      <button>
+                        Xem
+                        <i className="fas fa-long-arrow-alt-right"></i>
+                      </button>
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
