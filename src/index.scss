@@ -209,6 +209,10 @@ header {
         transition: 0.5s;
         transform: rotateZ(180deg);
       }
+      #check-doc {
+        transition: 0.5s;
+        transform: rotateZ(180deg);
+      }
       .child {
         position: relative;
         top: -15px;
@@ -790,7 +794,7 @@ header {
 .organizational-structure-container,
 .details-page,
 .role-management,
-.user-management {
+.management-page {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -1033,6 +1037,16 @@ header {
     input[type="number"]:focus,
     input[type="password"]:focus {
       margin-top: 20px;
+    }
+    .checkbox {
+      label,
+      input {
+        cursor: pointer;
+      }
+      label {
+        margin-left: 20px;
+      }
+      margin-bottom: 5px;
     }
     input.invalid {
       border-color: red;

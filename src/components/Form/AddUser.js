@@ -10,7 +10,7 @@ import SelectField from "./Field/SelectField";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, updateUser } from "../../redux/users/usersActions";
-import { fetchRoles } from "../../redux/roles/rolesActions";
+import { fetchGroups } from "../../redux/groups/groupsActions";
 
 import ReactNotification from "react-notifications-component";
 import { store } from "react-notifications-component";
@@ -21,11 +21,11 @@ const AddUser = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchRoles());
+    dispatch(fetchGroups());
   }, []);
 
   const userUpdate = useSelector((state) => state.users);
-  const roles = useSelector((state) => state.roles);
+  const groups = useSelector((state) => state.groups);
 
   const data =
     userUpdate &&
@@ -38,22 +38,20 @@ const AddUser = (props) => {
           username: data.username,
           password: data.password,
           confirmPassword: data.password,
-          roleId: data.roleId,
-          roleName: data.roleName,
+          groupId: data.id,
         }
       : {
           username: "",
           password: "",
           confirmPassword: "",
-          roleId: "",
-          roleName: "",
+          groupId: "",
         }
   );
 
   const message = useSelector((state) => state.users);
 
   const handleSubmit = (values) => {
-    values.roleId = user.roleId;
+    values.groupId = user.groupId;
     if (message === "This username has been taken") {
       ErrorNoti();
     } else {
@@ -69,10 +67,10 @@ const AddUser = (props) => {
 
   // Ham nay khong de lam gi
   const handleChange = (value) => {
-    const roleValue = roles.find((role) => role.name === value);
+    const roleValue = groups.find((role) => role.name === value);
     setUser({
       ...user,
-      roleId: roleValue.roleId,
+      groupId: roleValue.id,
     });
   };
 
@@ -123,7 +121,7 @@ const AddUser = (props) => {
                 <SelectField
                   label="Chức vụ :"
                   name="roleName"
-                  optionsData={roles ? roles : [{ name: "" }]}
+                  optionsData={groups ? groups : [{ name: "" }]}
                   onChange={handleChange}
                 />
 

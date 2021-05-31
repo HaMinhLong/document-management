@@ -7,10 +7,6 @@ module.exports = function (app) {
   // Retrieve all user
   app.get("/api/users", users.findAll);
 
-  // Get available user
-  // app.get("/api/listAvailable", users.listAvailable);
-  app.get("/api/listAvailable/:id", users.listAvailable);
-
   // Retrieve a single user by Id
   app.get("/api/users/:id", users.findById);
 
@@ -21,6 +17,8 @@ module.exports = function (app) {
   app.delete("/api/users/:id", users.delete);
 
   app.post("/api/users/signin", users.signin);
+
+  app.get("/api/listAvailable/:id", users.listAvailable);
 };
 
 // http

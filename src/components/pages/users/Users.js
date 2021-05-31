@@ -9,18 +9,19 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { fetchUsers, deleteUser } from "../../../redux/users/usersActions";
 
-import { fetchRoles } from "../../../redux/roles/rolesActions";
+import { fetchGroups } from "../../../redux/groups/groupsActions";
 
-const Users = () => {
+const Users = (props) => {
   document.title = "TLU | Quản lý tài khoản";
+  const checkRight = props.match.url === "/user" ? true : false;
   const [currentIndex, setCurrentIndex] = useState(1);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchRoles());
+    dispatch(fetchGroups());
   }, []);
-  const roles = useSelector((state) => state.roles);
+  const groups = useSelector((state) => state.groups);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -57,12 +58,12 @@ const Users = () => {
     setData(dataSearch.slice(0, 10));
   };
 
-  const filterUsers = (role) => {
-    if (role) {
+  const filterUsers = (group) => {
+    if (group) {
       setData(
         users &&
           users.length > 0 &&
-          users.filter((user) => user.roleName === role).slice(0, 10)
+          users.filter((user) => user.groupId === group).slice(0, 10)
       );
     } else {
       setData(users && users.length > 0 && users.slice(0, 10));
@@ -71,9 +72,9 @@ const Users = () => {
 
   return (
     <>
-      <Banner2 title={["Quản lí tài khoản"]} />
+      <Banner2 title={["Quản lý tài khoản"]} />
 
-      <section className="user-management padding">
+      <section className="management-page padding">
         <h1>Danh sách tài khoản :</h1>
 
         <div className="search-box">
@@ -87,14 +88,15 @@ const Users = () => {
             <i className="fas fa-search"></i>
           </button>
         </div>
-
-        <div className="add-button">
-          <button>
-            <Link to="/add-user">
-              Thêm tài khoản <i className="fas fa-user-plus"></i>
-            </Link>
-          </button>
-        </div>
+        {checkRight && (
+          <div className="add-button">
+            <button>
+              <Link to="/add-user">
+                Thêm tài khoản <i className="fas fa-user-plus"></i>
+              </Link>
+            </button>
+          </div>
+        )}
 
         <div className="filter-container">
           <div className="filter-result">
@@ -115,11 +117,11 @@ const Users = () => {
               <p>Bộ phận: </p>
               <select onClick={(e) => filterUsers(e.target.value)}>
                 <option value="">Tất cả</option>
-                {roles &&
-                  roles.length > 0 &&
-                  roles.map((role) => (
-                    <option key={role.roleId} value={role.name}>
-                      {role.name}
+                {groups &&
+                  groups.length > 0 &&
+                  groups.map((group) => (
+                    <option key={group.id} value={group.id}>
+                      {group.name}
                     </option>
                   ))}
               </select>
@@ -131,6 +133,7 @@ const Users = () => {
           users={data}
           setConfirmDelete={setConfirmDelete}
           setUsername={setUsername}
+          checkRight={checkRight}
         />
 
         {data && data.length > 0 && users && users.length > 0 && (

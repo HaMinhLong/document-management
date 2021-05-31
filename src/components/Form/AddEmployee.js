@@ -5,19 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Banner2 from "../layout/Banner2";
 import Footer2 from "../layout/Footer2";
 
-import { roles } from "../../data/roles.json";
-
 import {
   addEmployee,
-  fetchEmployee,
   updateEmployee,
 } from "../../redux/employees/employeesActions";
-
 import { fetchOrganizational } from "../../redux/organizational-structure/organizationalActions";
-import {
-  fetchUsers,
-  fetchAvailableUsers,
-} from "../../redux/users/usersActions";
+import { fetchAvailableUsers } from "../../redux/users/usersActions";
+import { fetchGroups } from "../../redux/groups/groupsActions";
 
 import { Formik, Form } from "formik";
 import { employeeValidation } from "./Validation/employeeValidation";
@@ -30,15 +24,21 @@ import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
 const AddEmployee = (props) => {
-  const roleId = localStorage.getItem("status");
   const dispatch = useDispatch();
   const id = props.match.params.id && props.match.params.id;
-
+  const groupId = localStorage.getItem("groupId");
+  const rights = JSON.parse(localStorage.getItem("rights"));
+  const checkRight = rights.find((right) => right.url === "employees-w")
+    ? false
+    : true;
   useEffect(() => {
     document.title = id
       ? "TLU | Thêm nhân viên"
       : "TLU | Cập nhật thông tin nhân viên";
+    dispatch(fetchGroups());
   }, []);
+
+  const groups = useSelector((state) => state.groups);
 
   const employeeUpdate = useSelector((state) => state.employees);
 
@@ -102,14 +102,14 @@ const AddEmployee = (props) => {
 
   // Ham nay khong de lam gi
   const handleChange = (value) => {
-    const roleValue = roles.find((role) => role.name === value);
-    roleValue &&
-      roleValue.id &&
+    const groupValue = groups.find((group) => group.name === value);
+    groupValue &&
+      groupValue.id &&
       setEmployee({
         ...employee,
-        roleId: roleValue.roleId,
+        roleId: groupValue.id,
       });
-    dispatch(fetchAvailableUsers(roleValue.roleId));
+    dispatch(fetchAvailableUsers(groupValue.id));
   };
 
   const users = useSelector((state) => state.users);
@@ -118,25 +118,6 @@ const AddEmployee = (props) => {
   }, [users]);
 
   // Thong bao
-  const SuccessNoti = () => {
-    store.addNotification({
-      title: !id ? "Nhân viên mới được thêm" : "Thông tin được cập nhật",
-      message: !id
-        ? "Thêm mới nhân viên thành công"
-        : "Cập nhật thông tin nhân viên thành công",
-      type: "success",
-      container: "top-right",
-      insert: "top",
-      animationIn: ["animate__animated", "animate__fadeIn"],
-      animationOut: ["animate__animated", "animate__fadeOut"],
-      dismiss: {
-        duration: 4000,
-        showIcon: true,
-        onScreen: true,
-      },
-      width: 350,
-    });
-  };
 
   const ErrorNoti = () => {
     store.addNotification({
@@ -173,7 +154,7 @@ const AddEmployee = (props) => {
             {(formik) => (
               <Form>
                 <TextField label="Tên nhân viên :" name="name" type="text" />
-                {(roleId === "89" || roleId === "1") && (
+                {checkRight && (
                   <TextField label="Mã nhân viên :" name="code" type="text" />
                 )}
                 <TextField label="Email :" name="email" type="email" />
@@ -182,7 +163,7 @@ const AddEmployee = (props) => {
                   name="phoneNumber"
                   type="text"
                 />
-                {(roleId === "89" || roleId === "1") && (
+                {checkRight && (
                   <SelectField
                     label="Bộ phận :"
                     name="departmentId"
@@ -190,17 +171,15 @@ const AddEmployee = (props) => {
                     onChange={handleDepartment}
                   />
                 )}
-
-                {(roleId === "89" || roleId === "1") && (
+                {checkRight && (
                   <SelectField
                     label="Chức vụ :"
                     name="roleName"
-                    optionsData={roles}
+                    optionsData={groups}
                     onChange={handleChange}
                   />
                 )}
-
-                {(roleId === "89" || roleId === "1") && (
+                {checkRight && (
                   <SelectField
                     label="Tài khoản :"
                     name="username"

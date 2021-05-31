@@ -16,22 +16,26 @@ import OrganizationalDetails from "../pages/organizational/OrganizationalDetails
 
 import AddDepartment from "../Form/AddDepartment";
 
-import Roles from "../pages/roles/Roles";
-import RoleDetails from "../pages/roles/role/RoleDetails";
-
-import Users from "../pages/users/Users";
+import Groups from "../pages/groups/Groups";
+import AddGroup from "../Form/AddGroup";
+import GroupDetails from "../pages/groups/group/GroupDetails";
 
 import About from "../pages/about/About";
 import AboutWe from "../pages/about we/AboutWe";
 
+import Users from "../pages/users/Users";
 import AddUser from "../Form/AddUser";
 import UserDetails from "../pages/users/user/UserDetails";
 
-import AddRole from "../Form/AddRole";
+import Rights from "../pages/rights/Rights";
+import AddRight from "../Form/AddRight";
+import RightDetails from "../pages/rights/right/RightDetails";
 
+import GroupRights from "../pages/group-rights/GroupRights";
+import AddGroupRight from "../Form/AddGroupRight";
+import GroupRightDetails from "../pages/group-rights/group-right/GroupRightDetails";
 class Home extends Component {
   render() {
-    const roleId = localStorage.getItem("status");
     return (
       <div>
         <Navbar />
@@ -40,76 +44,43 @@ class Home extends Component {
 
           {/* Employee management */}
           <Route exact path="/employees" component={Employees} />
+          <Route exact path="/employees-w" component={Employees} />
           <Route exact path="/employees/:id" component={EmployeeDetails} />
-          <Route
-            exact
-            path="/add-employee"
-            component={
-              roleId === "89" || roleId === "1" ? AddEmployee : NoMatch
-            }
-          />
+          <Route exact path="/add-employee" component={AddEmployee} />
           <Route exact path="/add-employee-:id" component={AddEmployee} />
 
           {/* Organizational Structure Management */}
           <Route exact path="/organizational" component={Organizational} />
+          <Route exact path="/organizational-w" component={Organizational} />
           <Route
             exacta
             path="/organizational/:id"
             component={OrganizationalDetails}
           />
 
-          <Route
-            exact
-            path="/add-department"
-            component={roleId === "89" ? AddDepartment : NoMatch}
-          />
-          <Route
-            exact
-            path="/add-department-:id"
-            component={roleId === "89" ? AddDepartment : NoMatch}
-          />
+          <Route exact path="/add-department" component={AddDepartment} />
+          <Route exact path="/add-department-:id" component={AddDepartment} />
 
-          <Route
-            exact
-            path="/role"
-            component={roleId === "89" ? Roles : NoMatch}
-          />
-          <Route
-            exact
-            path="/add-role"
-            component={roleId === "89" ? AddRole : NoMatch}
-          />
-          <Route
-            exact
-            path="/add-role-:id"
-            component={roleId === "89" ? AddRole : NoMatch}
-          />
-          <Route
-            exact
-            path="/roles/:id"
-            component={roleId === "89" ? RoleDetails : NoMatch}
-          />
+          <Route exact path="/group" component={Groups} />
+          <Route exact path="/add-group" component={AddGroup} />
+          <Route exact path="/add-group-:id" component={AddGroup} />
+          <Route exact path="/group/:id" component={GroupDetails} />
 
-          <Route
-            exact
-            path="/user"
-            component={roleId === "89" ? Users : NoMatch}
-          />
-          <Route
-            exact
-            path="/add-user"
-            component={roleId === "89" ? AddUser : NoMatch}
-          />
-          <Route
-            exact
-            path="/add-user-:id"
-            component={roleId === "89" ? AddUser : NoMatch}
-          />
-          <Route
-            exact
-            path="/users/:id"
-            component={roleId === "89" ? UserDetails : NoMatch}
-          />
+          <Route exact path="/user" component={Users} />
+          <Route exact path="/user-w" component={Users} />
+          <Route exact path="/add-user" component={AddUser} />
+          <Route exact path="/add-user-:id" component={AddUser} />
+          <Route exact path="/users/:id" component={UserDetails} />
+
+          <Route exact path="/right" component={Rights} />
+          <Route exact path="/add-right" component={AddRight} />
+          <Route exact path="/add-right-:id" component={AddRight} />
+          <Route exact path="/right/:id" component={RightDetails} />
+
+          <Route exact path="/group-right" component={GroupRights} />
+          <Route exact path="/add-groupright" component={AddGroupRight} />
+          <Route exact path="/add-groupright-:id" component={AddGroupRight} />
+          <Route exact path="/group-right/:id" component={GroupRightDetails} />
 
           <Route exact path="/about" component={About} />
           <Route exact path="/about-we" component={AboutWe} />

@@ -13,18 +13,18 @@ import {
   deleteEmployee,
 } from "../../../redux/employees/employeesActions";
 
-import { fetchRoles } from "../../../redux/roles/rolesActions";
+import { fetchGroups } from "../../../redux/groups/groupsActions";
 
 import { fetchOrganizational } from "../../../redux/organizational-structure/organizationalActions";
 
-const Employees = () => {
+const Employees = (props) => {
   const dispatch = useDispatch();
-  const roleId = localStorage.getItem("status");
+  const checkRight = props.match.url === "/employees" ? true : false;
   useEffect(() => {
     document.title = "TLU | Quản lí nhân viên";
-    dispatch(fetchRoles());
+    dispatch(fetchGroups());
   }, []);
-  const roles = useSelector((state) => state.roles);
+  const groups = useSelector((state) => state.groups);
 
   const [currentIndex, setCurrentIndex] = useState(1);
 
@@ -137,7 +137,7 @@ const Employees = () => {
             <i className="fas fa-search"></i>
           </button>
         </div>
-        {roleId && (roleId === "89" || roleId === "1") && (
+        {checkRight && (
           <div className="add-button">
             <button>
               <Link to="/add-employee">
@@ -184,9 +184,9 @@ const Employees = () => {
               <p>Chức vụ: </p>
               <select onClick={(e) => filterEmployeeByRole(e.target.value)}>
                 <option value="">Tất cả</option>
-                {roles &&
-                  roles.length > 0 &&
-                  roles.map((role) => (
+                {groups &&
+                  groups.length > 0 &&
+                  groups.map((role) => (
                     <option key={role.id} value={role.name}>
                       {role.name}
                     </option>
@@ -206,10 +206,10 @@ const Employees = () => {
           </div>
         </div>
         <Employee
-          roleId={roleId}
           employees={employees}
           setConfirmDelete={setConfirmDelete}
           setEmployeeDeleteId={setEmployeeDeleteId}
+          checkRight={checkRight}
         />
 
         {employees &&

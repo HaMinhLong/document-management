@@ -13,5 +13,4 @@ export const userValidation = yup.object({
     .string()
     .oneOf([yup.ref("password"), null], "Mật khẩu không trùng nhau")
     .required("Xác nhận mật khẩu không được để trống"),
-  roleName: yup.string().required("Chức vụ không được để trống"),
 });

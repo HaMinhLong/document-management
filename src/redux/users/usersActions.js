@@ -60,7 +60,6 @@ export const fetchUser = (username) => async (dispatch) => {
 export const addUser = (user) => async (dispatch) => {
   try {
     const { data } = await api.createUser(user);
-
     dispatch({
       type: actions.ADD_USER,
       payload: data,

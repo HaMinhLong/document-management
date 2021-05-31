@@ -22,12 +22,10 @@ module.exports = (sequelize, Sequelize) => {
     roleName: {
       type: Sequelize.STRING,
     },
-    image: {
-      type: Sequelize.STRING,
-    },
     username: {
       type: Sequelize.STRING,
     },
   });
+
   return Employee;
 };

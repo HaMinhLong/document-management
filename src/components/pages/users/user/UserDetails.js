@@ -6,6 +6,7 @@ import moment from "moment";
 
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "../../../../redux/users/usersActions";
+import { fetchGroup } from "../../../../redux/groups/groupsActions";
 
 const UserDetails = (props) => {
   const dispatch = useDispatch();
@@ -15,6 +16,12 @@ const UserDetails = (props) => {
     dispatch(fetchUser(username));
   }, []);
   const user = useSelector((state) => state.users);
+
+  useEffect(() => {
+    user && dispatch(fetchGroup(user.groupId));
+  }, [user]);
+
+  const group = useSelector((state) => state.groups);
 
   return (
     <>
@@ -29,7 +36,7 @@ const UserDetails = (props) => {
               </p>
               <p>
                 <span>Chức vụ : </span>
-                {user.roleName}
+                {group.name}
               </p>
               <p>
                 <span>Ngày lập : </span> {moment(user.createdAt).format("L")}

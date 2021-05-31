@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-const User = ({ users, setConfirmDelete, setUsername }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { fetchGroups } from "../../../../redux/groups/groupsActions";
+
+const User = ({ users, setConfirmDelete, setUsername, checkRight }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGroups());
+  }, []);
+
+  const groups = useSelector((state) => state.groups);
+
   const deleteUser = (username) => {
     setConfirmDelete(true);
     setUsername(username);
@@ -20,7 +31,7 @@ const User = ({ users, setConfirmDelete, setUsername }) => {
               <th>Phone Number</th> */}
               <th>Ngày lập</th>
               <th>Cập nhật lần cuối</th>
-              <th>Hành động</th>
+              {checkRight && <th>Hành động</th>}
             </tr>
           </thead>
           <tbody>
@@ -29,25 +40,34 @@ const User = ({ users, setConfirmDelete, setUsername }) => {
               users.map((user) => (
                 <tr key={user.username}>
                   <td className="name">
-                    <Link to={`/users/${user.username}`}>{user.username}</Link>
+                    <Link to={`/users/${user.username || ""}`}>
+                      {user.username || ""}
+                    </Link>
                   </td>
                   {/* <td className="name">
                     <Link to={`/users/${user.id}`}>{user.name}</Link>
                   </td> */}
-                  <td>{user.roleName}</td>
+                  <td>
+                    {groups &&
+                      groups.length > 0 &&
+                      groups.find((group) => group.id === user.groupId) &&
+                      groups.find((group) => group.id === user.groupId).name}
+                  </td>
                   {/* <td>{user.email}</td>
                   <td>{user.phoneNumber}</td> */}
                   <td>{moment(user.createdAt).format("L")}</td>
                   <td>{moment(user.updatedAt).format("L")}</td>
-                  <td>
-                    <Link to={`/add-user-${user.username}`}>
-                      <i className="fas fa-edit"></i>
-                    </Link>
-                    <i
-                      className="fas fa-trash"
-                      onClick={() => deleteUser(user.username)}
-                    ></i>
-                  </td>
+                  {checkRight && (
+                    <td>
+                      <Link to={`/add-user-${user.username}`}>
+                        <i className="fas fa-edit"></i>
+                      </Link>
+                      <i
+                        className="fas fa-trash"
+                        onClick={() => deleteUser(user.username)}
+                      ></i>
+                    </td>
+                  )}
                 </tr>
               ))}
           </tbody>

@@ -14,7 +14,7 @@ import { fetchOrganizational } from "../../../../redux/organizational-structure/
 const EmployeeDetails = (props) => {
   const id = props.match.params.id;
   const username = localStorage.getItem("username");
-  const roleId = localStorage.getItem("status");
+  const checkRight = props.match.url === "/employees" ? true : false;
 
   useEffect(() => {
     document.title = `TLU | ${employee.name}`;
@@ -99,9 +99,7 @@ const EmployeeDetails = (props) => {
                 <span>Cập nhật lần cuối: </span>{" "}
                 {moment(employee.updatedAt).format("L")}{" "}
               </p>
-              {(username === employee.username ||
-                roleId === "89" ||
-                roleId === "1") && (
+              {(checkRight || employee.username === username) && (
                 <Link to={`/add-employee-${employee.id}`}>
                   <button>Cập nhật nhân viên</button>
                 </Link>
