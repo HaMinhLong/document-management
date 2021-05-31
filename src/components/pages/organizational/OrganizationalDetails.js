@@ -5,22 +5,23 @@ import Footer2 from "../../layout/Footer2";
 import moment from "moment";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDepartments } from "../../../redux/organizational-structure/organizationalActions";
+import { fetchOrganizational } from "../../../redux/organizational-structure/organizationalActions";
 
 const OrganizationalDetails = (props) => {
   const id = props.match.params.id;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDepartments(id));
+    dispatch(fetchOrganizational());
   }, []);
 
-  const departmentDetails = useSelector((state) => state.organizational);
+  const organizational = useSelector((state) => state.organizational);
 
   const [data, setData] = useState({});
+
   useEffect(() => {
-    setData(departmentDetails);
-  }, [departmentDetails]);
+    setData(organizational.find((org) => org.id === id));
+  }, [organizational]);
 
   return (
     <>
@@ -32,6 +33,12 @@ const OrganizationalDetails = (props) => {
             <div className="information">
               <p>
                 <span>Tên cơ cấu tổ chức :</span> {data.name}
+              </p>
+              <p>
+                <span>Bộ phận quản lý :</span>{" "}
+                {data.id !== data.belongto
+                  ? organizational.find((org) => org.id === data.belongto).name
+                  : ""}
               </p>
               <p>
                 <span> Mô tả về {data.name} : </span>

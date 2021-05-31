@@ -1,5 +1,3 @@
-const { Sequelize, Op } = require("sequelize");
-
 module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define(
     "user", // Model name
@@ -12,14 +10,7 @@ module.exports = (sequelize, Sequelize) => {
       password: {
         type: Sequelize.STRING,
       },
-      roleId: {
-        type: Sequelize.STRING,
-      },
-      roleName: {
-        type: Sequelize.STRING,
-      },
     }
   );
-
   return User;
 };

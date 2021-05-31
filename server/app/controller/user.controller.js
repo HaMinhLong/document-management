@@ -1,7 +1,10 @@
 const db = require("../config/db.config.js");
 const User = db.user;
-const bcrypt = require("bcryptjs");
+const Employee = db.Employee;
 const { Sequelize, Op } = require("sequelize");
+const bcrypt = require("bcryptjs");
+const Group = db.group;
+const Right = db.right;
 
 function isExisted(username) {
   return User.count({ where: { username: username } }).then((count) => {
@@ -12,7 +15,7 @@ function isExisted(username) {
   });
 }
 
-// Post a User
+// Post a Customer
 exports.create = (req, res) => {
   // Save to MySQL database
   isExisted(req.body.username).then((isExisted) => {
@@ -22,77 +25,37 @@ exports.create = (req, res) => {
       User.create({
         username: req.body.username,
         password: req.body.password,
-        roleId: req.body.roleId,
-        roleName: req.body.roleName,
+        groupId: req.body.groupId,
       }).then((user) => {
-        // Send created User to client
+        // Send created customer to client
         res.send(user);
       });
     }
   });
 };
 
-// FETCH all Users
+// FETCH all Customers
 exports.findAll = (req, res) => {
   User.findAll().then((users) => {
-    // Send all users to Client
+    // Send all customers to Client
     res.send(users);
   });
 };
 
-// exports.listAvailable = (req, res) => {
-//   User.findAll({
-//     attributes: ["username"],
-//     where: {
-//       username: {
-//         [Op.notIn]: Sequelize.literal(`(SELECT username
-//           FROM employees)`),
-//       },
-//     },
-//   }).then((username) => {
-//     // Send all users to Client
-//     res.send(username);
-//   });
-//   // res.send("1");
-// };
-
-exports.listAvailable = (req, res) => {
-  User.findAll({
-    attributes: ["username"],
-    where: {
-      [Op.and]: [
-        // {
-        //   username: {
-        //     [Sequelize.Op.notIn]: Sequelize.literal(`(SELECT username
-        //   FROM employees)`),
-        //   },
-        // },
-        { roleId: req.params.id },
-      ],
-    },
-  }).then((username) => {
-    // Send all customers to Client
-    res.send(username);
-  });
-};
-
-// Find a User by Id
+// Find a Customer by Id
 exports.findById = (req, res) => {
   User.findById(req.params.id).then((users) => {
     res.send(users);
   });
 };
 
-// Update a User
+// Update a Customer
 exports.update = (req, res) => {
   const id = req.params.id;
-  // console.log(req.params.id),
-  // console.log(req.body)
   User.update(
     {
       password: req.body.password,
-      roleId: req.body.roleId,
-      roleName: req.body.roleName,
+      groupId: req.body.groupId,
     },
     { where: { username: req.params.id } }
   ).then(() => {
@@ -100,7 +63,7 @@ exports.update = (req, res) => {
   });
 };
 
-// Delete a User by Id
+// Delete a Customer by Id
 exports.delete = (req, res) => {
   const id = req.params.id;
   User.destroy({
@@ -112,6 +75,10 @@ exports.delete = (req, res) => {
 
 exports.signin = (req, res) => {
   User.findOne({
+    include: {
+      model: Group,
+      include: Right,
+    },
     where: {
       username: req.body.username,
     },
@@ -131,14 +98,40 @@ exports.signin = (req, res) => {
           message: "Invalid Password!",
         });
       }
-      res.status(200).send({
-        username: user.username,
-        password: user.password,
-        roleId: user.roleId,
-        roleName: user.roleName,
-      });
+      // Group.findAll({
+      //   include: Right,
+      //   where: {
+      //     Id: user.groupId
+      //   }
+      //   }).then(group => {
+      //     console.log(group)
+      //     console.log(user)
+      //     res.status(200).send(group);
+      //     res.status(200).send(user);
+      // });
+      res.status(200).send(user);
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
     });
+};
+
+exports.listAvailable = (req, res) => {
+  User.findAll({
+    attributes: ["username"],
+    where: {
+      [Op.and]: [
+        {
+          username: {
+            [Op.notIn]: Sequelize.literal(`(SELECT username
+            FROM employees)`),
+          },
+        },
+        { groupId: req.params.id },
+      ],
+    },
+  }).then((username) => {
+    // Send all customers to Client
+    res.send(username);
+  });
 };

@@ -45,9 +45,10 @@ const AddDepartment = (props) => {
       : {
           id: Math.floor(Math.random() * 1000000000000000000).toString(),
           name: "",
-          description: "",
-          email: "",
-          phoneNumber: "",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          email: "@gmail.com",
+          phoneNumber: "0963339657",
           belongto: "",
         }
   );

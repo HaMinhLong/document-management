@@ -1,10 +1,12 @@
 const db = require("../config/db.config.js");
 const Employee = db.employees;
+const User = db.user;
 const { Op } = require("sequelize");
 
-// Post a Employee
+// Post a Customer
 exports.create = (req, res) => {
   // Save to MySQL database
+
   Employee.create({
     id: req.body.id,
     code: req.body.code,
@@ -14,15 +16,14 @@ exports.create = (req, res) => {
     roleId: req.body.roleId,
     roleName: req.body.roleName,
     departmentId: req.params.id,
-    image: req.params.image,
-    username: req.params.username,
+    username: req.body.username,
   }).then((employee) => {
     // Send created customer to client
     res.send(employee);
   });
 };
 
-// FETCH all Employees
+// FETCH all Customers
 exports.findAll = (req, res) => {
   Employee.findAll().then((employee) => {
     // Send all customers to Client
@@ -30,14 +31,14 @@ exports.findAll = (req, res) => {
   });
 };
 
-// Find a Employee by Id
+// Find a Customer by Id
 exports.findById = (req, res) => {
   Employee.findById(req.params.id).then((employee) => {
     res.send(employee);
   });
 };
 
-// Update a Employee
+// Update a Customer
 exports.update = (req, res) => {
   const id = req.params.id;
   Employee.update(
@@ -49,9 +50,8 @@ exports.update = (req, res) => {
       email: req.body.email,
       roleId: req.body.roleId,
       roleName: req.body.roleName,
+      username: req.params.username,
       departmentId: req.body.departmentId,
-      image: req.body.image,
-      username: req.body.username,
     },
     { where: { id: req.params.id } }
   ).then(() => {
@@ -59,7 +59,7 @@ exports.update = (req, res) => {
   });
 };
 
-// Delete a Employee by Id
+// Delete a Customer by Id
 exports.delete = (req, res) => {
   const id = req.params.id;
   Employee.destroy({
@@ -67,4 +67,7 @@ exports.delete = (req, res) => {
   }).then(() => {
     res.status(200).send("deleted successfully a employee with id = " + id);
   });
+  // console.log('1')
 };
+
+// List all available user

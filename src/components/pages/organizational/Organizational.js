@@ -14,10 +14,9 @@ import {
   deleteDepartment,
 } from "../../../redux/organizational-structure/organizationalActions";
 
-const OrganizationalStructure = () => {
+const OrganizationalStructure = (props) => {
   const dispatch = useDispatch();
-
-  const roleId = localStorage.getItem("status");
+  const checkRight = props.match.url === "/organizational" ? true : false;
 
   useEffect(() => {
     document.title = "TLU | Quản lý cơ cấu tổ chức";
@@ -63,6 +62,16 @@ const OrganizationalStructure = () => {
     setData(dataSearch.slice(0, 10));
   };
 
+  const filterDepartmentsChild = (orgId) => {
+    if (orgId) {
+      setData(
+        organizational.filter((org) => org.belongto === orgId).slice(0, 10)
+      );
+    } else {
+      setData(organizational.slice(0, 10));
+    }
+  };
+
   return (
     <>
       <Banner2 title={["Quản lý cơ cấu tổ chức"]} />
@@ -80,7 +89,7 @@ const OrganizationalStructure = () => {
             <i className="fas fa-search"></i>
           </button>
         </div>
-        {roleId && roleId === "89" && (
+        {checkRight && (
           <div className="add-button">
             <button>
               <Link to="/add-department">
@@ -89,6 +98,7 @@ const OrganizationalStructure = () => {
             </button>
           </div>
         )}
+
         <div className="filter-container">
           <div className="filter-result">
             <p>
@@ -106,17 +116,33 @@ const OrganizationalStructure = () => {
               bộ phận
             </p>
           </div>
+          <div className="filter">
+            <div className="filter-department">
+              <p>Bộ phận: </p>
+              <select onClick={(e) => filterDepartmentsChild(e.target.value)}>
+                <option value="">Tất cả</option>
+                {organizational &&
+                  organizational.length > 0 &&
+                  organizational.map((org) => (
+                    <option key={org.id} value={org.id}>
+                      {org.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          </div>
         </div>
         <div className="table-container">
           <table>
             <thead>
               <tr>
                 <th>Cơ cấu tổ chức</th>
+                <th>Bộ phận quản lý</th>
                 <th>Mô tả</th>
                 <th>Email</th>
                 <th>Phone Number</th>
                 <th>Ngày thành lập</th>
-                {roleId && roleId === "89" && <th>Hành động</th>}
+                {checkRight && <th>Hành động</th>}
               </tr>
             </thead>
             <tbody>
@@ -127,11 +153,17 @@ const OrganizationalStructure = () => {
                     <td className="name">
                       <Link to={`/organizational/${data.id}`}>{data.name}</Link>
                     </td>
+                    <td>
+                      {data.id !== data.belongto
+                        ? organizational.find((org) => org.id === data.belongto)
+                            .name
+                        : ""}
+                    </td>
                     <td>{data.description.slice(0, 30)}...</td>
                     <td>{data.email}</td>
                     <td>{data.phoneNumber}</td>
                     <td>{moment(data.createdAt).format("L")}</td>
-                    {roleId && roleId === "89" && (
+                    {checkRight && (
                       <td>
                         <Link to={`/add-department-${data.id}}`}>
                           <i className="fas fa-edit"></i>

@@ -7,7 +7,7 @@ module.exports = function (app) {
   // Retrieve all Customer
   app.get("/api/departments", departments.findAll);
 
-  // app.get("/api/departments/:id", departments.findSub);
+  // app.get('/api/departments/:id', departments.findSub);
 
   // Retrieve a single Customer by Id
   app.get("/api/departments/:id", departments.findById);
@@ -18,3 +18,5 @@ module.exports = function (app) {
   // // Delete a Customer with Id
   app.delete("/api/departments/:id", departments.delete);
 };
+
+// http

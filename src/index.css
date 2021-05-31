@@ -209,6 +209,10 @@ header .tasks ul #check {
   transition: 0.5s;
   transform: rotateZ(180deg);
 }
+header .tasks ul #check-doc {
+  transition: 0.5s;
+  transform: rotateZ(180deg);
+}
 header .tasks ul .child {
   position: relative;
   top: -15px;
@@ -816,7 +820,7 @@ header .tasks.active {
 .organizational-structure-container,
 .details-page,
 .role-management,
-.user-management {
+.management-page {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -826,14 +830,14 @@ header .tasks.active {
 .organizational-structure-container h1,
 .details-page h1,
 .role-management h1,
-.user-management h1 {
+.management-page h1 {
   font-size: 25px;
 }
 .employees-container .search-box,
 .organizational-structure-container .search-box,
 .details-page .search-box,
 .role-management .search-box,
-.user-management .search-box {
+.management-page .search-box {
   position: absolute;
   top: 0;
   right: 0;
@@ -844,7 +848,7 @@ header .tasks.active {
 .organizational-structure-container .search-box button,
 .details-page .search-box button,
 .role-management .search-box button,
-.user-management .search-box button {
+.management-page .search-box button {
   border: none;
   background: transparent;
 }
@@ -852,7 +856,7 @@ header .tasks.active {
 .organizational-structure-container .search-box button input,
 .details-page .search-box button input,
 .role-management .search-box button input,
-.user-management .search-box button input {
+.management-page .search-box button input {
   border-radius: 20px;
   height: 30px;
   width: 240px;
@@ -868,14 +872,14 @@ header .tasks.active {
 .organizational-structure-container .search-box button input:focus,
 .details-page .search-box button input:focus,
 .role-management .search-box button input:focus,
-.user-management .search-box button input:focus {
+.management-page .search-box button input:focus {
   border-radius: 0px;
 }
 .employees-container .search-box button i,
 .organizational-structure-container .search-box button i,
 .details-page .search-box button i,
 .role-management .search-box button i,
-.user-management .search-box button i {
+.management-page .search-box button i {
   margin-left: 19px;
   font-size: 20px;
   color: #04143d;
@@ -887,14 +891,14 @@ header .tasks.active {
 .organizational-structure-container .search-box button i:hover,
 .details-page .search-box button i:hover,
 .role-management .search-box button i:hover,
-.user-management .search-box button i:hover {
+.management-page .search-box button i:hover {
   opacity: 1;
 }
 .employees-container .add-button,
 .organizational-structure-container .add-button,
 .details-page .add-button,
 .role-management .add-button,
-.user-management .add-button {
+.management-page .add-button {
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -906,14 +910,14 @@ header .tasks.active {
 .organizational-structure-container .add-button button,
 .details-page .add-button button,
 .role-management .add-button button,
-.user-management .add-button button {
+.management-page .add-button button {
   border: none;
 }
 .employees-container .add-button button a,
 .organizational-structure-container .add-button button a,
 .details-page .add-button button a,
 .role-management .add-button button a,
-.user-management .add-button button a {
+.management-page .add-button button a {
   border-radius: 20px;
   padding: 10px 29.5px;
   color: #fff;
@@ -926,7 +930,7 @@ header .tasks.active {
 .organizational-structure-container .add-button button a i,
 .details-page .add-button button a i,
 .role-management .add-button button a i,
-.user-management .add-button button a i {
+.management-page .add-button button a i {
   margin-left: 10px;
   color: #fff;
 }
@@ -934,7 +938,7 @@ header .tasks.active {
 .organizational-structure-container .table-container table,
 .details-page .table-container table,
 .role-management .table-container table,
-.user-management .table-container table {
+.management-page .table-container table {
   width: 100%;
   height: 100%;
   border: 1px solid #04143d;
@@ -947,8 +951,8 @@ header .tasks.active {
 .details-page .table-container table td,
 .role-management .table-container table th,
 .role-management .table-container table td,
-.user-management .table-container table th,
-.user-management .table-container table td {
+.management-page .table-container table th,
+.management-page .table-container table td {
   padding: 20px 15px;
   border: 1px solid #04143d;
   text-align: center;
@@ -957,7 +961,7 @@ header .tasks.active {
 .organizational-structure-container .table-container table tr th,
 .details-page .table-container table tr th,
 .role-management .table-container table tr th,
-.user-management .table-container table tr th {
+.management-page .table-container table tr th {
   background: #04143d;
   color: #fff;
   font-weight: bold;
@@ -968,7 +972,7 @@ header .tasks.active {
 .organizational-structure-container .table-container table tr th:hover,
 .details-page .table-container table tr th:hover,
 .role-management .table-container table tr th:hover,
-.user-management .table-container table tr th:hover {
+.management-page .table-container table tr th:hover {
   color: red;
 }
 .employees-container .table-container table tr .code,
@@ -979,15 +983,15 @@ header .tasks.active {
 .details-page .table-container table tr .name,
 .role-management .table-container table tr .code,
 .role-management .table-container table tr .name,
-.user-management .table-container table tr .code,
-.user-management .table-container table tr .name {
+.management-page .table-container table tr .code,
+.management-page .table-container table tr .name {
   font-weight: bold;
 }
 .employees-container .table-container table tr i,
 .organizational-structure-container .table-container table tr i,
 .details-page .table-container table tr i,
 .role-management .table-container table tr i,
-.user-management .table-container table tr i {
+.management-page .table-container table tr i {
   width: 50%;
   text-align: center;
   color: #04143d;
@@ -998,14 +1002,14 @@ header .tasks.active {
 .organizational-structure-container .table-container table tr i:hover,
 .details-page .table-container table tr i:hover,
 .role-management .table-container table tr i:hover,
-.user-management .table-container table tr i:hover {
+.management-page .table-container table tr i:hover {
   color: red;
 }
 .employees-container .pagination-container,
 .organizational-structure-container .pagination-container,
 .details-page .pagination-container,
 .role-management .pagination-container,
-.user-management .pagination-container {
+.management-page .pagination-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1015,7 +1019,7 @@ header .tasks.active {
 .organizational-structure-container .pagination-container span,
 .details-page .pagination-container span,
 .role-management .pagination-container span,
-.user-management .pagination-container span {
+.management-page .pagination-container span {
   width: 30px;
   height: 30px;
   text-align: center;
@@ -1031,7 +1035,7 @@ header .tasks.active {
 .organizational-structure-container .pagination-container span.activePagination,
 .details-page .pagination-container span.activePagination,
 .role-management .pagination-container span.activePagination,
-.user-management .pagination-container span.activePagination {
+.management-page .pagination-container span.activePagination {
   background: red;
   color: #fff;
 }
@@ -1039,7 +1043,7 @@ header .tasks.active {
 .organizational-structure-container .bg,
 .details-page .bg,
 .role-management .bg,
-.user-management .bg {
+.management-page .bg {
   position: absolute;
   top: 0;
   left: 0;
@@ -1051,7 +1055,7 @@ header .tasks.active {
 .organizational-structure-container .delete-employee,
 .details-page .delete-employee,
 .role-management .delete-employee,
-.user-management .delete-employee {
+.management-page .delete-employee {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1068,7 +1072,7 @@ header .tasks.active {
 .organizational-structure-container .delete-employee p,
 .details-page .delete-employee p,
 .role-management .delete-employee p,
-.user-management .delete-employee p {
+.management-page .delete-employee p {
   color: #fff;
   font-weight: bold;
   margin-bottom: 50px;
@@ -1077,7 +1081,7 @@ header .tasks.active {
 .organizational-structure-container .delete-employee .confirm,
 .details-page .delete-employee .confirm,
 .role-management .delete-employee .confirm,
-.user-management .delete-employee .confirm {
+.management-page .delete-employee .confirm {
   width: 100%;
   margin-top: 20px;
   margin-bottom: 50px;
@@ -1088,7 +1092,7 @@ header .tasks.active {
 .organizational-structure-container .delete-employee .confirm button,
 .details-page .delete-employee .confirm button,
 .role-management .delete-employee .confirm button,
-.user-management .delete-employee .confirm button {
+.management-page .delete-employee .confirm button {
   padding: 10px 40px;
   background: red;
   cursor: pointer;
@@ -1101,7 +1105,7 @@ header .tasks.active {
 .organizational-structure-container .delete-employee .confirm button:nth-child(2),
 .details-page .delete-employee .confirm button:nth-child(2),
 .role-management .delete-employee .confirm button:nth-child(2),
-.user-management .delete-employee .confirm button:nth-child(2) {
+.management-page .delete-employee .confirm button:nth-child(2) {
   margin-left: 100px;
   background: green;
 }
@@ -1109,14 +1113,14 @@ header .tasks.active {
 .organizational-structure-container .delete-employee .confirm button:hover,
 .details-page .delete-employee .confirm button:hover,
 .role-management .delete-employee .confirm button:hover,
-.user-management .delete-employee .confirm button:hover {
+.management-page .delete-employee .confirm button:hover {
   opacity: 1;
 }
 .employees-container > p,
 .organizational-structure-container > p,
 .details-page > p,
 .role-management > p,
-.user-management > p {
+.management-page > p {
   cursor: pointer;
   margin-top: 20px;
 }
@@ -1124,7 +1128,7 @@ header .tasks.active {
 .organizational-structure-container > p:hover,
 .details-page > p:hover,
 .role-management > p:hover,
-.user-management > p:hover {
+.management-page > p:hover {
   text-decoration: underline;
 }
 
@@ -1183,6 +1187,16 @@ header .tasks.active {
 .add-form-container form input[type=number]:focus,
 .add-form-container form input[type=password]:focus {
   margin-top: 20px;
+}
+.add-form-container form .checkbox {
+  margin-bottom: 5px;
+}
+.add-form-container form .checkbox label,
+.add-form-container form .checkbox input {
+  cursor: pointer;
+}
+.add-form-container form .checkbox label {
+  margin-left: 20px;
 }
 .add-form-container form input.invalid {
   border-color: red;

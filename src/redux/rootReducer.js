@@ -2,14 +2,18 @@ import { combineReducers } from "redux";
 
 import employeesReducers from "./employees/employeesReducers";
 import organizationalReducers from "./organizational-structure/organizationalReducers";
-import rolesReducers from "./roles/rolesReducers";
 import usersReducers from "./users/usersReducers";
+import groupsReducers from "./groups/groupsReducers";
+import rightsReducers from "./rights/rightsReducers";
+import groupRightsReducers from "./group-rights/groupRightsReducers";
 
 const rootReducer = combineReducers({
   employees: employeesReducers,
   organizational: organizationalReducers,
-  roles: rolesReducers,
+  groups: groupsReducers,
   users: usersReducers,
+  rights: rightsReducers,
+  groupRights: groupRightsReducers,
 });
 
 export default rootReducer;
