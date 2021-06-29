@@ -12,6 +12,10 @@ import { fetchRights } from "../../redux/rights/rightsActions";
 import { fetchGroups } from "../../redux/groups/groupsActions";
 import { addGroupRight } from "../../redux/group-rights/groupRightsActions";
 
+import ReactNotification from "react-notifications-component";
+import { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+
 const AddGroupRight = (props) => {
   document.title = "TLU | Cấp quyền";
 
@@ -36,9 +40,16 @@ const AddGroupRight = (props) => {
     values.groupId = groupRight.groupId;
     values.rightId = groupRight.rightId;
 
-    // console.log(values);
-
-    dispatch(addGroupRight(values));
+    console.log(
+      values.rightId.map((value) => {
+        const data = {
+          id: Math.floor(Math.random() * 1000000000000000000).toString(),
+          groupId: values.groupId,
+          rightId: value,
+        };
+        dispatch(addGroupRight(data));
+      })
+    );
     props.history.push("/group-right");
   };
 
@@ -55,12 +66,34 @@ const AddGroupRight = (props) => {
   const handleChangeRight = (rightID) => {
     setGroupRight({
       ...groupRight,
-      rightId: rightID,
+      rightId: [...groupRight.rightId, rightID],
+    });
+  };
+
+  // Thong bao
+  const SuccessNoti = () => {
+    store.addNotification({
+      title: !groupRightID ? "Quyền mới được cấp" : "Quyền được cập nhật",
+      message: !groupRightID
+        ? "Cấp quyền thành công"
+        : "Cập nhật thông tin quyền thành công",
+      type: "success",
+      container: "top-right",
+      insert: "top",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 4000,
+        showIcon: true,
+        onScreen: true,
+      },
+      width: 350,
     });
   };
 
   return (
     <>
+      <ReactNotification />
       <Banner2 title={[groupRightID ? "Cập nhật nhóm quyền" : "Cấp quyền"]} />
 
       <section className="add-form-container padding">
@@ -77,7 +110,11 @@ const AddGroupRight = (props) => {
                 <SelectField
                   label="Chức vụ :"
                   name="groupId"
-                  optionsData={groups}
+                  optionsData={
+                    groups && groups.length > 0
+                      ? groups.filter((group) => group.name !== "admin")
+                      : [{ name: "" }]
+                  }
                   onChange={handleChange}
                 />
 
@@ -105,6 +142,7 @@ const AddGroupRight = (props) => {
             )}
           </Formik>
         )}
+        <p onClick={() => window.history.back()}>Quay lại trang trước</p>
       </section>
 
       <Footer2 />

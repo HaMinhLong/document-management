@@ -28,9 +28,12 @@ const AddEmployee = (props) => {
   const id = props.match.params.id && props.match.params.id;
   const groupId = localStorage.getItem("groupId");
   const rights = JSON.parse(localStorage.getItem("rights"));
-  const checkRight = rights.find((right) => right.url === "employees-w")
-    ? false
-    : true;
+  const checkRight =
+    rights &&
+    rights.length > 0 &&
+    rights.find((right) => right.url === "employees-w")
+      ? false
+      : true;
   useEffect(() => {
     document.title = id
       ? "TLU | Thêm nhân viên"
@@ -109,7 +112,7 @@ const AddEmployee = (props) => {
         ...employee,
         roleId: groupValue.id,
       });
-    dispatch(fetchAvailableUsers(groupValue.id));
+    groupValue.id && dispatch(fetchAvailableUsers(groupValue.id));
   };
 
   const users = useSelector((state) => state.users);
@@ -175,7 +178,11 @@ const AddEmployee = (props) => {
                   <SelectField
                     label="Chức vụ :"
                     name="roleName"
-                    optionsData={groups}
+                    optionsData={
+                      groups && groups.length > 0
+                        ? groups.filter((group) => group.name !== "admin")
+                        : [{ name: "" }]
+                    }
                     onChange={handleChange}
                   />
                 )}

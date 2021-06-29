@@ -9,10 +9,10 @@ const FileBase64 = ({ data, setData }) => {
         type="file"
         required
         multiple={false}
-        value={data.image}
-        onDone={({ base64 }) => setData({ ...data, image: base64 })}
+        value={data.data}
+        onDone={({ base64 }) => setData({ ...data, data: base64 })}
       />
-      {data.image && data.image.length > 0 && <img src={data.image} alt="" />}
+      {data.data && data.data.length > 0 && <img src={data.data} alt="" />}
     </div>
   );
 };

@@ -9,7 +9,7 @@ export class NoMatch extends Component {
         <p>
           Redirect to{" "}
           <span onClick={() => this.props.history.push("/")}>
-            {localStorage.getItem("status") ? "Home Page" : "Login Page"}
+            {localStorage.getItem("username") ? "Home Page" : "Login Page"}
           </span>
         </p>
         <img

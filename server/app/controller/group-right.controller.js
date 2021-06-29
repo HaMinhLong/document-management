@@ -8,14 +8,14 @@ exports.create = async (req, res) => {
     rightId: req.body.rightId,
     groupId: req.body.groupId,
   }).then((groupRight) => {
-    // Send created group right to client
+    // Send created customer to client
     res.send(groupRight);
   });
 };
 
 exports.findAll = (req, res) => {
   GroupRight.findAll({}).then((groupRight) => {
-    // Send all group rights to Client
+    // Send all customers to Client
     res.send(groupRight);
   });
 };

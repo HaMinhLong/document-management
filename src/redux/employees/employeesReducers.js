@@ -3,7 +3,7 @@ import * as actions from "./employeesTypes";
 const employeesReducers = (state = [], action) => {
   switch (action.type) {
     case actions.FETCH_EMPLOYEES:
-      return action.payload;
+    case actions.FETCH_EMPLOYEES_BY_DEP:
     case actions.FETCH_EMPLOYEE:
       return action.payload;
     case actions.ADD_EMPLOYEE:

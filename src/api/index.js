@@ -14,11 +14,11 @@ export const deleteDepartment = (id) =>
 
 // EMPLOYEE MANAGEMENT
 export const fetchEmployees = () => axios.get(`${url}/employees`);
+export const fetchEmployeesByDep = (id) =>
+  axios.get(`${url}/employees/Dep/${id}`);
 export const fetchEmployee = (id) => axios.get(`${url}/employees/${id}`);
-
 export const createEmployee = (id, employee) =>
   axios.post(`${url}/employees/${id}`, employee);
-
 export const updateEmployee = (id, employee) =>
   axios.put(`${url}/employees/${id}`, employee);
 export const deleteEmployee = (id) => axios.delete(`${url}/employees/${id}`);
@@ -72,3 +72,56 @@ export const fetchTeam = (id) => axios.get(`${url}/teams/${id}`);
 export const createTeam = (team) => axios.post(`${url}/teams`, team);
 export const updateTeam = (id, team) => axios.put(`${url}/teams/${id}`, team);
 export const deleteTeam = (id) => axios.delete(`${url}/teams/${id}`);
+
+// PROCCESS MANAGEMENT
+export const fetchAllProccess = () => axios.get(`${url}/proccess`);
+export const fetchProccess = (id) => axios.get(`${url}/proccess/${id}`);
+export const createProccess = (proccess) =>
+  axios.post(`${url}/proccess`, proccess);
+export const updateProccess = (id, proccess) =>
+  axios.put(`${url}/proccess/${id}`, proccess);
+export const deleteProccess = (id) => axios.delete(`${url}/proccess/${id}`);
+
+// DOCUMENT MANAGEMENT
+export const fetchDocuments = () => axios.get(`${url}/documents`);
+export const fetchDocumentsByDep = (id) =>
+  axios.get(`${url}/documents/Dep/${id}`);
+export const fetchDocumentsByAssign = (id) =>
+  axios.get(`${url}/documents/Assign/${id}`);
+export const fetchDocument = (id) => axios.get(`${url}/documents/${id}`);
+export const createDocument = (document) =>
+  axios.post(`${url}/documents`, document);
+export const updateDocument = (id, document) =>
+  axios.put(`${url}/documents/${id}`, document);
+export const deleteDocument = (id) => axios.delete(`${url}/documents/${id}`);
+export const countByType = (date) => axios.post(`${url}/countbytype`, date);
+export const countBySender = (date) => axios.post(`${url}/countbysender`, date);
+export const countByDep = (date) => axios.post(`${url}/countbydep`, date);
+export const countByStatus = (date) => axios.post(`${url}/countbystatus`, date);
+export const changeStatus = (id, status) =>
+  axios.put(`${url}/documents/changestatus/${id}`, status);
+
+// ASSIGNED MANAGEMENT
+export const fetchAllAssigned = () => axios.get(`${url}/assigned`);
+export const fetchAssigned = (id) => axios.get(`${url}/assigned/${id}`);
+export const createAssigned = (assigned) =>
+  axios.post(`${url}/assigned`, assigned);
+export const updateAssigned = (id, assigned) =>
+  axios.put(`${url}/assigned/${id}`, assigned);
+export const deleteAssigned = (id) => axios.delete(`${url}/assigned/${id}`);
+
+// DOCTYPE MANAGEMENT
+export const fetchDocTypes = () => axios.get(`${url}/doctype`);
+export const fetchDocType = (id) => axios.get(`${url}/doctype/${id}`);
+export const createDocType = (doctype) => axios.post(`${url}/doctype`, doctype);
+export const updateDocType = (id, doctype) =>
+  axios.put(`${url}/doctype/${id}`, doctype);
+export const deleteDocType = (id) => axios.delete(`${url}/doctype/${id}`);
+
+// SENDER MANAGEMENT
+export const fetchSenders = () => axios.get(`${url}/sender`);
+export const fetchSender = (id) => axios.get(`${url}/sender/${id}`);
+export const createSender = (sender) => axios.post(`${url}/sender`, sender);
+export const updateSender = (id, sender) =>
+  axios.put(`${url}/sender/${id}`, sender);
+export const deleteSender = (id) => axios.delete(`${url}/sender/${id}`);

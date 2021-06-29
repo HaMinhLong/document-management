@@ -10,6 +10,8 @@ module.exports = function (app) {
   // Retrieve a single Customer by Id
   app.get("/api/employees/:id", employees.findById);
 
+  app.get("/api/employees/Dep/:id", employees.findByDep);
+
   // // Update a Customer with Id
   app.put("/api/employees/:id", employees.update);
 

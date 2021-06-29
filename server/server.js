@@ -15,7 +15,7 @@ app.use(cors());
 // Add headers
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "exp://127.0.0.1:19000");
+  // res.setHeader("Access-Control-Allow-Origin", "exp://127.0.0.1:19000");
 
   // Request methods you wish to allow
   res.setHeader(
@@ -55,6 +55,8 @@ require("./app/route/role.route")(app);
 require("./app/route/emp-team-role.route")(app);
 require("./app/route/proccess.route")(app);
 require("./app/route/assigned.route")(app);
+require("./app/route/docType.route")(app);
+require("./app/route/sender.route")(app);
 
 // Create a Server
 var server = app.listen(8081, function () {

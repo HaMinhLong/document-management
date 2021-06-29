@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     role_name: {
       type: Sequelize.ENUM,
-      values: ["Trưởng nhóm", "Thành viên"],
+      values: ["Trưởng phòng", "Nhân viên"],
     },
   });
   return Role;

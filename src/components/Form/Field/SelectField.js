@@ -15,12 +15,13 @@ const SelectField = ({ label, optionsData, id, onChange, ...props }) => {
         onClick={() => onChange(field.value)}
       >
         <option value="">Select</option>
-        {optionsData.map((option) => (
-          <option
-            key={option.name ? option.name : option.username}
-            value={option.name}
-          >
-            {option.name ? option.name : option.username}
+        {optionsData.map((option, index) => (
+          <option key={index} value={option.name}>
+            {option.name
+              ? option.name
+              : option.username
+              ? option.username
+              : option.role_name}
           </option>
         ))}
       </select>

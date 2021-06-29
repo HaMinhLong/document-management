@@ -22,7 +22,7 @@ const Employee = ({
   const organizational = useSelector((state) => state.organizational);
 
   const employeeLogin =
-    groupId !== "321092042012262300" &&
+    groupId !== "15190574710097992" &&
     employees &&
     employees.length > 0 &&
     employees.find((employee) => employee.username === username);
@@ -56,11 +56,12 @@ const Employee = ({
                 <td className="name">
                   <Link to={`/employees/${employee.id}`}>{employee.name}</Link>
                 </td>
-                <td>{employee.roleName}</td>
-                <td>{employee.email}</td>
-                <td>{employee.phoneNumber}</td>
+                <td>{employee.roleName || ""}</td>
+                <td>{employee.email || ""}</td>
+                <td>{employee.phoneNumber || ""}</td>
                 {/* <td>{moment(employee.createdAt).format("L")}</td> */}
-                {(groupId === "321092042012262300" ||
+                {(groupId === "644317359247429400" ||
+                  groupId === "461341600943357060" ||
                   (checkRight &&
                     (employeeLogin.departmentId === employee.departmentId ||
                       employeeLogin.departmentId ===
