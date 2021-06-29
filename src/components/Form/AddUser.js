@@ -17,6 +17,7 @@ import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 
 const AddUser = (props) => {
+  document.title = "TLU | Thêm tài khoản";
   const username = props.match.params.id && props.match.params.id;
   const dispatch = useDispatch();
 
@@ -121,7 +122,11 @@ const AddUser = (props) => {
                 <SelectField
                   label="Chức vụ :"
                   name="roleName"
-                  optionsData={groups ? groups : [{ name: "" }]}
+                  optionsData={
+                    groups && groups.length > 0
+                      ? groups.filter((group) => group.name !== "admin")
+                      : [{ name: "" }]
+                  }
                   onChange={handleChange}
                 />
 

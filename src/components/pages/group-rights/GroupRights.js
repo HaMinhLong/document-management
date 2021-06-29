@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import Banner2 from "../../layout/Banner2";
 import Footer2 from "../../layout/Footer2";
+import Pagination from "../../layout/Pagination";
 import GroupRight from "./group-right/GroupRight";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -26,12 +27,21 @@ const GroupRights = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
-    setData(groupRights);
+    setData(groupRights && groupRights.length > 0 && groupRights.slice(0, 10));
   }, [groupRights]);
+
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const nextPagination = (groupRightNumber, currentIndex) => {
+    setData(
+      groupRights.slice(
+        groupRightNumber * (currentIndex - 1),
+        groupRightNumber * currentIndex
+      )
+    );
+  };
 
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [groupRightId, setGroupRightId] = useState();
-
   const deleteGroupRightFunction = (groupRightId) => {
     dispatch(deleteGroupRight(groupRightId));
     setConfirmDelete(false);
@@ -58,11 +68,40 @@ const GroupRights = () => {
           </button>
         </div>
 
+        <div className="filter-container">
+          <div className="filter-result">
+            <p>
+              Hiển thị{" "}
+              {data &&
+              data.length > 0 &&
+              groupRights &&
+              groupRights.length > 0 ? (
+                <span>
+                  {data.length}/{groupRights.length}
+                </span>
+              ) : (
+                <span>0 </span>
+              )}{" "}
+              nhóm quyền
+            </p>
+          </div>
+        </div>
+
         <GroupRight
           groupRights={data}
           setConfirmDelete={setConfirmDelete}
           setGroupRightId={setGroupRightId}
         />
+
+        {data && data.length > 0 && groupRights && groupRights.length > 0 && (
+          <Pagination
+            recordsTotal={groupRights.length}
+            recordsNumber={10}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            nextPagination={nextPagination}
+          />
+        )}
 
         {confirmDelete && <span className="bg"></span>}
         {confirmDelete && (

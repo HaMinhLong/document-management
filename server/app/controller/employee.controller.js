@@ -2,6 +2,8 @@ const db = require("../config/db.config.js");
 const Employee = db.employees;
 const User = db.user;
 const { Op } = require("sequelize");
+const Sequelize = db.sequelize;
+const { QueryTypes } = require("sequelize");
 
 // Post a Customer
 exports.create = (req, res) => {
@@ -38,6 +40,21 @@ exports.findById = (req, res) => {
   });
 };
 
+exports.findByDep = async (req, res) => {
+  const id = req.params.id;
+  const query = ` SELECT * FROM employees 
+                  WHERE employees.departmentId = '${id}' 
+                  OR employees.departmentId = (
+                    SELECT id from departments 
+                    WHERE departments.belongto = '${id}'
+                  )`;
+  const employee = await Sequelize.query(query, {
+    type: QueryTypes.SELECT,
+  });
+
+  res.status(200).json(employee);
+};
+
 // Update a Customer
 exports.update = (req, res) => {
   const id = req.params.id;
@@ -55,7 +72,7 @@ exports.update = (req, res) => {
     },
     { where: { id: req.params.id } }
   ).then(() => {
-    res.status(200).send("updated successfully a employee with id = " + id);
+    res.status(200).send("updated successfully a department with id = " + id);
   });
 };
 
@@ -65,7 +82,7 @@ exports.delete = (req, res) => {
   Employee.destroy({
     where: { id: id },
   }).then(() => {
-    res.status(200).send("deleted successfully a employee with id = " + id);
+    res.status(200).send("deleted successfully a department with id = " + id);
   });
   // console.log('1')
 };

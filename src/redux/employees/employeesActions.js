@@ -13,6 +13,14 @@ export const fetchEmployees = () => async (dispatch) => {
   }
 };
 
+export const fetchEmployeesByDep = (id) => async (dispatch) => {
+  const { data } = await api.fetchEmployeesByDep(id);
+  dispatch({
+    type: actions.FETCH_EMPLOYEES_BY_DEP,
+    payload: data,
+  });
+};
+
 export const fetchEmployee = (id) => async (dispatch) => {
   try {
     const { data } = await api.fetchEmployee(id);

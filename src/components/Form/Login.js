@@ -17,7 +17,7 @@ const Login = () => {
   document.title = "TLU | Login";
   const [user, setUser] = useState({
     username: "",
-    password: "",
+    password: "minhlong",
   });
 
   const [checkLogin, setCheckLogin] = useState(false);

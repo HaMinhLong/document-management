@@ -7,9 +7,10 @@ import Login from "./components/routers/Login";
 
 const App = () => {
   const [checkLogin, setCheckLogin] = useState();
+  const username = localStorage.getItem("username");
   useEffect(() => {
-    setCheckLogin(localStorage.getItem("username") ? "login" : "notLogin");
-  });
+    setCheckLogin(username ? "login" : "notLogin");
+  }, [username]);
 
   return (
     <>

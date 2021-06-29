@@ -90,6 +90,7 @@ const Employees = (props) => {
       setEmployees(employeesList.slice(0, 10));
     }
   };
+
   const filterEmployeeByUser = (user) => {
     if (user) {
       if (user === "có") {
@@ -137,6 +138,7 @@ const Employees = (props) => {
             <i className="fas fa-search"></i>
           </button>
         </div>
+
         {checkRight && (
           <div className="add-button">
             <button>
@@ -164,6 +166,7 @@ const Employees = (props) => {
               nhân viên
             </p>
           </div>
+
           <div className="filter">
             <div className="filter-department">
               <p>Bộ phận: </p>
@@ -178,8 +181,7 @@ const Employees = (props) => {
                   ))}
               </select>
             </div>
-          </div>
-          <div className="filter">
+
             <div className="filter-department">
               <p>Chức vụ: </p>
               <select onClick={(e) => filterEmployeeByRole(e.target.value)}>
@@ -193,8 +195,7 @@ const Employees = (props) => {
                   ))}
               </select>
             </div>
-          </div>
-          <div className="filter">
+
             <div className="filter-department">
               <p>Tài khoản: </p>
               <select onClick={(e) => filterEmployeeByUser(e.target.value)}>
@@ -205,6 +206,7 @@ const Employees = (props) => {
             </div>
           </div>
         </div>
+
         <Employee
           employees={employees}
           setConfirmDelete={setConfirmDelete}

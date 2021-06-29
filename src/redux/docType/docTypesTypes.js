@@ -1,0 +1,5 @@
+export const FETCH_DOC_TYPES = "FETCH_DOC_TYPES";
+export const FETCH_DOC_TYPE = "FETCH_DOC_TYPE";
+export const ADD_DOC_TYPE = "ADD_DOC_TYPE";
+export const DELETE_DOC_TYPE = "DELETE_DOC_TYPE";
+export const UPDATE_DOC_TYPE = "DELETE_DOC_TYPE";

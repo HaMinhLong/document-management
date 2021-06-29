@@ -34,6 +34,27 @@ import RightDetails from "../pages/rights/right/RightDetails";
 import GroupRights from "../pages/group-rights/GroupRights";
 import AddGroupRight from "../Form/AddGroupRight";
 import GroupRightDetails from "../pages/group-rights/group-right/GroupRightDetails";
+
+import AllProccess from "../pages/all-proccess/AllProccess";
+import AddProccess from "../Form/AddProccess";
+import ProccessDetails from "../pages/all-proccess/proccess/ProccessDetails";
+
+import Documents from "../pages/documents/Documents";
+import AddDocument from "../Form/AddDocument";
+import DocumentDetails from "../pages/documents/document/DocumentDetails";
+
+import AllAssigned from "../pages/all-assigned/AllAssigned";
+import AddAssigned from "../Form/AddAssigned";
+import AssignedDetails from "../pages/all-assigned/assigned/AssignedDetails";
+
+import Senders from "../pages/senders/Senders";
+import AddSender from "../Form/AddSender";
+
+import DocTypes from "../pages/doc-types/DocTypes";
+import AddDocType from "../Form/AddDocType";
+
+import Statistical from "../pages/Statistical/Statistical";
+
 class Home extends Component {
   render() {
     return (
@@ -81,6 +102,37 @@ class Home extends Component {
           <Route exact path="/add-groupright" component={AddGroupRight} />
           <Route exact path="/add-groupright-:id" component={AddGroupRight} />
           <Route exact path="/group-right/:id" component={GroupRightDetails} />
+
+          <Route exact path="/document-process" component={AllProccess} />
+          <Route exact path="/add-proccess" component={AddProccess} />
+          <Route exact path="/add-proccess-:id" component={AddProccess} />
+          <Route exact path="/process/:id" component={ProccessDetails} />
+
+          <Route exact path="/incoming-document" component={Documents} />
+          <Route exact path="/incoming-document-w" component={Documents} />
+          <Route exact path="/internal-document" component={Documents} />
+          <Route exact path="/internal-document-w" component={Documents} />
+          <Route exact path="/add-incoming-document" component={AddDocument} />
+          <Route exact path="/add-internal-document" component={AddDocument} />
+          <Route exact path="/add-document-:id" component={AddDocument} />
+          <Route exact path="/document/:id" component={DocumentDetails} />
+
+          <Route exact path="/assigned" component={AllAssigned} />
+          <Route exact path="/assigned-w" component={AllAssigned} />
+          <Route exact path="/add-assigned" component={AddAssigned} />
+          <Route exact path="/add-assigned-:id" component={AddAssigned} />
+          <Route exact path="/assigned/:id" component={AssignedDetails} />
+
+          <Route exact path="/sender" component={Senders} />
+          <Route exact path="/add-sender" component={AddSender} />
+          <Route exact path="/add-sender-:id" component={AddSender} />
+          {/* <Route exact path="/sender/:id" component={RightDetails} /> */}
+
+          <Route exact path="/doc-type" component={DocTypes} />
+          <Route exact path="/add-doc-type" component={AddDocType} />
+          <Route exact path="/add-doc-type-:id" component={AddDocType} />
+
+          <Route exact path="/statistical" component={Statistical} />
 
           <Route exact path="/about" component={About} />
           <Route exact path="/about-we" component={AboutWe} />

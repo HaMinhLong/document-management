@@ -7,8 +7,8 @@ exports.create = async (req, res) => {
   await Assigned.create({
     id: req.body.id,
     employeeId: req.body.employeeId,
-    teamId: req.body.teamId,
     roleId: req.body.roleId,
+    documentId: req.body.documentId,
   }).then((EmployeeTeamRoles) => {
     // Send created customer to client
     res.send(EmployeeTeamRoles);
@@ -36,7 +36,6 @@ exports.update = (req, res) => {
   Assigned.update(
     {
       employeeId: req.body.employeeId,
-      teamId: req.body.teamId,
       roleId: req.body.roleId,
     },
     { where: { id: req.params.id } }

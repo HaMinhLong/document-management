@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEmployees } from "../../redux/employees/employeesActions";
 
@@ -13,12 +13,17 @@ const Navbar = () => {
     tasks.classList.toggle("active");
     tasksLogo.classList.toggle("active");
     tasksBg.classList.toggle("active");
-    if (data) setCheck(check ? false : true);
+    data === 1 && setCheck(check ? false : true);
+    data === 2 && setCheckDoc(checkDoc ? false : true);
+    data === 3 && setCheckDoc2(checkDoc2 ? false : true);
   };
+
   const dispatch = useDispatch();
   const user = localStorage.getItem("username");
   const groupId = localStorage.getItem("groupId");
   const rights = JSON.parse(localStorage.getItem("rights"));
+  const employeeId = localStorage.getItem("employeeId");
+  const employeeName = localStorage.getItem("employeeName");
 
   useEffect(() => {
     dispatch(fetchEmployees());
@@ -26,15 +31,33 @@ const Navbar = () => {
 
   const employees = useSelector((state) => state.employees);
 
+  const [employee, setEmployee] = useState();
+  useEffect(() => {
+    employees &&
+      employees.length > 0 &&
+      setEmployee(employees.find((emp) => emp.username === user));
+  }, [employees]);
+
+  employee && localStorage.setItem("employeeId", employee.id);
+  employee && localStorage.setItem("employeeName", employee.name);
+  employee && localStorage.setItem("departmentId", employee.departmentId);
+
   const logOut = () => {
     localStorage.setItem("username", "");
     localStorage.setItem("groupId", "1");
     localStorage.setItem("rights", []);
+    localStorage.setItem("employeeId", "");
+    localStorage.setItem("employeeName", "");
     window.location = "/";
   };
 
   const [check, setCheck] = useState(false);
   const [checkDoc, setCheckDoc] = useState(false);
+  const [checkDoc2, setCheckDoc2] = useState(false);
+
+  // 644317359247429400 admin
+  // 461341600943357060 ban_giam_hieu
+  // 222908158858354780 hanh_chinh
 
   return (
     <header>
@@ -44,22 +67,17 @@ const Navbar = () => {
       <div className="tasks-bg"></div>
       <span className="tasks-logo" onClick={() => toggleTasks(0)}></span>
       <div className="tasks active">
-        {groupId === "321092042012262300" ? (
+        {groupId === "644317359247429400" ||
+        groupId === "461341600943357060" ? (
           <ul>
             {user !== "admin" && (
               <li>
                 <Link
-                  to={`/employees/${
-                    employees &&
-                    employees.length > 0 &&
-                    employees.find((emp) => emp.username === user).id
-                  }`}
+                  to={`/employees/${employeeId && employeeId}`}
                   onClick={() => toggleTasks(0)}
                 >
                   <i className="far fa-user-circle"></i>
-                  {employees &&
-                    employees.length > 0 &&
-                    employees.find((emp) => emp.username === user).name}
+                  {employeeName && employeeName}
                 </Link>
                 <span></span>
               </li>
@@ -71,9 +89,10 @@ const Navbar = () => {
               </Link>
               <span></span>
             </li>
+
             <li>
-              <Link onClick={() => setCheckDoc(checkDoc ? false : true)}>
-                Quản lý văn bản{" "}
+              <Link onClick={() => setCheckDoc2(checkDoc2 ? false : true)}>
+                Quản lý văn bản đến{" "}
                 <i
                   className="fas fa-angle-down"
                   id={checkDoc ? "check-doc" : ""}
@@ -81,13 +100,64 @@ const Navbar = () => {
               </Link>
               <span></span>
             </li>
+            {checkDoc2 && (
+              <>
+                <li className="child">
+                  <Link to="/incoming-document" onClick={() => toggleTasks(3)}>
+                    {" "}
+                    Quản lý văn bản đến
+                  </Link>
+                </li>
+                <li className="child">
+                  <Link to="/assigned" onClick={() => toggleTasks(3)}>
+                    {" "}
+                    Quản lý phân công công việc
+                  </Link>
+                </li>
+                <li className="child">
+                  <Link to="/sender" onClick={() => toggleTasks(3)}>
+                    {" "}
+                    Quản lý nơi đến
+                  </Link>
+                </li>
+                <li className="child">
+                  <Link to="/doc-type" onClick={() => toggleTasks(3)}>
+                    {" "}
+                    Quản lý loại văn bản
+                  </Link>
+                </li>
+                <li className="child">
+                  <Link to="/statistical" onClick={() => toggleTasks(3)}>
+                    {" "}
+                    Thống kê văn bản
+                  </Link>
+                </li>
+              </>
+            )}
+            {/* 
+            <li>
+              <Link onClick={() => setCheckDoc(checkDoc ? false : true)}>
+                Quản lý văn bản nội bộ{" "}
+                <i
+                  className="fas fa-angle-down"
+                  id={checkDoc ? "check-doc" : ""}
+                ></i>
+              </Link>
+              <span></span>
+            </li> */}
 
             {checkDoc && (
               <>
                 <li className="child">
-                  <Link to="/document-process" onClick={() => toggleTasks(1)}>
+                  <Link to="/internal-document" onClick={() => toggleTasks(2)}>
                     {" "}
-                    Quản lý quy trình
+                    Quản lý văn bản nội bộ
+                  </Link>
+                </li>
+                <li className="child">
+                  <Link to="/assigned" onClick={() => toggleTasks(2)}>
+                    {" "}
+                    Quản lý phân công công việc
                   </Link>
                 </li>
               </>
@@ -172,17 +242,11 @@ const Navbar = () => {
             {user !== "admin" && (
               <li>
                 <Link
-                  to={`/employees/${
-                    employees &&
-                    employees.length > 0 &&
-                    employees.find((emp) => emp.username === user).id
-                  }`}
+                  to={`/employees/${employeeId && employeeId}`}
                   onClick={() => toggleTasks(0)}
                 >
                   <i className="far fa-user-circle"></i>
-                  {employees &&
-                    employees.length > 0 &&
-                    employees.find((emp) => emp.username === user).name}
+                  {employeeName && employeeName}
                 </Link>
                 <span></span>
               </li>

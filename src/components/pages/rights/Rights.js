@@ -27,9 +27,9 @@ const Rights = () => {
     }
   }, [rights]);
 
-  const nextPagination = (userNumber, currentIndex) => {
+  const nextPagination = (rightNumber, currentIndex) => {
     setData(
-      rights.slice(userNumber * (currentIndex - 1), userNumber * currentIndex)
+      rights.slice(rightNumber * (currentIndex - 1), rightNumber * currentIndex)
     );
   };
 

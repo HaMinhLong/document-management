@@ -41,7 +41,7 @@ const EmployeeDetails = (props) => {
   return (
     <>
       <Banner2
-        title={["Quản lí nhân viên", employee.name ? employee.name : ""]}
+        title={["Quản lý nhân viên", employee.name ? employee.name : ""]}
       />
       {employee && (
         <section className="employee-information-container padding">

@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchGroups, deleteGroup } from "../../../redux/groups/groupsActions";
 
 const Groups = () => {
+  document.title = "TLU | Quản lý chức vụ";
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchGroups());

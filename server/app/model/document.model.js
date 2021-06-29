@@ -5,20 +5,32 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       unique: true,
     },
+    code: {
+      type: Sequelize.STRING,
+      unique: true,
+    },
     name: {
       type: Sequelize.STRING,
     },
     description: {
       type: Sequelize.STRING,
     },
-    openDate: {
+    signature: {
       type: Sequelize.STRING,
     },
     status: {
-      type: Sequelize.STRING,
-    },
-    data: {
-      type: Sequelize.BLOB("long"),
+      type: Sequelize.ENUM,
+      values: [
+        "Chờ duyệt",
+        "Từ chối",
+        "Tiến hành",
+        "Trưởng phòng thực hiện",
+        "Nhân viên thực hiện",
+        "Chờ trưởng phòng duyệt",
+        "Xác nhận hoàn thành",
+        "Quá thời hạn xử lý",
+        "Đã hoàn thành",
+      ],
     },
   });
   return Document;

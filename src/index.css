@@ -8,7 +8,9 @@
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Lato" !important;
+  color: black !important;
+  font-size: 18px !important;
   background: linear-gradient(135deg, #485461 0%, #28313b 74%);
 }
 
@@ -26,11 +28,13 @@ body::-webkit-scrollbar {
 p {
   color: #04143d;
   font-size: 18px;
+  margin-bottom: 0px !important;
 }
 
 h1 {
-  margin-bottom: 30px;
-  color: #04143d;
+  margin-bottom: 30px !important;
+  color: #04143d !important;
+  font-weight: bold !important;
 }
 
 a {
@@ -67,6 +71,17 @@ option {
   height: 20px;
   padding: 5px;
   overflow-y: scroll;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  color: initial !important;
+  font-size: initial !important;
+  font-family: "Lato" !important;
+  line-height: initial !important;
 }
 
 option::-webkit-scrollbar {
@@ -155,7 +170,7 @@ header .tasks {
   position: absolute;
   top: 90px;
   right: 0;
-  width: 400px;
+  width: 500px;
   height: calc(100vh - 90px);
   background: #04143d;
   transition: 0.5s;
@@ -172,7 +187,7 @@ header .tasks ul {
 header .tasks ul li {
   position: relative;
   list-style: none;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
   overflow-x: hidden;
 }
 header .tasks ul li a {
@@ -183,6 +198,7 @@ header .tasks ul li a {
   text-transform: uppercase;
   transition: 0.5s;
   letter-spacing: 1px;
+  font-size: 16px !important;
 }
 header .tasks ul li span {
   position: relative;
@@ -217,10 +233,10 @@ header .tasks ul .child {
   position: relative;
   top: -15px;
   margin-left: 20px;
-  margin-bottom: 35px;
+  margin-bottom: 10px;
 }
 header .tasks ul .child a {
-  font-size: 14px;
+  font-size: 14px !important;
   text-decoration: underline;
   letter-spacing: 1px;
 }
@@ -237,12 +253,13 @@ header .tasks ul p {
   color: rgba(255, 255, 255, 0.1);
   transition: 0.3s;
   cursor: pointer;
+  z-index: -1;
 }
 header .tasks ul p:hover {
   color: rgba(255, 255, 255, 0.5);
 }
 header .tasks.active {
-  right: -400px;
+  right: -500px;
 }
 
 .banner-container {
@@ -301,12 +318,11 @@ header .tasks.active {
 .banner-container p {
   margin-top: 25.5px;
   color: white;
-  font-family: sans-serif;
   font-size: 42px;
   letter-spacing: 1.43px;
   text-transform: capitalize;
   font-weight: bold;
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito" !important;
   font-style: italic;
 }
 .banner-container p img {
@@ -987,6 +1003,18 @@ header .tasks.active {
 .management-page .table-container table tr .name {
   font-weight: bold;
 }
+.employees-container .table-container table tr .code a,
+.employees-container .table-container table tr .name a,
+.organizational-structure-container .table-container table tr .code a,
+.organizational-structure-container .table-container table tr .name a,
+.details-page .table-container table tr .code a,
+.details-page .table-container table tr .name a,
+.role-management .table-container table tr .code a,
+.role-management .table-container table tr .name a,
+.management-page .table-container table tr .code a,
+.management-page .table-container table tr .name a {
+  color: #04143d !important;
+}
 .employees-container .table-container table tr i,
 .organizational-structure-container .table-container table tr i,
 .details-page .table-container table tr i,
@@ -1075,7 +1103,7 @@ header .tasks.active {
 .management-page .delete-employee p {
   color: #fff;
   font-weight: bold;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
 .employees-container .delete-employee .confirm,
 .organizational-structure-container .delete-employee .confirm,
@@ -1096,9 +1124,8 @@ header .tasks.active {
   padding: 10px 40px;
   background: red;
   cursor: pointer;
-  color: #fff;
+  color: #fff !important;
   font-weight: bold;
-  opacity: 0.6;
   transition: 0.5s;
 }
 .employees-container .delete-employee .confirm button:nth-child(2),
@@ -1140,11 +1167,31 @@ header .tasks.active {
 }
 .information p {
   line-height: 24px;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
 .information p span {
   font-weight: bold;
   font-style: italic;
+}
+
+.details-page .button-container {
+  display: flex;
+}
+.details-page .button-container button {
+  margin-right: 30px;
+  padding: 0px 20px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  color: #fff !important;
+  font-weight: bold;
+  border-radius: 30px;
+}
+.details-page .button-container .agree {
+  background: green;
+}
+.details-page .button-container .disagree {
+  background: red;
 }
 
 .add-form-container {
@@ -1235,7 +1282,7 @@ header .tasks.active {
   width: 100%;
   height: 40px;
   background: #04143d;
-  color: #fff;
+  color: #fff !important;
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
@@ -1295,7 +1342,7 @@ header .tasks.active {
 }
 .employee-information-container .employee-information .card-box .contact p {
   color: #fff;
-  margin-bottom: 50px;
+  margin-bottom: 50px !important;
 }
 .employee-information-container .employee-information .card-box .contact p:nth-child(1) {
   border-bottom: 1px solid #fff;
@@ -1313,9 +1360,6 @@ header .tasks.active {
   position: relative;
   margin: 80px 100px;
 }
-.employee-information-container .employee-information .content div {
-  margin-bottom: 50px;
-}
 .employee-information-container .employee-information .content div h1 {
   text-decoration: underline;
 }
@@ -1323,7 +1367,7 @@ header .tasks.active {
   color: gray;
 }
 .employee-information-container .employee-information .content p {
-  margin-bottom: 45px;
+  padding-bottom: 45px;
 }
 .employee-information-container .employee-information .content p span {
   font-weight: bold;
@@ -1337,9 +1381,10 @@ header .tasks.active {
   width: 250px;
   height: 40px;
   background: #04143d;
-  color: #fff;
+  color: #fff !important;
   font-weight: bold;
   cursor: pointer;
+  margin-top: 30px !important;
 }
 .employee-information-container > p {
   display: inline-block;
@@ -1633,12 +1678,12 @@ header .tasks.active {
   width: 100%;
   height: 46px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 .filter-container .filter-result {
-  width: 50%;
+  width: 40%;
 }
 .filter-container .filter-result p {
   font-size: 18px;
@@ -1648,21 +1693,22 @@ header .tasks.active {
   color: #ff1944;
 }
 .filter-container .filter {
-  width: 350px;
+  max-width: 60%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .filter-container .filter .filter-department {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 7px 15px;
   border-radius: 23px;
   border: 1px solid #222222;
   font-size: 15px;
   cursor: pointer;
+  margin-left: 30px;
 }
 .filter-container .filter .filter-department p {
   font-weight: bold;
@@ -1912,7 +1958,7 @@ footer .links .links-list ul li i:hover {
 }
 .login-page .form-login form input {
   width: 100%;
-  height: 45px;
+  height: 40px;
 }
 .login-page .form-login form input[type=text],
 .login-page .form-login form input[type=password] {
@@ -1920,13 +1966,16 @@ footer .links .links-list ul li i:hover {
   color: #04143d;
   font-weight: bold;
   letter-spacing: 1px;
-  margin-top: 25px;
+  margin-top: 10px;
   margin-bottom: 20px;
-  outline: none;
+  outline: none !important;
   font-size: 16px;
+  border: none;
+  border-bottom: 1px solid #04143d;
+  background: transparent;
 }
 .login-page .form-login form input[type=submit] {
-  color: #fff;
+  color: #fff !important;
   background: #04143d;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -1988,6 +2037,51 @@ footer .links .links-list ul li i:hover {
   font-size: 16px;
   letter-spacing: 1.5px;
   text-decoration: underline;
+}
+
+.management-page.chart-page {
+  min-height: 120vh;
+}
+.management-page.chart-page button {
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  background: #04143d;
+  color: #fff !important;
+  font-weight: bold;
+  margin-right: 30px;
+  padding: 0px 20px;
+  border-radius: 20px;
+}
+.management-page.chart-page span {
+  margin-right: 50px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #04143d;
+}
+.management-page.chart-page .chart-type {
+  margin-bottom: 30px;
+}
+.management-page.chart-page .button-box {
+  margin-bottom: 30px;
+}
+.management-page.chart-page #download {
+  position: relative;
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+.chart-container {
+  width: 700px;
+  height: 500px;
+  margin: 0px 0px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.chart-container canvas {
+  width: 100%;
+  height: 100%;
 }
 
 /*# sourceMappingURL=index.css.map */

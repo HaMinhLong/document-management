@@ -43,7 +43,9 @@ const GroupRight = ({ groupRights, setConfirmDelete, setGroupRightId }) => {
                 <tr key={data.id}>
                   <td className="name">
                     <Link to={`/group-right/${data.id}`}>
-                      {groups.find((group) => group.id === data.groupId).name}
+                      {groups &&
+                        groups.length > 0 &&
+                        groups.find((group) => group.id === data.groupId).name}
                     </Link>
                   </td>
                   <td>
