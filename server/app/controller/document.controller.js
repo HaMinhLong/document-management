@@ -107,7 +107,7 @@ exports.findByDep = async (req, res) => {
 // Tìm theo phan cong
 exports.findByAssign = async (req, res) => {
   const document = await Sequelize.query(
-    "SELECT * FROM `assigneds` INNER JOIN `documents` ON `documents`.`id` = `assigneds`.`documentId` INNER JOIN `roles` ON `roles`.`id` = `assigneds`.`roleId`  WHERE `assigneds`.`employeeId` = ?;",
+    "SELECT * FROM `assigneds` INNER JOIN `roles` ON `roles`.`id` = `assigneds`.`roleId` INNER JOIN `documents` ON `documents`.`id` = `assigneds`.`documentId`  WHERE `assigneds`.`employeeId` = ?;",
     {
       replacements: [req.params.id],
       type: QueryTypes.SELECT,
@@ -122,7 +122,7 @@ exports.toltalByType = async (req, res) => {
   const { startDate, finishDate } = req.body;
 
   const document = await Sequelize.query(
-    "SELECT COUNT(documents.`id`) AS Number, docTypes.`name` AS Name FROM documents INNER JOIN docTypes ON docTypes.`id` = documents.`docTypeId`  WHERE documents.createdAt > :startDate and documents.createdAt < :finishDate GROUP BY documents.`docTypeId`",
+    "SELECT COUNT(documents.`id`) AS Number, docTypes.`name` AS Name FROM documents INNER JOIN docTypes ON docTypes.`id` = documents.`docTypeId`  WHERE documents.createdAt >= :startDate and documents.createdAt <= :finishDate GROUP BY documents.`docTypeId`",
     {
       replacements: {
         startDate: startDate,
@@ -140,7 +140,7 @@ exports.toltalBySender = async (req, res) => {
   const { startDate, finishDate } = req.body;
 
   const document = await Sequelize.query(
-    "SELECT COUNT(documents.`id`) AS Number, senders.`name` AS Name FROM documents INNER JOIN senders ON senders.`id` = documents.`senderId` WHERE documents.createdAt > :startDate and documents.createdAt < :finishDate GROUP BY documents.`senderId`;",
+    "SELECT COUNT(documents.`id`) AS Number, senders.`name` AS Name FROM documents INNER JOIN senders ON senders.`id` = documents.`senderId` WHERE documents.createdAt >= :startDate and documents.createdAt <= :finishDate GROUP BY documents.`senderId`;",
     {
       replacements: {
         startDate: startDate,
@@ -158,7 +158,7 @@ exports.toltalByDep = async (req, res) => {
   const { startDate, finishDate } = req.body;
 
   const document = await Sequelize.query(
-    "SELECT COUNT(documents.`id`) AS Number, departments.`name` AS Name FROM documents INNER JOIN departments ON departments.`id` = documents.`departmentId` WHERE documents.createdAt > :startDate and documents.createdAt < :finishDate GROUP BY documents.`departmentId`;",
+    "SELECT COUNT(documents.`id`) AS Number, departments.`name` AS Name FROM documents INNER JOIN departments ON departments.`id` = documents.`departmentId` WHERE documents.createdAt >= :startDate and documents.createdAt <= :finishDate GROUP BY documents.`departmentId`;",
     {
       replacements: {
         startDate: startDate,
@@ -175,7 +175,7 @@ exports.toltalByDep = async (req, res) => {
 exports.toltalByStatus = async (req, res) => {
   const { startDate, finishDate } = req.body;
   const document = await Sequelize.query(
-    "SELECT COUNT(documents.`id`) AS Number, documents.`status` AS Name FROM documents WHERE documents.createdAt > :startDate and documents.createdAt < :finishDate GROUP BY documents.`status`;",
+    "SELECT COUNT(documents.`id`) AS Number, documents.`status` AS Name FROM documents WHERE documents.createdAt >= :startDate and documents.createdAt <= :finishDate GROUP BY documents.`status`;",
     {
       replacements: {
         startDate: startDate,
