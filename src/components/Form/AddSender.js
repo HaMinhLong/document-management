@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import Banner2 from "../layout/Banner2";
-import Footer2 from "../layout/Footer2";
+import Banner2 from "../../layouts/Banner2";
+import Footer2 from "../../layouts/Footer2";
 
 import { Formik, Form } from "formik";
 import { senderValidation } from "./Validation/senderValidation";

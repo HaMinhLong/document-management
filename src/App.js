@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Home from "./components/routers/Home";
-import Login from "./components/routers/Login";
+import Home from "./routes/Home";
+import Login from "./routes/Login";
 
 const App = () => {
   const [checkLogin, setCheckLogin] = useState();

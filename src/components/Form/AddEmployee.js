@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Banner2 from "../layout/Banner2";
-import Footer2 from "../layout/Footer2";
+import Banner2 from "../../layouts/Banner2";
+import Footer2 from "../../layouts/Footer2";
 
 import {
   addEmployee,

@@ -85,10 +85,12 @@ const Login = () => {
         <div className="form-login">
           <div className="text-box">
             <div className="image-box">
-              <img
-                src="https://login.thanglong.edu.vn/images/logotlu.jpg"
-                alt="logo thang long"
-              />
+              <Link to="/">
+                <img
+                  src="https://login.thanglong.edu.vn/images/logotlu.jpg"
+                  alt="logo thang long"
+                />
+              </Link>
             </div>
             <h1>Welcome</h1>
             <p>Sign in by entering the information below</p>
