@@ -14,9 +14,12 @@ const Role = ({ groups, setConfirmDelete, setGroupId }) => {
       <div className="table-container">
         <table>
           <TableHead
-            fields={
-              ("Tên chức vụ", "Ngày lập", "Cập nhật lần cuối", "Hành động")
-            }
+            fields={[
+              "Tên chức vụ",
+              "Ngày lập",
+              "Cập nhật lần cuối",
+              "Hành động",
+            ]}
             checkRight={false}
           />
           <tbody>

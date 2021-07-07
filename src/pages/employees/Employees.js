@@ -11,10 +11,11 @@ import FilterBox from "../../components/componentDashs/FilterBox";
 import FilterResult from "../../components/componentDashs/FilterResult";
 import SearchBox from "../../components/componentDashs/SearchBox";
 import AddButton from "../../components/componentDashs/AddButton";
-
+import { checkAdmin } from "../../utils/utils";
 import {
   fetchEmployees,
   deleteEmployee,
+  fetchEmployeesByDep,
 } from "../../redux/employees/employeesActions";
 
 import { fetchGroups } from "../../redux/groups/groupsActions";
@@ -24,6 +25,9 @@ import { fetchOrganizational } from "../../redux/organizational-structure/organi
 const Employees = (props) => {
   const dispatch = useDispatch();
   const checkRight = props.match.url === "/employees" ? true : false;
+  const groupId = localStorage.getItem("groupId");
+  const departmentId = localStorage.getItem("departmentId");
+  const isAdmin = checkAdmin(groupId);
   useEffect(() => {
     document.title = "TLU | Quản lí nhân viên";
     dispatch(fetchGroups());
@@ -33,7 +37,9 @@ const Employees = (props) => {
   const [currentIndex, setCurrentIndex] = useState(1);
 
   useEffect(() => {
-    dispatch(fetchEmployees());
+    isAdmin
+      ? dispatch(fetchEmployees())
+      : dispatch(fetchEmployeesByDep(departmentId));
   }, [dispatch]);
 
   const employeesList = useSelector((state) => state.employees);
@@ -119,17 +125,20 @@ const Employees = (props) => {
           />
 
           <div className="filter">
-            <FilterBox
-              text={"Bộ phận"}
-              selectData={organizational}
-              filterFunction={filterEmployee}
-            />
-
-            <FilterBox
-              text={"Chức vụ"}
-              selectData={groups}
-              filterFunction={filterEmployeeByRole}
-            />
+            {isAdmin && (
+              <FilterBox
+                text={"Bộ phận"}
+                selectData={organizational}
+                filterFunction={filterEmployee}
+              />
+            )}
+            {isAdmin && (
+              <FilterBox
+                text={"Chức vụ"}
+                selectData={groups}
+                filterFunction={filterEmployeeByRole}
+              />
+            )}
 
             <FilterBox
               text={"Tài khoản"}

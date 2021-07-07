@@ -5,9 +5,9 @@ const TableHead = ({ fields, checkRight }) => {
     <>
       <thead>
         <tr>
-          {fields.map((field) => (
-            <th key={field}>{field}</th>
-          ))}
+          {fields &&
+            fields.length > 0 &&
+            fields.map((field) => <th key={field}>{field}</th>)}
           {checkRight && <th>Hành động</th>}
         </tr>
       </thead>

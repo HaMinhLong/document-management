@@ -9,6 +9,7 @@ import Footer2 from "../../../layouts/Footer2";
 import {
   fetchDocument,
   changeStatus,
+  changeDepartment,
 } from "../../../redux/documents/documentsActions";
 import { fetchOrganizational } from "../../../redux/organizational-structure/organizationalActions";
 import { fetchSenders } from "../../../redux/sender/sendersActions";
@@ -22,6 +23,7 @@ const DocumentDetails = (props) => {
   const employeeID = localStorage.getItem("employeeId");
   const groupID = localStorage.getItem("groupId");
   const [confirmChangeStatus, setConfirmChangeStatus] = useState(false);
+  const [confirmChangeDepartment, setConfirmChangeDepartment] = useState(false);
   const [message, setMessage] = useState("");
 
   const dispatch = useDispatch();
@@ -37,10 +39,19 @@ const DocumentDetails = (props) => {
   const organizational = useSelector((state) => state.organizational);
   const senders = useSelector((state) => state.senders);
   const allAssigned = useSelector((state) => state.assigned);
+  const [departmentId, setDepartmentId] = useState();
 
   const [status, setStatus] = useState("");
+  const [department, setDepartment] = useState("");
 
   const changeStatusDocument = () => {
+    dispatch(changeDepartment(id, departmentId));
+    setDepartment(
+      organizational &&
+        organizational.length > 0 &&
+        organizational.find((department) => department.id === departmentId) &&
+        organizational.find((department) => department.id === departmentId).name
+    );
     message === "duyệt văn bản"
       ? dispatch(changeStatus(document.id, "Tiến hành"))
       : message === "phát hành văn bản"
@@ -122,13 +133,16 @@ const DocumentDetails = (props) => {
             </p>
             <p>
               <span>Bộ phận: </span>
-              {(organizational &&
-                organizational.length > 0 &&
-                document &&
-                document.departmentId &&
-                organizational.find((dpm) => dpm.id === document.departmentId)
-                  .name) ||
-                ""}
+              {department
+                ? department
+                : (organizational &&
+                    organizational.length > 0 &&
+                    document &&
+                    document.departmentId &&
+                    organizational.find(
+                      (dpm) => dpm.id === document.departmentId
+                    ).name) ||
+                  ""}
             </p>
             {document.senderId && (
               <p>
@@ -159,7 +173,7 @@ const DocumentDetails = (props) => {
                     className="agree"
                     onClick={() => {
                       setMessage("duyệt văn bản");
-                      setConfirmChangeStatus(true);
+                      setConfirmChangeDepartment(true);
                     }}
                   >
                     Duyệt
@@ -174,7 +188,7 @@ const DocumentDetails = (props) => {
                     className="agree"
                     onClick={() => {
                       setMessage("phát hành văn bản");
-                      setConfirmChangeStatus(true);
+                      setConfirmChangeDepartment(true);
                     }}
                   >
                     Phát hành văn bản
@@ -295,8 +309,62 @@ const DocumentDetails = (props) => {
           <div className="delete-employee">
             <p>Bạn có muốn {message} không?</p>
             <div className="confirm">
-              <button onClick={() => changeStatusDocument()}>Xác nhân</button>
               <button onClick={() => setConfirmChangeStatus(false)}>Hủy</button>
+              <button onClick={() => changeStatusDocument()}>Xác nhân</button>
+            </div>
+          </div>
+        )}
+        {confirmChangeDepartment && (
+          <div className="delete-employee">
+            {(message === "duyệt văn bản" ||
+              message === "phát hành văn bản") && (
+              <>
+                <div
+                  style={{
+                    display: "flex",
+                    height: 40,
+                    alignItems: "center",
+                    marginBottom: 50,
+                  }}
+                >
+                  <p style={{ paddingBottom: 0, marginRight: 20 }}>
+                    Lựa chọn bộ phận:{" "}
+                  </p>
+                  <select
+                    style={{
+                      padding: "2px 10px 2px 15px",
+                      cursor: "pointer",
+                      borderRadius: 4,
+                    }}
+                    onClick={(e) => setDepartmentId(e.target.value)}
+                  >
+                    {organizational &&
+                      organizational.length > 0 &&
+                      organizational.map((data) => (
+                        <option
+                          key={data.id}
+                          value={data.id}
+                          style={{ cursor: "pointer" }}
+                        >
+                          {data.name}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              </>
+            )}
+            <div className="confirm">
+              <button onClick={() => setConfirmChangeDepartment(false)}>
+                Hủy
+              </button>
+              <button
+                onClick={() => {
+                  setConfirmChangeStatus(true);
+                  setConfirmChangeDepartment(false);
+                }}
+              >
+                Tiếp
+              </button>
             </div>
           </div>
         )}

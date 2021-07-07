@@ -16,6 +16,7 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import "antd/dist/antd.css";
 import { DatePicker, Space } from "antd";
 const { RangePicker } = DatePicker;
+
 const Statistical = () => {
   document.title = "TLU | Thống kê văn bản";
   const dispatch = useDispatch();
@@ -30,13 +31,15 @@ const Statistical = () => {
     setDatePrevious(
       `${date.getFullYear()}-${
         date.getDate() - 7 < 0 ? date.getMonth() : date.getMonth() + 1
-      }-${date.getDate() - 7}`
+      }-${date.getDate() - 8 === 0 ? date.getDate() - 7 : date.getDate() - 8}`
     );
     dispatch(
       countByType({
         startDate: `${date.getFullYear()}-${
           date.getDate() - 7 < 0 ? date.getMonth() : date.getMonth() + 1
-        }-${date.getDate() - 7}`,
+        }-${
+          date.getDate() - 8 === 0 ? date.getDate() - 7 : date.getDate() - 8
+        }`,
         finishDate: `${date.getFullYear()}-${date.getMonth() + 1}-${
           date.getDate() + 1
         }`,
@@ -55,6 +58,7 @@ const Statistical = () => {
   const totalDoc = () => {
     var total = 0;
     documents &&
+      documents.length > 0 &&
       documents.forEach((doc) => {
         total += doc.Number;
       });
@@ -231,8 +235,8 @@ const Statistical = () => {
               id="test-table-xls-button"
               className="download-table-xls-button"
               table="table-to-xls"
-              filename="tablexls"
-              sheet="tablexls"
+              filename="thongkevanban"
+              sheet="thongkevanban"
               buttonText="Export to Excel"
             />
           </div>

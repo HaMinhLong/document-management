@@ -44,7 +44,7 @@ exports.findByDep = async (req, res) => {
   const id = req.params.id;
   const query = ` SELECT * FROM employees 
                   WHERE employees.departmentId = '${id}' 
-                  OR employees.departmentId = (
+                  OR employees.departmentId IN (
                     SELECT id from departments 
                     WHERE departments.belongto = '${id}'
                   )`;
