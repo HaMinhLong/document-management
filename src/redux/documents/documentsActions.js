@@ -149,3 +149,18 @@ export const changeStatus = (id, status) => async (dispatch) => {
     console.log("Error Change Status: " + error.message);
   }
 };
+
+export const changeDepartment = (id, departmentId) => async (dispatch) => {
+  try {
+    const document = {
+      departmentId: departmentId,
+    };
+    await api.changeDepartment(id, document);
+    dispatch({
+      type: actions.CHANGE_DEPARTMENT,
+      payload: id,
+    });
+  } catch (error) {
+    console.log("Error Change Department: " + error.message);
+  }
+};

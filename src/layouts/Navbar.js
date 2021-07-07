@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEmployees } from "../redux/employees/employeesActions";
+import { checkAdmin } from "../utils/utils";
 
 const Navbar = () => {
   const toggleTasks = (data) => {
@@ -24,7 +25,7 @@ const Navbar = () => {
   const rights = JSON.parse(localStorage.getItem("rights"));
   const employeeId = localStorage.getItem("employeeId");
   const employeeName = localStorage.getItem("employeeName");
-
+  const isAdmin = checkAdmin(groupId);
   useEffect(() => {
     dispatch(fetchEmployees());
   }, []);
@@ -64,11 +65,14 @@ const Navbar = () => {
       <Link to="/" className="logo">
         <img src="https://thanglong.edu.vn/themes/md_tlu/img/logo.svg" alt="" />
       </Link>
-      <div className="tasks-bg"></div>
+      <div
+        className="tasks-bg"
+        style={{ cursor: "pointer" }}
+        onClick={() => toggleTasks(0)}
+      ></div>
       <span className="tasks-logo" onClick={() => toggleTasks(0)}></span>
       <div className="tasks active">
-        {groupId === "644317359247429400" ||
-        groupId === "461341600943357060" ? (
+        {isAdmin ? (
           <ul>
             {user !== "admin" && (
               <li>

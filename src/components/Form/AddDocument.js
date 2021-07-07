@@ -19,6 +19,7 @@ import { fetchOrganizational } from "../../redux/organizational-structure/organi
 import { fetchSenders } from "../../redux/sender/sendersActions";
 import { fetchDocTypes } from "../../redux/docType/docTypesActions";
 import { fetchAllAssigned } from "../../redux/assigned/assignedActions";
+import { checkAdmin } from "../../utils/utils";
 
 const AddDocument = (props) => {
   const id = props.match.params.id && props.match.params.id;
@@ -27,6 +28,8 @@ const AddDocument = (props) => {
   const groupId = localStorage.getItem("groupId");
   const employeeID = localStorage.getItem("employeeId");
   const departmentID = localStorage.getItem("departmentId");
+
+  const isAdmin = checkAdmin(groupId);
 
   const documents = useSelector((state) => state.documents);
   const data =
@@ -153,8 +156,7 @@ const AddDocument = (props) => {
                   name="status"
                   id="status"
                   optionsData={
-                    groupId === "644317359247429400" ||
-                    groupId === "461341600943357060"
+                    isAdmin
                       ? [
                           { name: "Chờ duyệt" },
                           { name: "Từ chối" },
@@ -190,11 +192,8 @@ const AddDocument = (props) => {
                   }
                   onChange={handleChangeType}
                 />
-                {(groupId !== "644317359247429400" &&
-                  groupId !== "461341600943357060" &&
-                  document.status !== "Chờ duyệt") ||
-                  ((groupId === "644317359247429400" ||
-                    groupId === "461341600943357060") && (
+                {(!isAdmin && document.status !== "Chờ duyệt") ||
+                  (isAdmin && (
                     <SelectField
                       label="Bộ phận :"
                       name="departmentId"

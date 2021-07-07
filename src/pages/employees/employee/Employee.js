@@ -71,16 +71,7 @@ const Employee = ({
                 <td>{employee.email || ""}</td>
                 <td>{employee.phoneNumber || ""}</td>
                 {/* <td>{moment(employee.createdAt).format("L")}</td> */}
-                {(groupId === "644317359247429400" ||
-                  groupId === "461341600943357060" ||
-                  (checkRight &&
-                    (employeeLogin.departmentId === employee.departmentId ||
-                      employeeLogin.departmentId ===
-                        (organizational &&
-                          organizational.length > 0 &&
-                          organizational.find(
-                            (org) => org.id === employee.departmentId
-                          ).belongto)))) && (
+                {checkRight && (
                   <td>
                     <Link to={`/add-employee-${employee.id}`}>
                       <i className="fas fa-edit"></i>

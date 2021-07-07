@@ -100,6 +100,8 @@ export const countByDep = (date) => axios.post(`${url}/countbydep`, date);
 export const countByStatus = (date) => axios.post(`${url}/countbystatus`, date);
 export const changeStatus = (id, status) =>
   axios.put(`${url}/documents/changestatus/${id}`, status);
+export const changeDepartment = (id, department) =>
+  axios.put(`${url}/documents/change-department/${id}`, department);
 
 // ASSIGNED MANAGEMENT
 export const fetchAllAssigned = () => axios.get(`${url}/assigned`);

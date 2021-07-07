@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Banner2 from "../../layouts/Banner2";
 import Footer2 from "../../layouts/Footer2";
 
-import { organizational } from "../../data/organizational.json";
 import { Formik, Form } from "formik";
 import { departmentValidation } from "./Validation/departmentValidation";
 import TextField from "./Field/TextField";

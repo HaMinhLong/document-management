@@ -15,6 +15,18 @@
     {
       "id": "812261813424355230",
       "role_name": "Nhân viên"
+    },
+    {
+      "id": "644317359247429400",
+      "groupName": "admin"
+    },
+    {
+      "id": "461341600943357060",
+      "groupName": "Ban giám hiệu"
+    },
+    {
+      "id": "222908158858354780",
+      "groupName": "Nhân viên phòng hành chính"
     }
   ]
 }

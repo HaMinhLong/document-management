@@ -93,7 +93,7 @@ exports.findByDep = async (req, res) => {
 
   const query = ` SELECT * FROM documents 
                   WHERE documents.departmentId = '${id}' 
-                  OR documents.departmentId = (
+                  OR documents.departmentId IN (
                     SELECT id from departments 
                     WHERE departments.belongto = '${id}'
                   )`;
@@ -193,6 +193,19 @@ exports.changeStatus = async (req, res) => {
   Document.update(
     {
       status: req.body.status,
+    },
+    { where: { id: id } }
+  ).then(() => {
+    res.status(200).send("updated successfully a Document with id = " + id);
+  });
+};
+
+exports.changeDepartment = async (req, res) => {
+  const id = req.params.id;
+  const { departmentId } = req.body;
+  Document.update(
+    {
+      departmentId: departmentId,
     },
     { where: { id: id } }
   ).then(() => {

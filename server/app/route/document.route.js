@@ -33,8 +33,10 @@ module.exports = function (app) {
   // Thong ke van ban theo noi gui
   app.post("/api/countbystatus", documents.toltalByStatus);
 
-  // Thay doi status theo ID
+  // Thay doi status theo documentId
   app.put("/api/documents/changestatus/:id", documents.changeStatus);
+  // Thay doi departmentId theo documentId
+  app.put("/api/documents/change-department/:id", documents.changeDepartment);
 
   // --------------------------- Xu ly van ban thong bao------------------------------//
 };

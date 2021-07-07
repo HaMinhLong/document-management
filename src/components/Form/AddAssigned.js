@@ -24,6 +24,7 @@ import {
   fetchDocumentsByDep,
 } from "../../redux/documents/documentsActions";
 import { changeStatus } from "../../redux/documents/documentsActions";
+import { checkDocManagement } from "../../utils/utils";
 
 const AddAssigned = (props) => {
   document.title = "TLU | Thêm phân công";
@@ -32,15 +33,13 @@ const AddAssigned = (props) => {
   const groupId = localStorage.getItem("groupId");
   const departmentID = localStorage.getItem("departmentId");
   const employeeID = localStorage.getItem("employeeId");
-
+  const isDocManagement = checkDocManagement(groupId);
   // 644317359247429400 admin
   // 461341600943357060 ban_giam_hieu
   // 222908158858354780 hanh_chinh
 
   useEffect(() => {
-    (groupId && groupId === "644317359247429400") ||
-    groupId === "461341600943357060" ||
-    groupId === "222908158858354780"
+    isDocManagement
       ? dispatch(fetchEmployees())
       : dispatch(fetchEmployeesByDep(departmentID));
 
@@ -86,9 +85,7 @@ const AddAssigned = (props) => {
       dispatch(addAssigned(values));
       props.history.push("/assigned");
     }
-    groupId === "644317359247429400" ||
-    groupId === "461341600943357060" ||
-    groupId === "222908158858354780"
+    isDocManagement
       ? dispatch(changeStatus(assigned.documentId, "Trưởng phòng thực hiện"))
       : dispatch(changeStatus(assigned.documentId, "Nhân viên thực hiện"));
   };
@@ -153,6 +150,7 @@ const AddAssigned = (props) => {
                           (document) =>
                             document.status !== "Chờ duyệt" &&
                             document.status !== "Từ chối" &&
+                            document.status !== "Quá hạn xử lý" &&
                             document.status !== "Đã hoàn thành"
                         )
                       : [{ name: "" }]
@@ -177,11 +175,7 @@ const AddAssigned = (props) => {
                   label="Vai trò :"
                   name="roleId"
                   optionsData={
-                    (groupId === "644317359247429400" ||
-                      groupId === "461341600943357060" ||
-                      groupId === "222908158858354780") &&
-                    roles &&
-                    roles.length > 0
+                    isDocManagement && roles && roles.length > 0
                       ? roles
                       : [{ name: "Nhân viên" }]
                   }

@@ -18,3 +18,11 @@ export const searchData = (value, data, setData) => {
   );
   setData(dataSearch.slice(0, 10));
 };
+
+export const checkAdmin = (groupId) =>
+  groupId === "644317359247429400" || groupId === "461341600943357060"
+    ? true
+    : false;
+
+export const checkDocManagement = (groupId) =>
+  checkAdmin(groupId) || groupId === "222908158858354780" ? true : false;

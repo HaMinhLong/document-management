@@ -7,12 +7,14 @@ import { fetchOrganizational } from "../../../redux/organizational-structure/org
 import { fetchDocTypes } from "../../../redux/docType/docTypesActions";
 import { fetchAllAssigned } from "../../../redux/assigned/assignedActions";
 import TableHead from "../../../components/componentDashs/TableHead";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 const Document = ({
   documents,
   checkRight,
   setConfirmDelete,
   setDocumentDeleteId,
+  isDocManagement,
 }) => {
   const groupId = localStorage.getItem("groupId");
   const employeeID = localStorage.getItem("employeeId");
@@ -36,7 +38,28 @@ const Document = ({
   return (
     <>
       <div className="table-container">
-        <table>
+        {!isDocManagement && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 30,
+              marginTop: 30,
+            }}
+          >
+            <span> </span>
+            <ReactHTMLTableToExcel
+              id="test-table-xls-button-v2"
+              className="download-table-xls-button"
+              table="document-to-xls"
+              filename="tablexls"
+              sheet="tablexls"
+              buttonText="Export to Excel"
+            />
+          </div>
+        )}
+        <table id="document-to-xls">
           <TableHead
             fields={[
               "Mã văn bản",

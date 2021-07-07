@@ -41,6 +41,7 @@ const Assigned = ({
             fields={[
               "Người thực hiện",
               "Văn bản",
+              "Chức vụ",
               "Ngày tạo",
               "Cập nhật lần cuối",
             ]}
@@ -53,21 +54,23 @@ const Assigned = ({
                 <tr key={assigned.id}>
                   <td className="name">
                     <Link to={`/assigned/${assigned.id}`}>
-                      {employees &&
+                      {(employees &&
                         employees.length > 0 &&
                         employees.find((emp) => emp.id === assigned.employeeId)
-                          .name}
+                          .name) ||
+                        ""}
                     </Link>
                   </td>
                   <td>
-                    {documents &&
+                    {(documents &&
                       documents.length > 0 &&
                       assigned.documentId &&
                       assigned &&
                       assigned.documentId &&
                       documents.find(
                         (document) => document.id === assigned.documentId
-                      ).name}
+                      ).name) ||
+                      ""}
                   </td>
                   <td>
                     {roles &&
